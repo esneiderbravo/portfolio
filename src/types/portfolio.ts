@@ -42,6 +42,7 @@ export type PortfolioContent = {
   projects: Project[];
   experiences: Experience[];
   skillGroups: SkillGroup[];
+  aiStack: SkillGroup[];
   coreCapabilities: string[];
 };
 

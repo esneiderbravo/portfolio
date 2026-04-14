@@ -113,6 +113,28 @@ export const portfolioContent: PortfolioContent = {
       ],
     },
   ],
+  aiStack: [
+    {
+      name: "AI Coding Assistants",
+      items: ["GitHub Copilot", "Cursor", "ChatGPT (GPT-4o)", "Claude (Anthropic)"],
+    },
+    {
+      name: "LLM APIs & Orchestration",
+      items: ["OpenAI API", "Anthropic API", "LangChain", "LangGraph"],
+    },
+    {
+      name: "Model Context Protocol",
+      items: ["GitHub MCP", "Jira MCP", "PostgreSQL MCP", "Confluence MCP", "Figma MCP"],
+    },
+    {
+      name: "Data Intelligence",
+      items: ["Snowflake", "Fivetran", "Looker", "dbt"],
+    },
+    {
+      name: "Design & Prototyping",
+      items: ["Figma", "Figma Dev Mode", "FigJam"],
+    },
+  ],
   skillGroups: [
     {
       name: "Frontend",

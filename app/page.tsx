@@ -15,7 +15,7 @@ const GROUP_ORDER = [
 ];
 
 export default function HomePage() {
-  const { profile, projects, experiences, skillGroups, coreCapabilities } = portfolioContent;
+  const { profile, projects, experiences, skillGroups, aiStack, coreCapabilities } = portfolioContent;
   const [firstName, ...lastNameParts] = profile.headline.split(" ");
   const lastName = lastNameParts.join(" ");
   const [locale, setLocale] = useState<Locale>("en");
@@ -28,6 +28,7 @@ export default function HomePage() {
     const sections: { id: string; activeKey: string }[] = [
       { id: "home", activeKey: "about" },
       { id: "about", activeKey: "about" },
+      { id: "ai", activeKey: "ai" },
       { id: "skills", activeKey: "skills" },
       { id: "experience", activeKey: "experience" },
       { id: "projects", activeKey: "projects" },
@@ -134,6 +135,29 @@ export default function HomePage() {
     figma: "design_services",
     postman: "send",
     "vs code": "code",
+    // ── AI Assistants ──────────────────────────────────────────────────────────
+    "github copilot": "auto_awesome",
+    "cursor": "code_blocks",
+    "chatgpt (gpt-4o)": "psychology",
+    "claude (anthropic)": "smart_toy",
+    // ── LLM & Orchestration ───────────────────────────────────────────────────
+    "openai api": "developer_mode",
+    "anthropic api": "memory",
+    "langchain": "link",
+    "langgraph": "schema",
+    // ── MCPs ─────────────────────────────────────────────────────────────────
+    "github mcp": "hub",
+    "jira mcp": "checklist",
+    "postgresql mcp": "database",
+    "confluence mcp": "article",
+    "figma mcp": "design_services",
+    // ── Data Intelligence ─────────────────────────────────────────────────────
+    "snowflake": "ac_unit",
+    "fivetran": "cable",
+    "dbt": "transform",
+    // ── Design ────────────────────────────────────────────────────────────────
+    "figma dev mode": "developer_board",
+    "figjam": "gesture",
   };
 
   const getIcon = (value: string, fallback = "code") =>
@@ -148,6 +172,14 @@ export default function HomePage() {
     Integrations: "handshake",
   };
 
+  const aiGroupIcon: Record<string, string> = {
+    "AI Coding Assistants": "auto_awesome",
+    "LLM APIs & Orchestration": "psychology",
+    "Model Context Protocol": "extension",
+    "Data Intelligence": "analytics",
+    "Design & Prototyping": "design_services",
+  };
+
   const mergedGroups = useMemo(
     () => [...skillGroups].sort((a, b) => GROUP_ORDER.indexOf(a.name) - GROUP_ORDER.indexOf(b.name)),
     [skillGroups]
@@ -160,6 +192,7 @@ export default function HomePage() {
           <div className="brand">ESNEIDERBRAVO.DEV</div>
           <div className="nav-links">
             <a href="#home" onClick={() => setActiveSection("about")} className={activeSection === "about" ? "active" : ""}>{t.nav.about}</a>
+            <a href="#ai" onClick={() => setActiveSection("ai")} className={activeSection === "ai" ? "active" : ""}>{t.nav.ai}</a>
             <a href="#skills" onClick={() => setActiveSection("skills")} className={activeSection === "skills" ? "active" : ""}>{t.nav.skills}</a>
             <a href="#experience" onClick={() => setActiveSection("experience")} className={activeSection === "experience" ? "active" : ""}>{t.experience.title}</a>
             <a href="#projects" onClick={() => setActiveSection("projects")} className={activeSection === "projects" ? "active" : ""}>{t.nav.projects}</a>
@@ -187,6 +220,7 @@ export default function HomePage() {
       {mobileMenuOpen && (
         <div className="mobile-nav">
           <a href="#home" onClick={() => { setActiveSection("about"); setMobileMenuOpen(false); }} className={activeSection === "about" ? "active" : ""}>{t.nav.about}</a>
+          <a href="#ai" onClick={() => { setActiveSection("ai"); setMobileMenuOpen(false); }} className={activeSection === "ai" ? "active" : ""}>{t.nav.ai}</a>
           <a href="#skills" onClick={() => { setActiveSection("skills"); setMobileMenuOpen(false); }} className={activeSection === "skills" ? "active" : ""}>{t.nav.skills}</a>
           <a href="#experience" onClick={() => { setActiveSection("experience"); setMobileMenuOpen(false); }} className={activeSection === "experience" ? "active" : ""}>{t.experience.title}</a>
           <a href="#projects" onClick={() => { setActiveSection("projects"); setMobileMenuOpen(false); }} className={activeSection === "projects" ? "active" : ""}>{t.nav.projects}</a>
@@ -246,6 +280,37 @@ export default function HomePage() {
           <div>
             <p className="quote">&quot;{t.about.quote}&quot;</p>
             <p className="about-body">{t.about.body}</p>
+          </div>
+        </section>
+
+        <section className="ai-section" id="ai">
+          <div className="ai-section-head">
+            <p className="section-kicker">{t.ai.kicker}</p>
+            <h2 className="ai-title">{t.ai.title}</h2>
+            <p className="ai-tagline">{t.ai.tagline}</p>
+          </div>
+
+          <div className="ai-grid">
+            {aiStack.map((group) => (
+              <article key={group.name} className="ai-card">
+                <h4>
+                  <span className="material-symbols-outlined ai-group-icon" aria-hidden="true">
+                    {aiGroupIcon[group.name] ?? "smart_toy"}
+                  </span>
+                  {group.name}
+                </h4>
+                <div className="ai-chips">
+                  {group.items.map((item) => (
+                    <span key={item} className="ai-chip">
+                      <span className="material-symbols-outlined" aria-hidden="true">
+                        {getIcon(item, "auto_awesome")}
+                      </span>
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            ))}
           </div>
         </section>
 

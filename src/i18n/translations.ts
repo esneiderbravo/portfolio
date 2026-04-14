@@ -1,7 +1,7 @@
 export type Locale = "en" | "es";
 
 type Translation = {
-  nav: { about: string; skills: string; projects: string; contact: string; resume: string; language: string; };
+  nav: { about: string; skills: string; projects: string; contact: string; resume: string; language: string; ai: string; };
   hero: { availability: string; role: string; bio: string; yearsOfLogic: string; };
   about: { title: string; quote: string; body: string; };
   stack: { kicker: string; title: string; };
@@ -10,13 +10,14 @@ type Translation = {
   skills: { title: string; capabilitiesTitle: string; headlineTitle: string; };
   footer: { signature: string; };
   experience: { kicker: string; title: string; present: string; };
+  ai: { kicker: string; title: string; tagline: string; };
 };
 
 export const translations: Record<Locale, Translation> = {
   en: {
     nav: {
       about: "About", skills: "Skills", projects: "Projects",
-      contact: "Contact", resume: "Resume", language: "Language",
+      contact: "Contact", resume: "Resume", language: "Language", ai: "AI Stack",
     },
     hero: {
       availability: "Available for new projects",
@@ -52,11 +53,16 @@ export const translations: Record<Locale, Translation> = {
     skills: { title: "Technical Skills", capabilitiesTitle: "Core Capabilities", headlineTitle: "Short Professional Headline" },
     footer: { signature: "ENGINEERED WITH PRECISION" },
     experience: { kicker: "Work History", title: "Experience", present: "Current" },
+    ai: {
+      kicker: "AI-First Architecture",
+      title: "AI Developer Stack",
+      tagline: "Tools, platforms and protocols I use to build and ship AI-powered products.",
+    },
   },
   es: {
     nav: {
       about: "Sobre mí", skills: "Habilidades", projects: "Proyectos",
-      contact: "Contacto", resume: "CV", language: "Idioma",
+      contact: "Contacto", resume: "CV", language: "Idioma", ai: "IA Stack",
     },
     hero: {
       availability: "Disponible para nuevos proyectos",
@@ -84,5 +90,10 @@ export const translations: Record<Locale, Translation> = {
     skills: { title: "Habilidades Tecnicas", capabilitiesTitle: "Capacidades Clave", headlineTitle: "Headline Profesional Corta" },
     footer: { signature: "ENGINEERED WITH PRECISION" },
     experience: { kicker: "Historial Laboral", title: "Experiencia", present: "Actual" },
+    ai: {
+      kicker: "Arquitectura AI-First",
+      title: "Stack de IA",
+      tagline: "Herramientas, plataformas y protocolos que uso para construir productos potenciados por IA.",
+    },
   },
 };
