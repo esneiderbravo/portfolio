@@ -127,16 +127,12 @@ export const portfolioContent: PortfolioContent = {
       items: ["GitHub MCP", "Jira MCP", "PostgreSQL MCP", "Confluence MCP", "Figma MCP"],
     },
     {
-      name: "Data Intelligence",
-      items: ["Snowflake", "Fivetran", "Looker", "dbt"],
-    },
-    {
       name: "Design & Prototyping",
-      items: ["Figma", "Figma Dev Mode", "FigJam"],
+      items: ["Figma Dev Mode", "FigJam"],
     },
     {
       name: "AI Dev Workflow",
-      items: ["OpenSpec CLI", "Artifact-Driven Changes", "opsx:propose", "opsx:apply", "opsx:verify"],
+      items: ["OpenSpec CLI", "Artifact-Driven Changes", "Skills", "Agents", "Sub-agents"],
     },
   ],
   skillGroups: [
@@ -150,7 +146,7 @@ export const portfolioContent: PortfolioContent = {
     },
     {
       name: "Data & Messaging",
-      items: ["PostgreSQL", "MySQL", "Redis", "Kafka", "AWS S3", "Elastic APM"],
+      items: ["PostgreSQL", "MySQL", "Redis", "Kafka", "AWS S3", "Elastic APM", "Snowflake", "Fivetran", "Looker", "dbt"],
     },
     {
       name: "Cloud & DevOps",

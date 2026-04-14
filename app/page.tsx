@@ -32,19 +32,44 @@ export default function HomePage() {
       { id: "skills", activeKey: "skills" },
       { id: "experience", activeKey: "experience" },
       { id: "projects", activeKey: "projects" },
-      { id: "contact", activeKey: "contact" },
     ];
-    const observers = sections.map(({ id, activeKey }) => {
-      const el = document.getElementById(id);
-      if (!el) return null;
-      const obs = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActiveSection(activeKey); },
-        { threshold: 0, rootMargin: "-40% 0px -50% 0px" }
-      );
-      obs.observe(el);
-      return obs;
-    });
-    return () => observers.forEach((obs) => obs?.disconnect());
+    const keyById = new Map(sections.map((section) => [section.id, section.activeKey]));
+    const visibleRatios = new Map<string, number>();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const id = entry.target.id;
+          visibleRatios.set(id, entry.isIntersecting ? entry.intersectionRatio : 0);
+        }
+
+        let nextActiveKey = "about";
+        let bestRatio = 0;
+        for (const section of sections) {
+          const ratio = visibleRatios.get(section.id) ?? 0;
+          if (ratio > bestRatio) {
+            bestRatio = ratio;
+            nextActiveKey = keyById.get(section.id) ?? nextActiveKey;
+          }
+        }
+
+        if (bestRatio > 0) {
+          setActiveSection((current) => (current === nextActiveKey ? current : nextActiveKey));
+        }
+      },
+      {
+        threshold: [0, 0.1, 0.25, 0.4, 0.6, 0.8, 1],
+        rootMargin: "-10% 0px -55% 0px",
+      }
+    );
+
+    const elements = sections
+      .map((section) => document.getElementById(section.id))
+      .filter((element): element is HTMLElement => Boolean(element));
+
+    elements.forEach((element) => observer.observe(element));
+
+    return () => observer.disconnect();
   }, []);
 
   const socialIcons: Record<string, string> = {
@@ -161,6 +186,9 @@ export default function HomePage() {
     "opsx:propose": "edit_document",
     "opsx:apply": "build_circle",
     "opsx:verify": "verified",
+    "skills": "school",
+    "agents": "smart_toy",
+    "sub-agents": "group_work",
     // ── Design ────────────────────────────────────────────────────────────────
     "figma dev mode": "developer_board",
     "figjam": "gesture",
@@ -203,7 +231,6 @@ export default function HomePage() {
             <a href="#skills" onClick={() => setActiveSection("skills")} className={activeSection === "skills" ? "active" : ""}>{t.nav.skills}</a>
             <a href="#experience" onClick={() => setActiveSection("experience")} className={activeSection === "experience" ? "active" : ""}>{t.experience.title}</a>
             <a href="#projects" onClick={() => setActiveSection("projects")} className={activeSection === "projects" ? "active" : ""}>{t.nav.projects}</a>
-            <a href="#contact" onClick={() => setActiveSection("contact")} className={activeSection === "contact" ? "active" : ""}>{t.nav.contact}</a>
           </div>
           <label className="locale-selector" aria-label={t.nav.language}>
             <span>{t.nav.language}</span>
@@ -231,7 +258,6 @@ export default function HomePage() {
           <a href="#skills" onClick={() => { setActiveSection("skills"); setMobileMenuOpen(false); }} className={activeSection === "skills" ? "active" : ""}>{t.nav.skills}</a>
           <a href="#experience" onClick={() => { setActiveSection("experience"); setMobileMenuOpen(false); }} className={activeSection === "experience" ? "active" : ""}>{t.experience.title}</a>
           <a href="#projects" onClick={() => { setActiveSection("projects"); setMobileMenuOpen(false); }} className={activeSection === "projects" ? "active" : ""}>{t.nav.projects}</a>
-          <a href="#contact" onClick={() => { setActiveSection("contact"); setMobileMenuOpen(false); }} className={activeSection === "contact" ? "active" : ""}>{t.nav.contact}</a>
         </div>
       )}
 
