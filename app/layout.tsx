@@ -60,6 +60,9 @@ export const metadata: Metadata = {
     creator: "@esneiderbravo",
     images: ["/opengraph-image"],
   },
+  verification: {
+    google: "lL7xFXKp0F-591-wkYeSkEeL0iWBjhwD2IeKA1nEHkI",
+  },
   robots: {
     index: true,
     follow: true,
