@@ -1,26 +1,78 @@
+"use client";
+
+import { useMemo, useState } from "react";
+import Image from "next/image";
 import { portfolioContent } from "@/src/content/portfolio";
+import { translations, type Locale } from "@/src/i18n/translations";
 
 export default function HomePage() {
   const { profile, projects, techGroups } = portfolioContent;
-  const [frontend, backend, databases, infrastructure, tools] = techGroups;
+  const [frontend, backend, dataMessaging, cloudDevops, integrations] = techGroups;
   const [firstName, ...lastNameParts] = profile.headline.split(" ");
   const lastName = lastNameParts.join(" ");
+  const [locale, setLocale] = useState<Locale>("en");
+  const t = useMemo(() => translations[locale], [locale]);
+
+  const socialIcons: Record<string, string> = {
+    github: "terminal",
+    linkedin: "hub",
+    email: "mail",
+  };
+
+  const itemIcons: Record<string, string> = {
+    // Data & Messaging
+    postgresql: "database",
+    redis: "bolt",
+    kafka: "stream",
+    "aws s3": "cloud_upload",
+    "elastic apm": "monitor_heart",
+    // Cloud & DevOps
+    aws: "cloud",
+    docker: "package_2",
+    jenkins: "build",
+    ansible: "settings_suggest",
+    "github actions": "deployed_code",
+    kubernetes: "hub",
+    // Integrations
+    salesforce: "handshake",
+    twilio: "call",
+    sendgrid: "mail",
+    rollbar: "error",
+    plaid: "account_balance",
+    looker: "bar_chart",
+    // Fallbacks for tools
+    git: "terminal",
+    jira: "checklist",
+    figma: "design_services",
+    postman: "send",
+    "vs code": "code",
+  };
+
+  const getIcon = (value: string, fallback = "code") =>
+    itemIcons[value.toLowerCase()] ?? fallback;
 
   return (
     <>
       <nav className="nav">
         <div className="nav-inner">
-          <div className="brand">KINETIC.DEV</div>
+          <div className="brand">ESNEIDERBRAVO.DEV</div>
           <div className="nav-links">
-            <a href="#works">Works</a>
+            <a href="#works">{t.nav.works}</a>
             <a className="active" href="#stack">
-              Stack
+              {t.nav.stack}
             </a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
+            <a href="#about">{t.nav.about}</a>
+            <a href="#contact">{t.nav.contact}</a>
           </div>
+          <label className="locale-selector" aria-label={t.nav.language}>
+            <span>{t.nav.language}</span>
+            <select value={locale} onChange={(event) => setLocale(event.target.value as Locale)}>
+              <option value="en">EN</option>
+              <option value="es">ES</option>
+            </select>
+          </label>
           <a className="resume-btn" href="#contact">
-            Resume
+            {t.nav.resume}
           </a>
         </div>
       </nav>
@@ -30,7 +82,7 @@ export default function HomePage() {
           <div className="hero-copy">
             <div className="status-pill">
               <span className="status-dot" />
-              <span>{profile.availability}</span>
+              <span>{t.hero.availability}</span>
             </div>
 
             <h1>
@@ -39,12 +91,15 @@ export default function HomePage() {
               <span>{lastName}</span>
             </h1>
 
-            <p className="hero-role">{profile.role}</p>
-            <p className="hero-bio">{profile.bio}</p>
+            <p className="hero-role">{t.hero.role}</p>
+            <p className="hero-bio">{t.hero.bio}</p>
 
             <div className="socials">
               {profile.socialLinks.map((link) => (
-                <a key={link.label} href={link.href} target="_blank" rel="noreferrer">
+                <a key={link.label} href={link.href} target="_blank" rel="noreferrer" className="social-link">
+                  <span className="material-symbols-outlined" aria-hidden="true">
+                    {socialIcons[link.label.toLowerCase()] ?? "link"}
+                  </span>
                   {link.label}
                 </a>
               ))}
@@ -52,79 +107,114 @@ export default function HomePage() {
           </div>
 
           <div className="hero-visual-wrap">
-            <div className="hero-visual" aria-hidden="true" />
+            <div className="hero-visual">
+              <Image
+                src="/profile.png"
+                alt="Retrato profesional de Esneider Bravo"
+                fill
+                priority
+                className="hero-image"
+                sizes="(max-width: 920px) 90vw, 530px"
+              />
+            </div>
             <div className="experience-card">
               <strong>{profile.yearsExperience}</strong>
-              <p>Years of logic</p>
+              <p>{t.hero.yearsOfLogic}</p>
             </div>
           </div>
         </section>
 
         <section className="about" id="about">
-          <div className="about-label">{profile.philosophyTitle}</div>
+          <div className="about-label">{t.about.title}</div>
           <div>
-            <p className="quote">&quot;{profile.philosophyQuote}&quot;</p>
-            <p className="about-body">{profile.philosophyBody}</p>
+            <p className="quote">&quot;{t.about.quote}&quot;</p>
+            <p className="about-body">{t.about.body}</p>
           </div>
         </section>
 
         <section className="stack" id="stack">
           <div className="stack-head">
             <div>
-              <p className="section-kicker">Core ecosystem</p>
-              <h2>Engineered Toolkit</h2>
+              <p className="section-kicker">{t.stack.kicker}</p>
+              <h2>{t.stack.title}</h2>
             </div>
-            <p className="stack-caption">
-              Seleccion curada de tecnologias para construir plataformas enterprise y productos digitales escalables.
-            </p>
+            <p className="stack-caption">{t.stack.caption}</p>
           </div>
 
           <div className="stack-grid">
+            {/* Frontend — chips */}
             <article className="stack-card wide">
-              <h3>{frontend.name}</h3>
+              <h3>
+                <span className="material-symbols-outlined stack-icon" aria-hidden="true">layers</span>
+                {frontend.name}
+              </h3>
               <div className="chip-list">
                 {frontend.items.map((item) => (
-                  <span key={item} className="chip">
-                    {item}
-                  </span>
+                  <span key={item} className="chip">{item}</span>
                 ))}
               </div>
             </article>
 
+            {/* Backend — chips */}
             <article className="stack-card wide">
-              <h3>{backend.name}</h3>
+              <h3>
+                <span className="material-symbols-outlined stack-icon" aria-hidden="true">dns</span>
+                {backend.name}
+              </h3>
               <div className="chip-list">
                 {backend.items.map((item) => (
-                  <span key={item} className="chip">
-                    {item}
-                  </span>
+                  <span key={item} className="chip">{item}</span>
                 ))}
               </div>
             </article>
 
+            {/* Data & Messaging — icon list */}
             <article className="stack-card">
-              <h4>{databases.name}</h4>
+              <h4>{dataMessaging.name}</h4>
               <ul>
-                {databases.items.map((item) => (
-                  <li key={item}>{item}</li>
+                {dataMessaging.items.map((item) => (
+                  <li key={item}>
+                    <span className="stack-item">
+                      <span className="material-symbols-outlined stack-icon" aria-hidden="true">
+                        {getIcon(item, "storage")}
+                      </span>
+                      {item}
+                    </span>
+                  </li>
                 ))}
               </ul>
             </article>
 
+            {/* Cloud & DevOps — icon list, spans 2 cols */}
             <article className="stack-card infra">
-              <h4>{infrastructure.name}</h4>
+              <h4>{cloudDevops.name}</h4>
               <ul>
-                {infrastructure.items.map((item) => (
-                  <li key={item}>{item}</li>
+                {cloudDevops.items.map((item) => (
+                  <li key={item}>
+                    <span className="stack-item">
+                      <span className="material-symbols-outlined stack-icon" aria-hidden="true">
+                        {getIcon(item, "cloud")}
+                      </span>
+                      {item}
+                    </span>
+                  </li>
                 ))}
               </ul>
             </article>
 
+            {/* Integrations — icon list */}
             <article className="stack-card">
-              <h4>{tools.name}</h4>
+              <h4>{integrations.name}</h4>
               <ul>
-                {tools.items.map((item) => (
-                  <li key={item}>{item}</li>
+                {integrations.items.map((item) => (
+                  <li key={item}>
+                    <span className="stack-item">
+                      <span className="material-symbols-outlined stack-icon" aria-hidden="true">
+                        {getIcon(item, "integration_instructions")}
+                      </span>
+                      {item}
+                    </span>
+                  </li>
                 ))}
               </ul>
             </article>
@@ -132,29 +222,36 @@ export default function HomePage() {
         </section>
 
         <section className="projects-section">
-          <p className="section-kicker">Featured projects</p>
+          <p className="section-kicker">{t.projects.title}</p>
           <div className="projects-grid">
             {projects.map((project) => (
               <article key={project.title} className="project-card">
                 <p className="project-domain">{project.domain}</p>
                 <h3>{project.title}</h3>
-                <p>{project.summary}</p>
-                <p className="impact">Impacto: {project.impact}</p>
+                <p>{t.projects.summaries[project.title] ?? project.summary}</p>
+                <p className="impact">
+                  {t.projects.impactPrefix}: {t.projects.impacts[project.title] ?? project.impact}
+                </p>
               </article>
             ))}
           </div>
         </section>
 
         <section className="cta" id="contact">
-          <h2>LISTO PARA CONSTRUIR ALGO GRANDE?</h2>
-          <p>Conversemos sobre tu proximo producto, arquitectura o proceso de modernizacion.</p>
-          <a href={`mailto:${profile.email}`}>Iniciar Proyecto</a>
+          <h2>{t.cta.title}</h2>
+          <p>{t.cta.body}</p>
+          <a href={`mailto:${profile.email}`}>
+            {t.cta.action}
+            <span className="material-symbols-outlined" aria-hidden="true">
+              arrow_forward
+            </span>
+          </a>
         </section>
       </main>
 
       <footer className="footer">
-        <div className="footer-brand">KINETIC ARCHITECT</div>
-        <div className="footer-copy">© 2026 ESNEIDER BRAVO • ENGINEERED WITH PRECISION</div>
+        <div className="footer-brand">ESNEIDERBRAVO.DEV</div>
+        <div className="footer-copy">© 2026 ESNEIDER BRAVO • {t.footer.signature}</div>
         <div className="footer-links">
           {profile.socialLinks.map((link) => (
             <a key={link.label} href={link.href} target="_blank" rel="noreferrer">
@@ -167,4 +264,3 @@ export default function HomePage() {
     </>
   );
 }
-

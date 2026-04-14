@@ -30,6 +30,12 @@ a {
   text-decoration: none;
 }
 
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24;
+  font-size: 1rem;
+  line-height: 1;
+}
+
 .nav {
   position: fixed;
   top: 0;
@@ -46,6 +52,7 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 0.8rem;
 }
 
 .brand {
@@ -85,10 +92,37 @@ a {
   font-weight: 700;
 }
 
+.locale-selector {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--on-surface-variant);
+  font-size: 0.58rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  font-family: var(--font-space-grotesk), "Space Grotesk", sans-serif;
+}
+
+.locale-selector select {
+  appearance: none;
+  background: var(--surface-highest);
+  color: var(--primary);
+  border: 1px solid var(--outline-ghost);
+  border-radius: 0.3rem;
+  font-size: 0.62rem;
+  font-family: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.3rem 0.45rem;
+}
+
+.locale-selector select:focus {
+  outline: 1px solid rgba(129, 236, 255, 0.5);
+}
+
 .page-shell {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 7rem 1.2rem 3.5rem;
+  margin: auto;
+  padding: 7rem 15rem 3.5rem;
   background-image: radial-gradient(at 0% 0%, rgba(129, 236, 255, 0.06) 0, transparent 50%),
     radial-gradient(at 100% 100%, rgba(105, 246, 184, 0.06) 0, transparent 50%);
 }
@@ -162,6 +196,12 @@ a {
   color: var(--primary);
 }
 
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
 .hero-visual-wrap {
   position: relative;
   width: min(100%, 530px);
@@ -169,11 +209,18 @@ a {
 }
 
 .hero-visual {
+  position: relative;
+  overflow: hidden;
   aspect-ratio: 1;
   border-radius: 0.7rem;
   background: linear-gradient(140deg, #2b2b2b 0%, #111111 55%, #1e1e1e 100%);
   border: 1px solid rgba(72, 72, 71, 0.28);
   box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
+}
+
+.hero-image {
+  object-fit: cover;
+  object-position: center top;
 }
 
 .experience-card {
@@ -276,6 +323,9 @@ a {
   font-family: var(--font-space-grotesk), "Space Grotesk", sans-serif;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .stack-card h4 {
@@ -312,6 +362,22 @@ a {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-size: 0.72rem;
+}
+
+.stack-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.stack-icon {
+  color: var(--secondary);
+  font-size: 0.95rem;
+}
+
+.stack-card h3 .stack-icon {
+  font-size: 1.35rem;
+  color: var(--primary);
 }
 
 .projects-section {
@@ -377,7 +443,9 @@ a {
 }
 
 .cta a {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
   background: var(--primary);
   color: #005762;
   border-radius: 0.45rem;
@@ -426,6 +494,10 @@ a {
 @media (min-width: 920px) {
   .nav-links {
     display: flex;
+  }
+
+  .locale-selector {
+    margin-left: auto;
   }
 
   .hero {

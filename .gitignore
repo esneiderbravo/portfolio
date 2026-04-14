@@ -21,7 +21,3 @@ build/
 *.tsbuildinfo
 coverage/
 
-# local design references
-stitch_*/
-stitch_*.zip
-

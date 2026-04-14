@@ -45,23 +45,28 @@ export const portfolioContent: PortfolioContent = {
   techGroups: [
     {
       name: "Frontend",
-      items: ["React", "Next.js", "TypeScript", "Tailwind", "MUI"],
+      // Evidence: marketplaceportal/app/src/package.json (React 18, MUI v5, Auth0, Recharts, Formik, react-router-dom, Webpack)
+      items: ["React 18", "MUI v5", "Auth0", "Redux", "Webpack", "Formik", "Recharts"],
     },
     {
       name: "Backend",
-      items: ["Python", "Flask", "FastAPI", "REST", "GraphQL"],
+      // Evidence: originationservice, loanservice, marketplace_service, decisionservice requirements.txt
+      items: ["Python", "Flask", "FastAPI", "SQLAlchemy", "GraphQL", "Alembic", "Celery"],
     },
     {
-      name: "Databases",
-      items: ["PostgreSQL", "MongoDB", "Redis"],
+      name: "Data & Messaging",
+      // Evidence: 25 repos with Redis, 21 with Kafka, 21 with PostgreSQL, boto3 S3 across 24 repos
+      items: ["PostgreSQL", "Redis", "Kafka", "AWS S3", "Elastic APM"],
     },
     {
-      name: "Cloud & Infrastructure",
-      items: ["AWS", "Docker", "Kubernetes", "CI/CD", "GitHub Actions"],
+      name: "Cloud & DevOps",
+      // Evidence: Docker in 24 repos, Jenkins in 24 workflows, Ansible in 18, Kubernetes in .yml files
+      items: ["AWS", "Docker", "Jenkins", "Ansible", "GitHub Actions", "Kubernetes"],
     },
     {
-      name: "Tools",
-      items: ["Git", "Jira", "Figma", "Postman", "VS Code"],
+      name: "Integrations",
+      // Evidence: salesforce in 15 repos, twilio in 13, sendgrid in 5, rollbar in 19, plaid in marketplaceportal
+      items: ["Salesforce", "Twilio", "Sendgrid", "Rollbar", "Plaid", "Looker"],
     },
   ],
 };
