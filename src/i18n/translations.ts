@@ -21,14 +21,14 @@ export const translations: Record<Locale, Translation> = {
     },
     hero: {
       availability: "Available for new projects",
-      role: "Senior Fullstack Developer & Systems Architect",
-      bio: "Software engineer focused on fintech platforms. I design and scale products with strong architecture, performance, reliability, and user experience.",
+      role: "Senior Backend Engineer · Python · FastAPI · AWS",
+      bio: "Senior Software Engineer with 8+ years building scalable fintech platforms. Specializing in Python, FastAPI, microservices, and AWS — shipping systems that combine performance, reliability, and AI-first thinking.",
       yearsOfLogic: "Years of logic",
     },
     about: {
       title: "The Philosophy",
       quote: "I believe in intentional architecture. Every line of code must support the weight of future scale.",
-      body: "I have built and evolved systems at LendingFront with a fullstack mindset: React frontends, business APIs, integrations, operational automation, and quality standards. My constant objective is turning technical complexity into reliable and measurable products.",
+      body: "I have built and evolved distributed systems at LendingFront — designing Python microservices with FastAPI and Flask, scalable REST APIs, Kafka-driven pipelines, and React frontends. My constant objective is transforming technical complexity into reliable, measurable products deployable on AWS at scale.",
     },
     stack: { kicker: "Core ecosystem", title: "Engineered Toolkit" },
     projects: {

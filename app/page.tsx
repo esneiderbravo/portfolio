@@ -222,7 +222,7 @@ export default function HomePage() {
 
   return (
     <>
-      <nav className="nav">
+      <nav className="nav" aria-label="Main navigation">
         <div className="nav-inner">
           <div className="brand">ESNEIDERBRAVO.DEV</div>
           <div className="nav-links">
@@ -275,7 +275,7 @@ export default function HomePage() {
               <span>{lastName}</span>
             </h1>
 
-            <p className="hero-role">{t.hero.role}</p>
+            <h2 className="hero-role">{t.hero.role}</h2>
             <p className="hero-bio">{t.hero.bio}</p>
 
             <div className="socials">
@@ -294,7 +294,7 @@ export default function HomePage() {
             <div className="hero-visual">
               <Image
                 src="/profile.png"
-                alt="Retrato profesional de Esneider Bravo"
+                alt="Esneider Bravo — Senior Backend Engineer specializing in Python, FastAPI, and AWS"
                 fill
                 priority
                 className="hero-image"
@@ -308,17 +308,17 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="about" id="about">
-          <div className="about-label">{t.about.title}</div>
+        <section className="about" id="about" aria-labelledby="about-heading">
+          <h2 id="about-heading" className="about-label">{t.about.title}</h2>
           <div>
             <p className="quote">&quot;{t.about.quote}&quot;</p>
             <p className="about-body">{t.about.body}</p>
           </div>
         </section>
 
-        <section className="ai-section" id="ai">
+        <section className="ai-section" id="ai" aria-labelledby="ai-heading">
           <div className="ai-section-head">
-            <p className="section-kicker">{t.ai.kicker}</p>
+            <h2 id="ai-heading" className="section-kicker">{t.ai.kicker}</h2>
             <p className="ai-tagline">{t.ai.tagline}</p>
           </div>
 
@@ -346,10 +346,10 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="stack" id="skills">
+        <section className="stack" id="skills" aria-labelledby="skills-heading">
           <div className="stack-head">
             <div>
-              <p className="section-kicker">{t.skills.title}</p>
+              <h2 id="skills-heading" className="section-kicker">{t.skills.title}</h2>
             </div>
           </div>
 
@@ -456,8 +456,8 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="projects-section" id="projects">
-          <p className="section-kicker">{t.projects.title}</p>
+        <section className="projects-section" id="projects" aria-labelledby="projects-heading">
+          <h2 id="projects-heading" className="section-kicker">{t.projects.title}</h2>
           <div className="projects-grid">
             {projects.map((project) => (
               <article key={project.title} className="project-card">
