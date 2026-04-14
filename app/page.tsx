@@ -155,6 +155,12 @@ export default function HomePage() {
     "snowflake": "ac_unit",
     "fivetran": "cable",
     "dbt": "transform",
+    // ── AI Dev Workflow ───────────────────────────────────────────────────────
+    "openspec cli": "terminal",
+    "artifact-driven changes": "checklist",
+    "opsx:propose": "edit_document",
+    "opsx:apply": "build_circle",
+    "opsx:verify": "verified",
     // ── Design ────────────────────────────────────────────────────────────────
     "figma dev mode": "developer_board",
     "figjam": "gesture",
@@ -178,6 +184,7 @@ export default function HomePage() {
     "Model Context Protocol": "extension",
     "Data Intelligence": "analytics",
     "Design & Prototyping": "design_services",
+    "AI Dev Workflow": "workflow",
   };
 
   const mergedGroups = useMemo(
@@ -286,7 +293,6 @@ export default function HomePage() {
         <section className="ai-section" id="ai">
           <div className="ai-section-head">
             <p className="section-kicker">{t.ai.kicker}</p>
-            <h2 className="ai-title">{t.ai.title}</h2>
             <p className="ai-tagline">{t.ai.tagline}</p>
           </div>
 

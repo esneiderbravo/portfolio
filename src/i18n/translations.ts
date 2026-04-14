@@ -10,7 +10,7 @@ type Translation = {
   skills: { title: string; capabilitiesTitle: string; headlineTitle: string; };
   footer: { signature: string; };
   experience: { kicker: string; title: string; present: string; };
-  ai: { kicker: string; title: string; tagline: string; };
+  ai: { kicker: string; tagline: string; };
 };
 
 export const translations: Record<Locale, Translation> = {
@@ -55,7 +55,6 @@ export const translations: Record<Locale, Translation> = {
     experience: { kicker: "Work History", title: "Experience", present: "Current" },
     ai: {
       kicker: "AI-First Architecture",
-      title: "AI Developer Stack",
       tagline: "Tools, platforms and protocols I use to build and ship AI-powered products.",
     },
   },
@@ -92,7 +91,6 @@ export const translations: Record<Locale, Translation> = {
     experience: { kicker: "Historial Laboral", title: "Experiencia", present: "Actual" },
     ai: {
       kicker: "Arquitectura AI-First",
-      title: "Stack de IA",
       tagline: "Herramientas, plataformas y protocolos que uso para construir productos potenciados por IA.",
     },
   },

@@ -134,6 +134,10 @@ export const portfolioContent: PortfolioContent = {
       name: "Design & Prototyping",
       items: ["Figma", "Figma Dev Mode", "FigJam"],
     },
+    {
+      name: "AI Dev Workflow",
+      items: ["OpenSpec CLI", "Artifact-Driven Changes", "opsx:propose", "opsx:apply", "opsx:verify"],
+    },
   ],
   skillGroups: [
     {
