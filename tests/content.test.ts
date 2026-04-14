@@ -11,8 +11,12 @@ describe("portfolio content", () => {
     expect(portfolioContent.projects.length).toBeGreaterThanOrEqual(3);
   });
 
-  it("defines all required tech groups", () => {
-    expect(portfolioContent.techGroups.length).toBeGreaterThanOrEqual(5);
+  it("defines all required skill groups", () => {
+    expect(portfolioContent.skillGroups.length).toBeGreaterThanOrEqual(5);
+  });
+
+  it("has work experience entries", () => {
+    expect(portfolioContent.experiences.length).toBeGreaterThanOrEqual(3);
   });
 });
 

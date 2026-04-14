@@ -24,14 +24,24 @@ export type Project = {
   impact: string;
 };
 
-export type TechGroup = {
+export type SkillGroup = {
   name: string;
   items: string[];
+};
+
+export type Experience = {
+  company: string;
+  role: string;
+  period: string;
+  current?: boolean;
+  bullets: string[];
 };
 
 export type PortfolioContent = {
   profile: Profile;
   projects: Project[];
-  techGroups: TechGroup[];
+  experiences: Experience[];
+  skillGroups: SkillGroup[];
+  coreCapabilities: string[];
 };
 

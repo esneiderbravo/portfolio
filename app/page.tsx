@@ -1,17 +1,50 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { portfolioContent } from "@/src/content/portfolio";
 import { translations, type Locale } from "@/src/i18n/translations";
 
+const GROUP_ORDER = [
+  "Frontend",
+  "Backend & Languages",
+  "Data & Messaging",
+  "Cloud & DevOps",
+  "APIs & Architecture",
+  "Integrations",
+];
+
 export default function HomePage() {
-  const { profile, projects, techGroups } = portfolioContent;
-  const [frontend, backend, dataMessaging, cloudDevops, integrations] = techGroups;
+  const { profile, projects, experiences, skillGroups, coreCapabilities } = portfolioContent;
   const [firstName, ...lastNameParts] = profile.headline.split(" ");
   const lastName = lastNameParts.join(" ");
   const [locale, setLocale] = useState<Locale>("en");
   const t = useMemo(() => translations[locale], [locale]);
+  const [activeSection, setActiveSection] = useState<string>("about");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [expIndex, setExpIndex] = useState(0);
+
+  useEffect(() => {
+    const sections: { id: string; activeKey: string }[] = [
+      { id: "home", activeKey: "about" },
+      { id: "about", activeKey: "about" },
+      { id: "skills", activeKey: "skills" },
+      { id: "experience", activeKey: "experience" },
+      { id: "projects", activeKey: "projects" },
+      { id: "contact", activeKey: "contact" },
+    ];
+    const observers = sections.map(({ id, activeKey }) => {
+      const el = document.getElementById(id);
+      if (!el) return null;
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActiveSection(activeKey); },
+        { threshold: 0, rootMargin: "-40% 0px -50% 0px" }
+      );
+      obs.observe(el);
+      return obs;
+    });
+    return () => observers.forEach((obs) => obs?.disconnect());
+  }, []);
 
   const socialIcons: Record<string, string> = {
     github: "terminal",
@@ -20,27 +53,82 @@ export default function HomePage() {
   };
 
   const itemIcons: Record<string, string> = {
-    // Data & Messaging
+    // ── Frontend ──────────────────────────────────────────────────────────────
+    "react 18": "deployed_code",
+    "react.js": "deployed_code",
+    react: "deployed_code",
+    "mui v5": "palette",
+    "material ui": "palette",
+    auth0: "lock",
+    redux: "account_tree",
+    webpack: "build",
+    formik: "edit_note",
+    recharts: "bar_chart",
+    jquery: "javascript",
+    html5: "html",
+    css3: "css",
+    typescript: "data_object",
+    tailwind: "style",
+    "framer motion": "animation",
+    "next.js": "rocket_launch",
+    // ── Backend & Languages ────────────────────────────────────────────────────
+    python: "code",
+    "python (fastapi, django, flask)": "code",
+    flask: "local_drink",
+    fastapi: "flash_on",
+    django: "dns",
+    "node.js": "dns",
+    "php (laravel)": "terminal",
+    sqlalchemy: "table",
+    alembic: "history",
+    graphql: "schema",
+    celery: "pending_actions",
+    marshmallow: "transform",
+    // ── Data & Messaging ──────────────────────────────────────────────────────
     postgresql: "database",
+    mysql: "database",
     redis: "bolt",
     kafka: "stream",
     "aws s3": "cloud_upload",
     "elastic apm": "monitor_heart",
-    // Cloud & DevOps
+    // ── Cloud & DevOps ────────────────────────────────────────────────────────
     aws: "cloud",
     docker: "package_2",
     jenkins: "build",
     ansible: "settings_suggest",
     "github actions": "deployed_code",
     kubernetes: "hub",
-    // Integrations
+    "ci/cd pipelines": "sync_alt",
+    "ci/cd": "sync_alt",
+    // ── APIs & Architecture ───────────────────────────────────────────────────
+    "rest apis": "api",
+    "rest": "api",
+    microservices: "widgets",
+    "distributed systems": "hub",
+    // ── Integrations ──────────────────────────────────────────────────────────
     salesforce: "handshake",
     twilio: "call",
     sendgrid: "mail",
     rollbar: "error",
     plaid: "account_balance",
     looker: "bar_chart",
-    // Fallbacks for tools
+    // ── Engineering Skills / Capabilities ─────────────────────────────────────
+    "clean architecture": "architecture",
+    "solid principles": "rule",
+    "test-driven development (tdd)": "check_circle",
+    "system design (scalable systems)": "schema",
+    "sql query optimization": "query_stats",
+    "scalable api design": "lan",
+    "performance tuning": "speed",
+    "observability & monitoring": "monitoring",
+    "ai-first architectures": "psychology",
+    "ai integration in microservices": "smart_toy",
+    "technical leadership": "groups",
+    "code reviews": "rate_review",
+    mentoring: "school",
+    "agile / scrum": "sprint",
+    "multidisciplinary team leadership": "diversity_3",
+    // ── Tools (fallback) ──────────────────────────────────────────────────────
     git: "terminal",
     jira: "checklist",
     figma: "design_services",
@@ -51,18 +139,31 @@ export default function HomePage() {
   const getIcon = (value: string, fallback = "code") =>
     itemIcons[value.toLowerCase()] ?? fallback;
 
+  const groupIcon: Record<string, string> = {
+    Frontend: "layers",
+    "Backend & Languages": "dns",
+    "Data & Messaging": "database",
+    "Cloud & DevOps": "cloud",
+    "APIs & Architecture": "api",
+    Integrations: "handshake",
+  };
+
+  const mergedGroups = useMemo(
+    () => [...skillGroups].sort((a, b) => GROUP_ORDER.indexOf(a.name) - GROUP_ORDER.indexOf(b.name)),
+    [skillGroups]
+  );
+
   return (
     <>
       <nav className="nav">
         <div className="nav-inner">
           <div className="brand">ESNEIDERBRAVO.DEV</div>
           <div className="nav-links">
-            <a href="#works">{t.nav.works}</a>
-            <a className="active" href="#stack">
-              {t.nav.stack}
-            </a>
-            <a href="#about">{t.nav.about}</a>
-            <a href="#contact">{t.nav.contact}</a>
+            <a href="#home" onClick={() => setActiveSection("about")} className={activeSection === "about" ? "active" : ""}>{t.nav.about}</a>
+            <a href="#skills" onClick={() => setActiveSection("skills")} className={activeSection === "skills" ? "active" : ""}>{t.nav.skills}</a>
+            <a href="#experience" onClick={() => setActiveSection("experience")} className={activeSection === "experience" ? "active" : ""}>{t.experience.title}</a>
+            <a href="#projects" onClick={() => setActiveSection("projects")} className={activeSection === "projects" ? "active" : ""}>{t.nav.projects}</a>
+            <a href="#contact" onClick={() => setActiveSection("contact")} className={activeSection === "contact" ? "active" : ""}>{t.nav.contact}</a>
           </div>
           <label className="locale-selector" aria-label={t.nav.language}>
             <span>{t.nav.language}</span>
@@ -71,14 +172,30 @@ export default function HomePage() {
               <option value="es">ES</option>
             </select>
           </label>
-          <a className="resume-btn" href="#contact">
-            {t.nav.resume}
-          </a>
+          <button
+            className={`hamburger${mobileMenuOpen ? " open" : ""}`}
+            aria-label="Toggle navigation"
+            onClick={() => setMobileMenuOpen((v) => !v)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
         </div>
       </nav>
 
+      {mobileMenuOpen && (
+        <div className="mobile-nav">
+          <a href="#home" onClick={() => { setActiveSection("about"); setMobileMenuOpen(false); }} className={activeSection === "about" ? "active" : ""}>{t.nav.about}</a>
+          <a href="#skills" onClick={() => { setActiveSection("skills"); setMobileMenuOpen(false); }} className={activeSection === "skills" ? "active" : ""}>{t.nav.skills}</a>
+          <a href="#experience" onClick={() => { setActiveSection("experience"); setMobileMenuOpen(false); }} className={activeSection === "experience" ? "active" : ""}>{t.experience.title}</a>
+          <a href="#projects" onClick={() => { setActiveSection("projects"); setMobileMenuOpen(false); }} className={activeSection === "projects" ? "active" : ""}>{t.nav.projects}</a>
+          <a href="#contact" onClick={() => { setActiveSection("contact"); setMobileMenuOpen(false); }} className={activeSection === "contact" ? "active" : ""}>{t.nav.contact}</a>
+        </div>
+      )}
+
       <main className="page-shell">
-        <section className="hero" id="works">
+        <section className="hero" id="home">
           <div className="hero-copy">
             <div className="status-pill">
               <span className="status-dot" />
@@ -132,96 +249,117 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="stack" id="stack">
+        <section className="stack" id="skills">
           <div className="stack-head">
             <div>
-              <p className="section-kicker">{t.stack.kicker}</p>
-              <h2>{t.stack.title}</h2>
+              <p className="section-kicker">{t.skills.title}</p>
             </div>
-            <p className="stack-caption">{t.stack.caption}</p>
           </div>
 
-          <div className="stack-grid">
-            {/* Frontend — chips */}
-            <article className="stack-card wide">
-              <h3>
-                <span className="material-symbols-outlined stack-icon" aria-hidden="true">layers</span>
-                {frontend.name}
-              </h3>
-              <div className="chip-list">
-                {frontend.items.map((item) => (
-                  <span key={item} className="chip">{item}</span>
+          <div className="skills-grid">
+            {mergedGroups.map((group) => (
+              <article key={group.name} className="stack-card">
+                <h4>
+                  <span className="material-symbols-outlined stack-icon" aria-hidden="true">
+                    {groupIcon[group.name] ?? "code"}
+                  </span>
+                  {group.name}
+                </h4>
+                <ul>
+                  {group.items.map((item) => (
+                    <li key={`${group.name}-${item}`}>
+                      <span className="stack-item">
+                        <span className="material-symbols-outlined stack-icon" aria-hidden="true">
+                          {getIcon(item, "code")}
+                        </span>
+                        {item}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+
+          <article className="stack-card capabilities-card">
+            <h4>{t.skills.capabilitiesTitle}</h4>
+            <div className="chip-list">
+              {coreCapabilities.map((capability) => (
+                <span key={capability} className="chip capability-chip">
+                  <span className="material-symbols-outlined" aria-hidden="true">
+                    {getIcon(capability, "bolt")}
+                  </span>
+                  {capability}
+                </span>
+              ))}
+            </div>
+          </article>
+        </section>
+
+        <section className="exp-section" id="experience">
+          <p className="section-kicker">{t.experience.kicker}</p>
+          <h2 className="exp-title">{t.experience.title}</h2>
+
+          <div className="exp-carousel">
+            <div
+              className="exp-track"
+              style={{ transform: `translateX(-${expIndex * 100}%)` }}
+            >
+              {experiences.map((exp) => (
+                <article key={`${exp.company}-${exp.role}`} className="exp-card">
+                  <div className="exp-card-header">
+                    <div>
+                      <p className="exp-company">{exp.company}</p>
+                      <h3 className="exp-role">{exp.role}</h3>
+                    </div>
+                    <span className={`exp-period${exp.current ? " current" : ""}`}>
+                      {exp.current ? t.experience.present : exp.period}
+                      {exp.current && <span className="exp-period-sub">{exp.period}</span>}
+                    </span>
+                  </div>
+                  <ul className="exp-bullets">
+                    {exp.bullets.map((bullet) => (
+                      <li key={bullet}>{bullet}</li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
+            </div>
+
+            <div className="exp-controls">
+              <button
+                className="exp-nav-btn"
+                onClick={() => setExpIndex((i) => Math.max(0, i - 1))}
+                disabled={expIndex === 0}
+                aria-label="Previous"
+              >
+                <span className="material-symbols-outlined">arrow_back</span>
+              </button>
+
+              <div className="exp-dots">
+                {experiences.map((_, i) => (
+                  <button
+                    key={i}
+                    className={`exp-dot${i === expIndex ? " active" : ""}`}
+                    onClick={() => setExpIndex(i)}
+                    aria-label={`Slide ${i + 1}`}
+                  />
                 ))}
               </div>
-            </article>
 
-            {/* Backend — chips */}
-            <article className="stack-card wide">
-              <h3>
-                <span className="material-symbols-outlined stack-icon" aria-hidden="true">dns</span>
-                {backend.name}
-              </h3>
-              <div className="chip-list">
-                {backend.items.map((item) => (
-                  <span key={item} className="chip">{item}</span>
-                ))}
-              </div>
-            </article>
-
-            {/* Data & Messaging — icon list */}
-            <article className="stack-card">
-              <h4>{dataMessaging.name}</h4>
-              <ul>
-                {dataMessaging.items.map((item) => (
-                  <li key={item}>
-                    <span className="stack-item">
-                      <span className="material-symbols-outlined stack-icon" aria-hidden="true">
-                        {getIcon(item, "storage")}
-                      </span>
-                      {item}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </article>
-
-            {/* Cloud & DevOps — icon list, spans 2 cols */}
-            <article className="stack-card infra">
-              <h4>{cloudDevops.name}</h4>
-              <ul>
-                {cloudDevops.items.map((item) => (
-                  <li key={item}>
-                    <span className="stack-item">
-                      <span className="material-symbols-outlined stack-icon" aria-hidden="true">
-                        {getIcon(item, "cloud")}
-                      </span>
-                      {item}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </article>
-
-            {/* Integrations — icon list */}
-            <article className="stack-card">
-              <h4>{integrations.name}</h4>
-              <ul>
-                {integrations.items.map((item) => (
-                  <li key={item}>
-                    <span className="stack-item">
-                      <span className="material-symbols-outlined stack-icon" aria-hidden="true">
-                        {getIcon(item, "integration_instructions")}
-                      </span>
-                      {item}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </article>
+              <button
+                className="exp-nav-btn"
+                onClick={() => setExpIndex((i) => Math.min(experiences.length - 1, i + 1))}
+                disabled={expIndex === experiences.length - 1}
+                aria-label="Next"
+              >
+                <span className="material-symbols-outlined">arrow_forward</span>
+              </button>
+            </div>
           </div>
         </section>
 
-        <section className="projects-section">
+        <section className="projects-section" id="projects">
           <p className="section-kicker">{t.projects.title}</p>
           <div className="projects-grid">
             {projects.map((project) => (
@@ -240,7 +378,7 @@ export default function HomePage() {
         <section className="cta" id="contact">
           <h2>{t.cta.title}</h2>
           <p>{t.cta.body}</p>
-          <a href={`mailto:${profile.email}`}>
+          <a href="https://wa.me/573195854272" target="_blank" rel="noreferrer">
             {t.cta.action}
             <span className="material-symbols-outlined" aria-hidden="true">
               arrow_forward
@@ -258,7 +396,7 @@ export default function HomePage() {
               {link.label}
             </a>
           ))}
-          <a href={`mailto:${profile.email}`}>Email</a>
+          <a href="https://wa.me/573195854272" target="_blank" rel="noreferrer">WhatsApp</a>
         </div>
       </footer>
     </>

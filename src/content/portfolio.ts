@@ -42,32 +42,119 @@ export const portfolioContent: PortfolioContent = {
       impact: "Mejor trazabilidad operativa, menor tasa de incidencias y mayor confianza en flujos transaccionales.",
     },
   ],
-  techGroups: [
+  experiences: [
     {
-      name: "Frontend",
-      // Evidence: marketplaceportal/app/src/package.json (React 18, MUI v5, Auth0, Recharts, Formik, react-router-dom, Webpack)
-      items: ["React 18", "MUI v5", "Auth0", "Redux", "Webpack", "Formik", "Recharts"],
+      company: "LendingFront",
+      role: "Senior Software Engineer",
+      period: "Jun 2024 – Present",
+      current: true,
+      bullets: [
+        "Developed backend solutions using Python (FastAPI, Django)",
+        "Designed scalable REST APIs for financial systems",
+        "Applied clean architecture and best practices",
+      ],
     },
     {
-      name: "Backend",
-      // Evidence: originationservice, loanservice, marketplace_service, decisionservice requirements.txt
-      items: ["Python", "Flask", "FastAPI", "SQLAlchemy", "GraphQL", "Alembic", "Celery"],
+      company: "LendingFront",
+      role: "Integration Team Lead",
+      period: "Aug 2023 – Jun 2024",
+      bullets: [
+        "Aligned Development and QA teams",
+        "Ensured high-quality software delivery",
+        "Removed bottlenecks and improved processes",
+      ],
+    },
+    {
+      company: "LendingFront",
+      role: "Software Engineer II",
+      period: "Nov 2022 – Oct 2023",
+      bullets: [
+        "Built backend systems using Python and Flask",
+        "Led transition to microservices with Node.js",
+        "Managed a team of 3 developers",
+        "Optimized SQL queries (MySQL / PostgreSQL)",
+        "Implemented CI/CD pipelines with Jenkins and Docker",
+      ],
+    },
+    {
+      company: "LendingFront",
+      role: "Software Engineer",
+      period: "Mar 2021 – Oct 2022",
+      bullets: [
+        "Developed REST APIs with Node.js",
+        "Built applications with Python (Flask)",
+        "Improved database performance",
+        "Implemented automated testing",
+        "Contributed to CI/CD processes",
+      ],
+    },
+    {
+      company: "Ladys Confecciones SAS BIC",
+      role: "Web Developer",
+      period: "Aug 2020 – Mar 2021",
+      bullets: [
+        "Built e-commerce marketplace with PHP & Laravel",
+        "Integrated payment gateways",
+        "Developed REST APIs",
+        "Implemented testing with PHPUnit",
+        "Improved frontend performance",
+      ],
+    },
+    {
+      company: "Universidad del Magdalena",
+      role: "Web Developer",
+      period: "Feb 2019 – Aug 2020",
+      bullets: [
+        "Developed academic web systems (PHP, jQuery)",
+        "Optimized database performance",
+        "Implemented testing frameworks",
+        "Worked with Agile methodologies",
+        "Documented systems and gathered requirements",
+      ],
+    },
+  ],
+  skillGroups: [
+    {
+      name: "Frontend",
+      items: ["React.js", "Next.js", "MUI v5", "TypeScript", "Auth0", "Redux", "Webpack", "Formik", "Recharts", "jQuery", "HTML5", "CSS3"],
+    },
+    {
+      name: "Backend & Languages",
+      items: ["Python (FastAPI, Django, Flask)", "SQLAlchemy", "Alembic", "Celery", "Marshmallow", "Node.js", "PHP (Laravel)"],
     },
     {
       name: "Data & Messaging",
-      // Evidence: 25 repos with Redis, 21 with Kafka, 21 with PostgreSQL, boto3 S3 across 24 repos
-      items: ["PostgreSQL", "Redis", "Kafka", "AWS S3", "Elastic APM"],
+      items: ["PostgreSQL", "MySQL", "Redis", "Kafka", "AWS S3", "Elastic APM"],
     },
     {
       name: "Cloud & DevOps",
-      // Evidence: Docker in 24 repos, Jenkins in 24 workflows, Ansible in 18, Kubernetes in .yml files
       items: ["AWS", "Docker", "Jenkins", "Ansible", "GitHub Actions", "Kubernetes"],
     },
     {
+      name: "APIs & Architecture",
+      items: ["REST APIs", "GraphQL", "Microservices", "Distributed Systems"],
+    },
+    {
       name: "Integrations",
-      // Evidence: salesforce in 15 repos, twilio in 13, sendgrid in 5, rollbar in 19, plaid in marketplaceportal
       items: ["Salesforce", "Twilio", "Sendgrid", "Rollbar", "Plaid", "Looker"],
     },
+  ],
+  coreCapabilities: [
+    "Clean Architecture",
+    "SOLID Principles",
+    "Test-Driven Development (TDD)",
+    "System Design (Scalable Systems)",
+    "SQL Query Optimization",
+    "Scalable API Design",
+    "Performance Tuning",
+    "Observability & Monitoring",
+    "AI-First Architectures",
+    "AI Integration in Microservices",
+    "Technical Leadership",
+    "Code Reviews",
+    "Mentoring",
+    "Agile / Scrum",
+    "Multidisciplinary Team Leadership",
   ],
 };
 
