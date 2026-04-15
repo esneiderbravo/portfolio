@@ -1,7 +1,7 @@
 export type Locale = "en" | "es";
 
 type Translation = {
-  nav: { about: string; skills: string; projects: string; contact: string; resume: string; language: string; ai: string; };
+  nav: { about: string; skills: string; projects: string; contact: string; resume: string; language: string; ai: string; experience: string; education: string; certifications: string; };
   hero: { availability: string; role: string; bio: string; yearsOfLogic: string; };
   about: { title: string; quote: string; body: string; };
   stack: { kicker: string; title: string; };
@@ -9,7 +9,16 @@ type Translation = {
   cta: { title: string; body: string; action: string; };
   skills: { title: string; capabilitiesTitle: string; headlineTitle: string; };
   footer: { signature: string; };
-  experience: { kicker: string; title: string; present: string; };
+  experience: { kicker: string; present: string; };
+  education: { kicker: string; };
+  certifications: {
+    kicker: string;
+    issuerLabel: string;
+    issuedLabel: string;
+    credentialLabel: string;
+    titles: Record<string, string>;
+    issuers: Record<string, string>;
+  };
   ai: { kicker: string; tagline: string; };
 };
 
@@ -17,7 +26,7 @@ export const translations: Record<Locale, Translation> = {
   en: {
     nav: {
       about: "About", skills: "Skills", projects: "Projects",
-      contact: "Contact", resume: "Resume", language: "Language", ai: "AI Stack",
+      contact: "Contact", resume: "Resume", language: "Language", ai: "AI Stack", experience: "Experience", education: "Education", certifications: "Certifications",
     },
     hero: {
       availability: "Available for new projects",
@@ -52,7 +61,22 @@ export const translations: Record<Locale, Translation> = {
     },
     skills: { title: "Technical Skills", capabilitiesTitle: "Core Capabilities", headlineTitle: "Short Professional Headline" },
     footer: { signature: "ENGINEERED WITH PRECISION" },
-    experience: { kicker: "Work History", title: "Experience", present: "Current" },
+    experience: { kicker: "Work History", present: "Current" },
+    education: { kicker: "Education" },
+    certifications: {
+      kicker: "Certifications",
+      issuerLabel: "Issuer",
+      issuedLabel: "Issued",
+      credentialLabel: "Show credential",
+      titles: {
+        "Introduccion a la gestion de proyectos": "Introduction to Project Management",
+        "Curso de Introduccion a React.js": "Introduction to React.js Course",
+      },
+      issuers: {
+        "Tecnologico de Monterrey": "Monterrey Institute of Technology",
+        "Universidad Internacional de La Rioja": "International University of La Rioja",
+      },
+    },
     ai: {
       kicker: "AI-First Architecture",
       tagline: "Tools, platforms and protocols I use to build and ship AI-powered products.",
@@ -61,7 +85,7 @@ export const translations: Record<Locale, Translation> = {
   es: {
     nav: {
       about: "Sobre mí", skills: "Habilidades", projects: "Proyectos",
-      contact: "Contacto", resume: "CV", language: "Idioma", ai: "IA Stack",
+      contact: "Contacto", resume: "CV", language: "Idioma", ai: "IA Stack", experience: "Experiencia", education: "Educacion", certifications: "Certificaciones",
     },
     hero: {
       availability: "Disponible para nuevos proyectos",
@@ -88,7 +112,16 @@ export const translations: Record<Locale, Translation> = {
     },
     skills: { title: "Habilidades Tecnicas", capabilitiesTitle: "Capacidades Clave", headlineTitle: "Headline Profesional Corta" },
     footer: { signature: "ENGINEERED WITH PRECISION" },
-    experience: { kicker: "Historial Laboral", title: "Experiencia", present: "Actual" },
+    experience: { kicker: "Historial Laboral", present: "Actual" },
+    education: { kicker: "Educacion" },
+    certifications: {
+      kicker: "Certificaciones",
+      issuerLabel: "Emisor",
+      issuedLabel: "Emitido",
+      credentialLabel: "Ver credencial",
+      titles: {},
+      issuers: {},
+    },
     ai: {
       kicker: "Arquitectura AI-First",
       tagline: "Herramientas, plataformas y protocolos que uso para construir productos potenciados por IA.",

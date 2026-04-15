@@ -113,6 +113,69 @@ export const portfolioContent: PortfolioContent = {
       ],
     },
   ],
+  education: [
+    {
+      institution: "Universidad del Magdalena",
+      degree: "B.S. in Systems Engineering",
+      location: "Santa Marta, Colombia",
+      highlights: [
+        "Built a strong base in software architecture, algorithms, and relational databases.",
+        "Developed academic web systems with PHP and JavaScript as part of applied projects.",
+      ],
+    },
+  ],
+  certifications: [
+    {
+      name: "Introduccion a la gestion de proyectos",
+      issuer: "Tecnologico de Monterrey",
+      issued: "Oct 2025",
+      credentialId: "R4U3AU9QFVY7",
+      credentialUrl: "https://www.coursera.org/account/accomplishments/verify/R4U3AU9QFVY7",
+    },
+    {
+      name: "Lifelong Learning 2025",
+      issuer: "Certiprof",
+      issued: "Aug 2025",
+      credentialUrl: "https://www.credly.com/badges/a02000d7-7513-4d0f-9beb-969465563024/linked_in_profile",
+    },
+    {
+      name: "Introduction to Docker",
+      issuer: "Google",
+      issued: "Mar 2024",
+      credentialId: "aaf7e06444bd0fe1aec455d960b7c891",
+      credentialUrl: "https://coursera.org/share/aaf7e06444bd0fe1aec455d960b7c891",
+    },
+    {
+      name: "Remote Work Professional Certification - RWPC",
+      issuer: "Certiprof",
+      issued: "Apr 2023",
+      credentialUrl: "https://www.credly.com/badges/8374a564-1624-42fa-9340-f9e6725be05a/linked_in_profile",
+    },
+    {
+      name: "Scrum Foundation Professional Certificate - SFPC",
+      issuer: "Certiprof",
+      issued: "Feb 2023",
+      credentialUrl: "https://www.credly.com/badges/6ac40dbc-278e-49ec-bab1-beaabed96e6e/linked_in_profile",
+    },
+    {
+      name: "Curso de Introduccion a React.js",
+      issuer: "Platzi",
+      issued: "Feb 2023",
+      credentialId: "bb33d01a-a018-46f7-950d-0c2ed8026abc",
+      credentialUrl: "https://platzi.com/p/esneiderbravoyb/curso/2444-react/diploma/detalle/",
+    },
+    {
+      name: "EF SET English Certificate 51/100 (B2 Upper Intermediate)",
+      issuer: "EF SET",
+      issued: "2023",
+      credentialUrl: "https://www.efset.org/cert/JgA6mE",
+    },
+    {
+      name: "Preparation Certification AZ900: Microsoft Azure Fundamentals",
+      issuer: "Universidad Internacional de La Rioja",
+      issued: "Oct 2022",
+    },
+  ],
   aiStack: [
     {
       name: "AI Coding Assistants",

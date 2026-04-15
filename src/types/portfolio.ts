@@ -37,10 +37,28 @@ export type Experience = {
   bullets: string[];
 };
 
+export type Education = {
+  institution: string;
+  degree: string;
+  period?: string;
+  location?: string;
+  highlights?: string[];
+};
+
+export type Certification = {
+  name: string;
+  issuer: string;
+  issued: string;
+  credentialId?: string;
+  credentialUrl?: string;
+};
+
 export type PortfolioContent = {
   profile: Profile;
   projects: Project[];
   experiences: Experience[];
+  education: Education[];
+  certifications: Certification[];
   skillGroups: SkillGroup[];
   aiStack: SkillGroup[];
   coreCapabilities: string[];

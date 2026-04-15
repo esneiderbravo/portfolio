@@ -15,7 +15,7 @@ const GROUP_ORDER = [
 ];
 
 export default function HomePage() {
-  const { profile, projects, experiences, skillGroups, aiStack, coreCapabilities } = portfolioContent;
+  const { profile, projects, experiences, education, certifications, skillGroups, aiStack, coreCapabilities } = portfolioContent;
   const [firstName, ...lastNameParts] = profile.headline.split(" ");
   const lastName = lastNameParts.join(" ");
   const [locale, setLocale] = useState<Locale>("en");
@@ -31,6 +31,8 @@ export default function HomePage() {
       { id: "ai", activeKey: "ai" },
       { id: "skills", activeKey: "skills" },
       { id: "experience", activeKey: "experience" },
+      { id: "education", activeKey: "education" },
+      { id: "certifications", activeKey: "certifications" },
       { id: "projects", activeKey: "projects" },
     ];
     const keyById = new Map(sections.map((section) => [section.id, section.activeKey]));
@@ -229,7 +231,9 @@ export default function HomePage() {
             <a href="#home" onClick={() => setActiveSection("about")} className={activeSection === "about" ? "active" : ""}>{t.nav.about}</a>
             <a href="#ai" onClick={() => setActiveSection("ai")} className={activeSection === "ai" ? "active" : ""}>{t.nav.ai}</a>
             <a href="#skills" onClick={() => setActiveSection("skills")} className={activeSection === "skills" ? "active" : ""}>{t.nav.skills}</a>
-            <a href="#experience" onClick={() => setActiveSection("experience")} className={activeSection === "experience" ? "active" : ""}>{t.experience.title}</a>
+            <a href="#experience" onClick={() => setActiveSection("experience")} className={activeSection === "experience" ? "active" : ""}>{t.nav.experience}</a>
+            <a href="#education" onClick={() => setActiveSection("education")} className={activeSection === "education" ? "active" : ""}>{t.nav.education}</a>
+            <a href="#certifications" onClick={() => setActiveSection("certifications")} className={activeSection === "certifications" ? "active" : ""}>{t.nav.certifications}</a>
             <a href="#projects" onClick={() => setActiveSection("projects")} className={activeSection === "projects" ? "active" : ""}>{t.nav.projects}</a>
           </div>
           <label className="locale-selector" aria-label={t.nav.language}>
@@ -256,7 +260,9 @@ export default function HomePage() {
           <a href="#home" onClick={() => { setActiveSection("about"); setMobileMenuOpen(false); }} className={activeSection === "about" ? "active" : ""}>{t.nav.about}</a>
           <a href="#ai" onClick={() => { setActiveSection("ai"); setMobileMenuOpen(false); }} className={activeSection === "ai" ? "active" : ""}>{t.nav.ai}</a>
           <a href="#skills" onClick={() => { setActiveSection("skills"); setMobileMenuOpen(false); }} className={activeSection === "skills" ? "active" : ""}>{t.nav.skills}</a>
-          <a href="#experience" onClick={() => { setActiveSection("experience"); setMobileMenuOpen(false); }} className={activeSection === "experience" ? "active" : ""}>{t.experience.title}</a>
+          <a href="#experience" onClick={() => { setActiveSection("experience"); setMobileMenuOpen(false); }} className={activeSection === "experience" ? "active" : ""}>{t.nav.experience}</a>
+          <a href="#education" onClick={() => { setActiveSection("education"); setMobileMenuOpen(false); }} className={activeSection === "education" ? "active" : ""}>{t.nav.education}</a>
+          <a href="#certifications" onClick={() => { setActiveSection("certifications"); setMobileMenuOpen(false); }} className={activeSection === "certifications" ? "active" : ""}>{t.nav.certifications}</a>
           <a href="#projects" onClick={() => { setActiveSection("projects"); setMobileMenuOpen(false); }} className={activeSection === "projects" ? "active" : ""}>{t.nav.projects}</a>
         </div>
       )}
@@ -395,7 +401,6 @@ export default function HomePage() {
 
         <section className="exp-section" id="experience">
           <p className="section-kicker">{t.experience.kicker}</p>
-          <h2 className="exp-title">{t.experience.title}</h2>
 
           <div className="exp-carousel">
             <div
@@ -453,6 +458,58 @@ export default function HomePage() {
                 <span className="material-symbols-outlined">arrow_forward</span>
               </button>
             </div>
+          </div>
+        </section>
+
+        <section className="education-section" id="education" aria-labelledby="education-heading">
+          <h2 id="education-heading" className="section-kicker">{t.education.kicker}</h2>
+          <div className="education-grid">
+            {education.map((item) => {
+              const meta = [item.period, item.location].filter(Boolean).join(" • ");
+              return (
+                <article key={`${item.institution}-${item.degree}`} className="education-card">
+                  <h3 className="education-degree">{item.degree}</h3>
+                  <p className="education-institution">{item.institution}</p>
+                  {meta && <p className="education-meta">{meta}</p>}
+                  {item.highlights && item.highlights.length > 0 && (
+                    <ul className="education-highlights">
+                      {item.highlights.map((highlight) => (
+                        <li key={highlight}>{highlight}</li>
+                      ))}
+                    </ul>
+                  )}
+                </article>
+              );
+            })}
+          </div>
+        </section>
+
+        <section className="certifications-section" id="certifications" aria-labelledby="certifications-heading">
+          <h2 id="certifications-heading" className="section-kicker">{t.certifications.kicker}</h2>
+          <div className="certifications-grid">
+            {certifications.map((certification) => (
+              <article key={`${certification.name}-${certification.issuer}`} className="certification-card">
+                <h3 className="certification-name">
+                  {t.certifications.titles[certification.name] ?? certification.name}
+                </h3>
+                <p className="certification-meta">
+                  <strong>{t.certifications.issuerLabel}:</strong> {t.certifications.issuers[certification.issuer] ?? certification.issuer}
+                </p>
+                <p className="certification-meta">
+                  <strong>{t.certifications.issuedLabel}:</strong> {certification.issued}
+                </p>
+                {certification.credentialId && (
+                  <p className="certification-meta">
+                    <strong>ID:</strong> {certification.credentialId}
+                  </p>
+                )}
+                {certification.credentialUrl && (
+                  <a className="certification-link" href={certification.credentialUrl} target="_blank" rel="noreferrer">
+                    {t.certifications.credentialLabel}
+                  </a>
+                )}
+              </article>
+            ))}
           </div>
         </section>
 
