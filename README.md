@@ -28,15 +28,15 @@ A dark-mode, performance-first personal portfolio built entirely with **Next.js 
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Framework | Next.js 14 (App Router) |
-| Language | TypeScript 5 |
-| Styling | Pure CSS — custom design tokens, no framework |
-| Icons | Google Material Symbols Outlined |
-| Fonts | Inter + Space Grotesk (Google Fonts) |
-| Testing | Vitest |
-| Deployment | Vercel |
+| Layer      | Technology                                    |
+| ---------- | --------------------------------------------- |
+| Framework  | Next.js 14 (App Router)                       |
+| Language   | TypeScript 5                                  |
+| Styling    | Pure CSS — custom design tokens, no framework |
+| Icons      | Google Material Symbols Outlined              |
+| Fonts      | Inter + Space Grotesk (Google Fonts)          |
+| Testing    | Vitest                                        |
+| Deployment | Vercel                                        |
 
 ---
 
@@ -86,6 +86,7 @@ Open [http://localhost:3000](http://localhost:3000).
 All content is decoupled from the UI. To make it your own:
 
 **1. Update your profile** — `src/content/portfolio.ts`
+
 ```ts
 profile: {
   name: "Your Name",
@@ -98,14 +99,15 @@ profile: {
 ```
 
 **2. Add experience entries**
+
 ```ts
 experiences: [
   {
-    company: "Acme Corp",
-    role: "Senior Engineer",
-    period: "Jan 2023 – Present",
+    company: 'Acme Corp',
+    role: 'Senior Engineer',
+    period: 'Jan 2023 – Present',
     current: true,
-    bullets: ["Built X", "Led Y"],
+    bullets: ['Built X', 'Led Y'],
   },
 ]
 ```
@@ -116,26 +118,26 @@ experiences: [
 
 ## Sections
 
-| Section | Description |
-|---|---|
-| **Hero** | Full-viewport intro — photo, role, bio & socials |
-| **About** | Philosophy quote + body copy |
-| **Skills** | 6-group tech grid + core capabilities chips |
-| **Experience** | Animated carousel — 6 roles across 3 companies |
-| **Projects** | 3 featured projects with impact statements |
-| **Contact** | CTA → direct WhatsApp link |
+| Section        | Description                                      |
+| -------------- | ------------------------------------------------ |
+| **Hero**       | Full-viewport intro — photo, role, bio & socials |
+| **About**      | Philosophy quote + body copy                     |
+| **Skills**     | 6-group tech grid + core capabilities chips      |
+| **Experience** | Animated carousel — 6 roles across 3 companies   |
+| **Projects**   | 3 featured projects with impact statements       |
+| **Contact**    | CTA → direct WhatsApp link                       |
 
 ---
 
 ## Responsive Breakpoints
 
-| Breakpoint | Layout |
-|---|---|
-| `< 640px` | Single column, hamburger nav |
-| `≥ 640px` | 2-col grids, wider padding |
-| `≥ 920px` | 2-col hero, 3-col skills/projects, desktop nav |
-| `≥ 1280px` | Increased horizontal padding |
-| `≥ 1440px` | Max padding (15rem per side) |
+| Breakpoint | Layout                                         |
+| ---------- | ---------------------------------------------- |
+| `< 640px`  | Single column, hamburger nav                   |
+| `≥ 640px`  | 2-col grids, wider padding                     |
+| `≥ 920px`  | 2-col hero, 3-col skills/projects, desktop nav |
+| `≥ 1280px` | Increased horizontal padding                   |
+| `≥ 1440px` | Max padding (15rem per side)                   |
 
 ---
 

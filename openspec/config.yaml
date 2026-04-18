@@ -1,0 +1,37 @@
+schema: spec-driven
+
+context: |
+  Project: Personal portfolio for Esneider Bravo — Senior Backend Engineer
+  Live URL: https://esneiderbravo.dev
+  Purpose: Professional showcase targeting senior/lead engineering roles in fintech and AI-first companies
+
+  Tech stack:
+    - Next.js 16 (App Router) + React 19 + TypeScript 5 (strict mode)
+    - Single-page application — all sections rendered in app/page.tsx
+    - Static data layer — no database, no backend API; all content in src/content/portfolio.ts
+    - i18n: EN/ES toggle (client-side state, no router), translations in src/i18n/translations.ts
+    - Styling: CSS custom properties in app/globals.css, Google Fonts (Inter, Space Grotesk), Material Symbols icons
+    - Testing: Vitest for unit tests (tests/content.test.ts)
+    - Quality gate: scripts/validate.mjs runs lint → typecheck → test → build in sequence
+
+  Conventions:
+    - Conventional commits (feat:, fix:, seo:, refactor:, etc.)
+    - No framework for CSS — raw CSS with custom properties
+    - TypeScript types defined in src/types/portfolio.ts, must stay in sync with content
+    - ESLint uses flat config (eslint.config.mjs), currently minimal (eslint-config-next only)
+    - No Prettier yet — formatting is inconsistent across files
+
+  Domain knowledge:
+    - Sections rendered in order: home → about → ai-stack → skills → experience → education → certifications → projects → CTA
+    - Scroll spy uses IntersectionObserver; active section tracked in component state
+    - SEO: JSON-LD (Person + WebSite), OpenGraph, Twitter cards, sitemap, robots all configured
+    - ES locale has empty project summaries/impacts (intentional — EN-only for featured projects)
+    - Owner is sole developer — no team, no PR review process currently
+
+rules:
+  proposal:
+    - Keep proposals under 400 words
+    - Always include a Non-goals section if scope could be misread
+  tasks:
+    - Break tasks into chunks completable in under 90 minutes
+    - Each task must be independently verifiable (no "do X and Y together")

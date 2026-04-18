@@ -23,4 +23,3 @@ jobs:
 
       - name: Validate
         run: npm run validate
-

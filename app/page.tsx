@@ -1,226 +1,236 @@
-"use client";
+'use client'
 
-import { useEffect, useMemo, useState } from "react";
-import Image from "next/image";
-import { portfolioContent } from "@/src/content/portfolio";
-import { translations, type Locale } from "@/src/i18n/translations";
+import Image from 'next/image'
+import { useEffect, useMemo, useState } from 'react'
+
+import { portfolioContent } from '@/src/content/portfolio'
+import { translations, type Locale } from '@/src/i18n/translations'
 
 const GROUP_ORDER = [
-  "Frontend",
-  "Backend & Languages",
-  "Data & Messaging",
-  "Cloud & DevOps",
-  "APIs & Architecture",
-  "Integrations",
-];
+  'Frontend',
+  'Backend & Languages',
+  'Data & Messaging',
+  'Cloud & DevOps',
+  'APIs & Architecture',
+  'Integrations',
+]
 
 export default function HomePage() {
-  const { profile, projects, experiences, education, certifications, skillGroups, aiStack, coreCapabilities } = portfolioContent;
-  const [firstName, ...lastNameParts] = profile.headline.split(" ");
-  const lastName = lastNameParts.join(" ");
-  const [locale, setLocale] = useState<Locale>("en");
-  const t = useMemo(() => translations[locale], [locale]);
-  const [activeSection, setActiveSection] = useState<string>("about");
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [expIndex, setExpIndex] = useState(0);
+  const {
+    profile,
+    projects,
+    experiences,
+    education,
+    certifications,
+    skillGroups,
+    aiStack,
+    coreCapabilities,
+  } = portfolioContent
+  const [firstName, ...lastNameParts] = profile.headline.split(' ')
+  const lastName = lastNameParts.join(' ')
+  const [locale, setLocale] = useState<Locale>('en')
+  const t = useMemo(() => translations[locale], [locale])
+  const [activeSection, setActiveSection] = useState<string>('about')
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [expIndex, setExpIndex] = useState(0)
 
   useEffect(() => {
     const sections: { id: string; activeKey: string }[] = [
-      { id: "home", activeKey: "about" },
-      { id: "about", activeKey: "about" },
-      { id: "ai", activeKey: "ai" },
-      { id: "skills", activeKey: "skills" },
-      { id: "experience", activeKey: "experience" },
-      { id: "education", activeKey: "education" },
-      { id: "certifications", activeKey: "certifications" },
-      { id: "projects", activeKey: "projects" },
-    ];
-    const keyById = new Map(sections.map((section) => [section.id, section.activeKey]));
-    const visibleRatios = new Map<string, number>();
+      { id: 'home', activeKey: 'about' },
+      { id: 'about', activeKey: 'about' },
+      { id: 'ai', activeKey: 'ai' },
+      { id: 'skills', activeKey: 'skills' },
+      { id: 'experience', activeKey: 'experience' },
+      { id: 'education', activeKey: 'education' },
+      { id: 'certifications', activeKey: 'certifications' },
+      { id: 'projects', activeKey: 'projects' },
+    ]
+    const keyById = new Map(sections.map((section) => [section.id, section.activeKey]))
+    const visibleRatios = new Map<string, number>()
 
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          const id = entry.target.id;
-          visibleRatios.set(id, entry.isIntersecting ? entry.intersectionRatio : 0);
+          const id = entry.target.id
+          visibleRatios.set(id, entry.isIntersecting ? entry.intersectionRatio : 0)
         }
 
-        let nextActiveKey = "about";
-        let bestRatio = 0;
+        let nextActiveKey = 'about'
+        let bestRatio = 0
         for (const section of sections) {
-          const ratio = visibleRatios.get(section.id) ?? 0;
+          const ratio = visibleRatios.get(section.id) ?? 0
           if (ratio > bestRatio) {
-            bestRatio = ratio;
-            nextActiveKey = keyById.get(section.id) ?? nextActiveKey;
+            bestRatio = ratio
+            nextActiveKey = keyById.get(section.id) ?? nextActiveKey
           }
         }
 
         if (bestRatio > 0) {
-          setActiveSection((current) => (current === nextActiveKey ? current : nextActiveKey));
+          setActiveSection((current) => (current === nextActiveKey ? current : nextActiveKey))
         }
       },
       {
         threshold: [0, 0.1, 0.25, 0.4, 0.6, 0.8, 1],
-        rootMargin: "-10% 0px -55% 0px",
-      }
-    );
+        rootMargin: '-10% 0px -55% 0px',
+      },
+    )
 
     const elements = sections
       .map((section) => document.getElementById(section.id))
-      .filter((element): element is HTMLElement => Boolean(element));
+      .filter((element): element is HTMLElement => Boolean(element))
 
-    elements.forEach((element) => observer.observe(element));
+    elements.forEach((element) => observer.observe(element))
 
-    return () => observer.disconnect();
-  }, []);
+    return () => observer.disconnect()
+  }, [])
 
   const socialIcons: Record<string, string> = {
-    github: "terminal",
-    linkedin: "hub",
-    email: "mail",
-  };
+    github: 'terminal',
+    linkedin: 'hub',
+    email: 'mail',
+  }
 
   const itemIcons: Record<string, string> = {
     // ── Frontend ──────────────────────────────────────────────────────────────
-    "react 18": "deployed_code",
-    "react.js": "deployed_code",
-    react: "deployed_code",
-    "mui v5": "palette",
-    "material ui": "palette",
-    auth0: "lock",
-    redux: "account_tree",
-    webpack: "build",
-    formik: "edit_note",
-    recharts: "bar_chart",
-    jquery: "javascript",
-    html5: "html",
-    css3: "css",
-    typescript: "data_object",
-    tailwind: "style",
-    "framer motion": "animation",
-    "next.js": "rocket_launch",
+    'react 18': 'deployed_code',
+    'react.js': 'deployed_code',
+    react: 'deployed_code',
+    'mui v5': 'palette',
+    'material ui': 'palette',
+    auth0: 'lock',
+    redux: 'account_tree',
+    webpack: 'build',
+    formik: 'edit_note',
+    recharts: 'bar_chart',
+    jquery: 'javascript',
+    html5: 'html',
+    css3: 'css',
+    typescript: 'data_object',
+    tailwind: 'style',
+    'framer motion': 'animation',
+    'next.js': 'rocket_launch',
     // ── Backend & Languages ────────────────────────────────────────────────────
-    python: "code",
-    "python (fastapi, django, flask)": "code",
-    flask: "local_drink",
-    fastapi: "flash_on",
-    django: "dns",
-    "node.js": "dns",
-    "php (laravel)": "terminal",
-    sqlalchemy: "table",
-    alembic: "history",
-    graphql: "schema",
-    celery: "pending_actions",
-    marshmallow: "transform",
+    python: 'code',
+    'python (fastapi, django, flask)': 'code',
+    flask: 'local_drink',
+    fastapi: 'flash_on',
+    django: 'dns',
+    'node.js': 'dns',
+    'php (laravel)': 'terminal',
+    sqlalchemy: 'table',
+    alembic: 'history',
+    graphql: 'schema',
+    celery: 'pending_actions',
+    marshmallow: 'transform',
     // ── Data & Messaging ──────────────────────────────────────────────────────
-    postgresql: "database",
-    mysql: "database",
-    redis: "bolt",
-    kafka: "stream",
-    "aws s3": "cloud_upload",
-    "elastic apm": "monitor_heart",
+    postgresql: 'database',
+    mysql: 'database',
+    redis: 'bolt',
+    kafka: 'stream',
+    'aws s3': 'cloud_upload',
+    'elastic apm': 'monitor_heart',
     // ── Cloud & DevOps ────────────────────────────────────────────────────────
-    aws: "cloud",
-    docker: "package_2",
-    jenkins: "build",
-    ansible: "settings_suggest",
-    "github actions": "deployed_code",
-    kubernetes: "hub",
-    "ci/cd pipelines": "sync_alt",
-    "ci/cd": "sync_alt",
+    aws: 'cloud',
+    docker: 'package_2',
+    jenkins: 'build',
+    ansible: 'settings_suggest',
+    'github actions': 'deployed_code',
+    kubernetes: 'hub',
+    'ci/cd pipelines': 'sync_alt',
+    'ci/cd': 'sync_alt',
     // ── APIs & Architecture ───────────────────────────────────────────────────
-    "rest apis": "api",
-    "rest": "api",
-    microservices: "widgets",
-    "distributed systems": "hub",
+    'rest apis': 'api',
+    rest: 'api',
+    microservices: 'widgets',
+    'distributed systems': 'hub',
     // ── Integrations ──────────────────────────────────────────────────────────
-    salesforce: "handshake",
-    twilio: "call",
-    sendgrid: "mail",
-    rollbar: "error",
-    plaid: "account_balance",
-    looker: "bar_chart",
+    salesforce: 'handshake',
+    twilio: 'call',
+    sendgrid: 'mail',
+    rollbar: 'error',
+    plaid: 'account_balance',
+    looker: 'bar_chart',
     // ── Engineering Skills / Capabilities ─────────────────────────────────────
-    "clean architecture": "architecture",
-    "solid principles": "rule",
-    "test-driven development (tdd)": "check_circle",
-    "system design (scalable systems)": "schema",
-    "sql query optimization": "query_stats",
-    "scalable api design": "lan",
-    "performance tuning": "speed",
-    "observability & monitoring": "monitoring",
-    "ai-first architectures": "psychology",
-    "ai integration in microservices": "smart_toy",
-    "technical leadership": "groups",
-    "code reviews": "rate_review",
-    mentoring: "school",
-    "agile / scrum": "sprint",
-    "multidisciplinary team leadership": "diversity_3",
+    'clean architecture': 'architecture',
+    'solid principles': 'rule',
+    'test-driven development (tdd)': 'check_circle',
+    'system design (scalable systems)': 'schema',
+    'sql query optimization': 'query_stats',
+    'scalable api design': 'lan',
+    'performance tuning': 'speed',
+    'observability & monitoring': 'monitoring',
+    'ai-first architectures': 'psychology',
+    'ai integration in microservices': 'smart_toy',
+    'technical leadership': 'groups',
+    'code reviews': 'rate_review',
+    mentoring: 'school',
+    'agile / scrum': 'sprint',
+    'multidisciplinary team leadership': 'diversity_3',
     // ── Tools (fallback) ──────────────────────────────────────────────────────
-    git: "terminal",
-    jira: "checklist",
-    figma: "design_services",
-    postman: "send",
-    "vs code": "code",
+    git: 'terminal',
+    jira: 'checklist',
+    figma: 'design_services',
+    postman: 'send',
+    'vs code': 'code',
     // ── AI Assistants ──────────────────────────────────────────────────────────
-    "github copilot": "auto_awesome",
-    "cursor": "code_blocks",
-    "chatgpt (gpt-4o)": "psychology",
-    "claude (anthropic)": "smart_toy",
+    'github copilot': 'auto_awesome',
+    cursor: 'code_blocks',
+    'chatgpt (gpt-4o)': 'psychology',
+    'claude (anthropic)': 'smart_toy',
     // ── LLM & Orchestration ───────────────────────────────────────────────────
-    "openai api": "developer_mode",
-    "anthropic api": "memory",
-    "langchain": "link",
-    "langgraph": "schema",
+    'openai api': 'developer_mode',
+    'anthropic api': 'memory',
+    langchain: 'link',
+    langgraph: 'schema',
     // ── MCPs ─────────────────────────────────────────────────────────────────
-    "github mcp": "hub",
-    "jira mcp": "checklist",
-    "postgresql mcp": "database",
-    "confluence mcp": "article",
-    "figma mcp": "design_services",
+    'github mcp': 'hub',
+    'jira mcp': 'checklist',
+    'postgresql mcp': 'database',
+    'confluence mcp': 'article',
+    'figma mcp': 'design_services',
     // ── Data Intelligence ─────────────────────────────────────────────────────
-    "snowflake": "ac_unit",
-    "fivetran": "cable",
-    "dbt": "transform",
+    snowflake: 'ac_unit',
+    fivetran: 'cable',
+    dbt: 'transform',
     // ── AI Dev Workflow ───────────────────────────────────────────────────────
-    "openspec cli": "terminal",
-    "artifact-driven changes": "checklist",
-    "opsx:propose": "edit_document",
-    "opsx:apply": "build_circle",
-    "opsx:verify": "verified",
-    "skills": "school",
-    "agents": "smart_toy",
-    "sub-agents": "group_work",
+    'openspec cli': 'terminal',
+    'artifact-driven changes': 'checklist',
+    'opsx:propose': 'edit_document',
+    'opsx:apply': 'build_circle',
+    'opsx:verify': 'verified',
+    skills: 'school',
+    agents: 'smart_toy',
+    'sub-agents': 'group_work',
     // ── Design ────────────────────────────────────────────────────────────────
-    "figma dev mode": "developer_board",
-    "figjam": "gesture",
-  };
+    'figma dev mode': 'developer_board',
+    figjam: 'gesture',
+  }
 
-  const getIcon = (value: string, fallback = "code") =>
-    itemIcons[value.toLowerCase()] ?? fallback;
+  const getIcon = (value: string, fallback = 'code') => itemIcons[value.toLowerCase()] ?? fallback
 
   const groupIcon: Record<string, string> = {
-    Frontend: "layers",
-    "Backend & Languages": "dns",
-    "Data & Messaging": "database",
-    "Cloud & DevOps": "cloud",
-    "APIs & Architecture": "api",
-    Integrations: "handshake",
-  };
+    Frontend: 'layers',
+    'Backend & Languages': 'dns',
+    'Data & Messaging': 'database',
+    'Cloud & DevOps': 'cloud',
+    'APIs & Architecture': 'api',
+    Integrations: 'handshake',
+  }
 
   const aiGroupIcon: Record<string, string> = {
-    "AI Coding Assistants": "auto_awesome",
-    "LLM APIs & Orchestration": "psychology",
-    "Model Context Protocol": "extension",
-    "Data Intelligence": "analytics",
-    "Design & Prototyping": "design_services",
-    "AI Dev Workflow": "workflow",
-  };
+    'AI Coding Assistants': 'auto_awesome',
+    'LLM APIs & Orchestration': 'psychology',
+    'Model Context Protocol': 'extension',
+    'Data Intelligence': 'analytics',
+    'Design & Prototyping': 'design_services',
+    'AI Dev Workflow': 'workflow',
+  }
 
   const mergedGroups = useMemo(
-    () => [...skillGroups].sort((a, b) => GROUP_ORDER.indexOf(a.name) - GROUP_ORDER.indexOf(b.name)),
-    [skillGroups]
-  );
+    () =>
+      [...skillGroups].sort((a, b) => GROUP_ORDER.indexOf(a.name) - GROUP_ORDER.indexOf(b.name)),
+    [skillGroups],
+  )
 
   return (
     <>
@@ -228,13 +238,55 @@ export default function HomePage() {
         <div className="nav-inner">
           <div className="brand">ESNEIDERBRAVO.DEV</div>
           <div className="nav-links">
-            <a href="#home" onClick={() => setActiveSection("about")} className={activeSection === "about" ? "active" : ""}>{t.nav.about}</a>
-            <a href="#ai" onClick={() => setActiveSection("ai")} className={activeSection === "ai" ? "active" : ""}>{t.nav.ai}</a>
-            <a href="#skills" onClick={() => setActiveSection("skills")} className={activeSection === "skills" ? "active" : ""}>{t.nav.skills}</a>
-            <a href="#experience" onClick={() => setActiveSection("experience")} className={activeSection === "experience" ? "active" : ""}>{t.nav.experience}</a>
-            <a href="#education" onClick={() => setActiveSection("education")} className={activeSection === "education" ? "active" : ""}>{t.nav.education}</a>
-            <a href="#certifications" onClick={() => setActiveSection("certifications")} className={activeSection === "certifications" ? "active" : ""}>{t.nav.certifications}</a>
-            <a href="#projects" onClick={() => setActiveSection("projects")} className={activeSection === "projects" ? "active" : ""}>{t.nav.projects}</a>
+            <a
+              href="#home"
+              onClick={() => setActiveSection('about')}
+              className={activeSection === 'about' ? 'active' : ''}
+            >
+              {t.nav.about}
+            </a>
+            <a
+              href="#ai"
+              onClick={() => setActiveSection('ai')}
+              className={activeSection === 'ai' ? 'active' : ''}
+            >
+              {t.nav.ai}
+            </a>
+            <a
+              href="#skills"
+              onClick={() => setActiveSection('skills')}
+              className={activeSection === 'skills' ? 'active' : ''}
+            >
+              {t.nav.skills}
+            </a>
+            <a
+              href="#experience"
+              onClick={() => setActiveSection('experience')}
+              className={activeSection === 'experience' ? 'active' : ''}
+            >
+              {t.nav.experience}
+            </a>
+            <a
+              href="#education"
+              onClick={() => setActiveSection('education')}
+              className={activeSection === 'education' ? 'active' : ''}
+            >
+              {t.nav.education}
+            </a>
+            <a
+              href="#certifications"
+              onClick={() => setActiveSection('certifications')}
+              className={activeSection === 'certifications' ? 'active' : ''}
+            >
+              {t.nav.certifications}
+            </a>
+            <a
+              href="#projects"
+              onClick={() => setActiveSection('projects')}
+              className={activeSection === 'projects' ? 'active' : ''}
+            >
+              {t.nav.projects}
+            </a>
           </div>
           <label className="locale-selector" aria-label={t.nav.language}>
             <span>{t.nav.language}</span>
@@ -244,7 +296,7 @@ export default function HomePage() {
             </select>
           </label>
           <button
-            className={`hamburger${mobileMenuOpen ? " open" : ""}`}
+            className={`hamburger${mobileMenuOpen ? ' open' : ''}`}
             aria-label="Toggle navigation"
             onClick={() => setMobileMenuOpen((v) => !v)}
           >
@@ -257,13 +309,76 @@ export default function HomePage() {
 
       {mobileMenuOpen && (
         <div className="mobile-nav">
-          <a href="#home" onClick={() => { setActiveSection("about"); setMobileMenuOpen(false); }} className={activeSection === "about" ? "active" : ""}>{t.nav.about}</a>
-          <a href="#ai" onClick={() => { setActiveSection("ai"); setMobileMenuOpen(false); }} className={activeSection === "ai" ? "active" : ""}>{t.nav.ai}</a>
-          <a href="#skills" onClick={() => { setActiveSection("skills"); setMobileMenuOpen(false); }} className={activeSection === "skills" ? "active" : ""}>{t.nav.skills}</a>
-          <a href="#experience" onClick={() => { setActiveSection("experience"); setMobileMenuOpen(false); }} className={activeSection === "experience" ? "active" : ""}>{t.nav.experience}</a>
-          <a href="#education" onClick={() => { setActiveSection("education"); setMobileMenuOpen(false); }} className={activeSection === "education" ? "active" : ""}>{t.nav.education}</a>
-          <a href="#certifications" onClick={() => { setActiveSection("certifications"); setMobileMenuOpen(false); }} className={activeSection === "certifications" ? "active" : ""}>{t.nav.certifications}</a>
-          <a href="#projects" onClick={() => { setActiveSection("projects"); setMobileMenuOpen(false); }} className={activeSection === "projects" ? "active" : ""}>{t.nav.projects}</a>
+          <a
+            href="#home"
+            onClick={() => {
+              setActiveSection('about')
+              setMobileMenuOpen(false)
+            }}
+            className={activeSection === 'about' ? 'active' : ''}
+          >
+            {t.nav.about}
+          </a>
+          <a
+            href="#ai"
+            onClick={() => {
+              setActiveSection('ai')
+              setMobileMenuOpen(false)
+            }}
+            className={activeSection === 'ai' ? 'active' : ''}
+          >
+            {t.nav.ai}
+          </a>
+          <a
+            href="#skills"
+            onClick={() => {
+              setActiveSection('skills')
+              setMobileMenuOpen(false)
+            }}
+            className={activeSection === 'skills' ? 'active' : ''}
+          >
+            {t.nav.skills}
+          </a>
+          <a
+            href="#experience"
+            onClick={() => {
+              setActiveSection('experience')
+              setMobileMenuOpen(false)
+            }}
+            className={activeSection === 'experience' ? 'active' : ''}
+          >
+            {t.nav.experience}
+          </a>
+          <a
+            href="#education"
+            onClick={() => {
+              setActiveSection('education')
+              setMobileMenuOpen(false)
+            }}
+            className={activeSection === 'education' ? 'active' : ''}
+          >
+            {t.nav.education}
+          </a>
+          <a
+            href="#certifications"
+            onClick={() => {
+              setActiveSection('certifications')
+              setMobileMenuOpen(false)
+            }}
+            className={activeSection === 'certifications' ? 'active' : ''}
+          >
+            {t.nav.certifications}
+          </a>
+          <a
+            href="#projects"
+            onClick={() => {
+              setActiveSection('projects')
+              setMobileMenuOpen(false)
+            }}
+            className={activeSection === 'projects' ? 'active' : ''}
+          >
+            {t.nav.projects}
+          </a>
         </div>
       )}
 
@@ -286,9 +401,15 @@ export default function HomePage() {
 
             <div className="socials">
               {profile.socialLinks.map((link) => (
-                <a key={link.label} href={link.href} target="_blank" rel="noreferrer" className="social-link">
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="social-link"
+                >
                   <span className="material-symbols-outlined" aria-hidden="true">
-                    {socialIcons[link.label.toLowerCase()] ?? "link"}
+                    {socialIcons[link.label.toLowerCase()] ?? 'link'}
                   </span>
                   {link.label}
                 </a>
@@ -315,7 +436,9 @@ export default function HomePage() {
         </section>
 
         <section className="about" id="about" aria-labelledby="about-heading">
-          <h2 id="about-heading" className="about-label">{t.about.title}</h2>
+          <h2 id="about-heading" className="about-label">
+            {t.about.title}
+          </h2>
           <div>
             <p className="quote">&quot;{t.about.quote}&quot;</p>
             <p className="about-body">{t.about.body}</p>
@@ -324,7 +447,9 @@ export default function HomePage() {
 
         <section className="ai-section" id="ai" aria-labelledby="ai-heading">
           <div className="ai-section-head">
-            <h2 id="ai-heading" className="section-kicker">{t.ai.kicker}</h2>
+            <h2 id="ai-heading" className="section-kicker">
+              {t.ai.kicker}
+            </h2>
             <p className="ai-tagline">{t.ai.tagline}</p>
           </div>
 
@@ -333,7 +458,7 @@ export default function HomePage() {
               <article key={group.name} className="ai-card">
                 <h4>
                   <span className="material-symbols-outlined ai-group-icon" aria-hidden="true">
-                    {aiGroupIcon[group.name] ?? "smart_toy"}
+                    {aiGroupIcon[group.name] ?? 'smart_toy'}
                   </span>
                   {group.name}
                 </h4>
@@ -341,7 +466,7 @@ export default function HomePage() {
                   {group.items.map((item) => (
                     <span key={item} className="ai-chip">
                       <span className="material-symbols-outlined" aria-hidden="true">
-                        {getIcon(item, "auto_awesome")}
+                        {getIcon(item, 'auto_awesome')}
                       </span>
                       {item}
                     </span>
@@ -355,7 +480,9 @@ export default function HomePage() {
         <section className="stack" id="skills" aria-labelledby="skills-heading">
           <div className="stack-head">
             <div>
-              <h2 id="skills-heading" className="section-kicker">{t.skills.title}</h2>
+              <h2 id="skills-heading" className="section-kicker">
+                {t.skills.title}
+              </h2>
             </div>
           </div>
 
@@ -364,7 +491,7 @@ export default function HomePage() {
               <article key={group.name} className="stack-card">
                 <h4>
                   <span className="material-symbols-outlined stack-icon" aria-hidden="true">
-                    {groupIcon[group.name] ?? "code"}
+                    {groupIcon[group.name] ?? 'code'}
                   </span>
                   {group.name}
                 </h4>
@@ -373,7 +500,7 @@ export default function HomePage() {
                     <li key={`${group.name}-${item}`}>
                       <span className="stack-item">
                         <span className="material-symbols-outlined stack-icon" aria-hidden="true">
-                          {getIcon(item, "code")}
+                          {getIcon(item, 'code')}
                         </span>
                         {item}
                       </span>
@@ -390,7 +517,7 @@ export default function HomePage() {
               {coreCapabilities.map((capability) => (
                 <span key={capability} className="chip capability-chip">
                   <span className="material-symbols-outlined" aria-hidden="true">
-                    {getIcon(capability, "bolt")}
+                    {getIcon(capability, 'bolt')}
                   </span>
                   {capability}
                 </span>
@@ -403,10 +530,7 @@ export default function HomePage() {
           <p className="section-kicker">{t.experience.kicker}</p>
 
           <div className="exp-carousel">
-            <div
-              className="exp-track"
-              style={{ transform: `translateX(-${expIndex * 100}%)` }}
-            >
+            <div className="exp-track" style={{ transform: `translateX(-${expIndex * 100}%)` }}>
               {experiences.map((exp) => (
                 <article key={`${exp.company}-${exp.role}`} className="exp-card">
                   <div className="exp-card-header">
@@ -414,7 +538,7 @@ export default function HomePage() {
                       <p className="exp-company">{exp.company}</p>
                       <h3 className="exp-role">{exp.role}</h3>
                     </div>
-                    <span className={`exp-period${exp.current ? " current" : ""}`}>
+                    <span className={`exp-period${exp.current ? ' current' : ''}`}>
                       {exp.current ? t.experience.present : exp.period}
                       {exp.current && <span className="exp-period-sub">{exp.period}</span>}
                     </span>
@@ -442,7 +566,7 @@ export default function HomePage() {
                 {experiences.map((_, i) => (
                   <button
                     key={i}
-                    className={`exp-dot${i === expIndex ? " active" : ""}`}
+                    className={`exp-dot${i === expIndex ? ' active' : ''}`}
                     onClick={() => setExpIndex(i)}
                     aria-label={`Slide ${i + 1}`}
                   />
@@ -462,10 +586,12 @@ export default function HomePage() {
         </section>
 
         <section className="education-section" id="education" aria-labelledby="education-heading">
-          <h2 id="education-heading" className="section-kicker">{t.education.kicker}</h2>
+          <h2 id="education-heading" className="section-kicker">
+            {t.education.kicker}
+          </h2>
           <div className="education-grid">
             {education.map((item) => {
-              const meta = [item.period, item.location].filter(Boolean).join(" • ");
+              const meta = [item.period, item.location].filter(Boolean).join(' • ')
               return (
                 <article key={`${item.institution}-${item.degree}`} className="education-card">
                   <h3 className="education-degree">{item.degree}</h3>
@@ -479,21 +605,31 @@ export default function HomePage() {
                     </ul>
                   )}
                 </article>
-              );
+              )
             })}
           </div>
         </section>
 
-        <section className="certifications-section" id="certifications" aria-labelledby="certifications-heading">
-          <h2 id="certifications-heading" className="section-kicker">{t.certifications.kicker}</h2>
+        <section
+          className="certifications-section"
+          id="certifications"
+          aria-labelledby="certifications-heading"
+        >
+          <h2 id="certifications-heading" className="section-kicker">
+            {t.certifications.kicker}
+          </h2>
           <div className="certifications-grid">
             {certifications.map((certification) => (
-              <article key={`${certification.name}-${certification.issuer}`} className="certification-card">
+              <article
+                key={`${certification.name}-${certification.issuer}`}
+                className="certification-card"
+              >
                 <h3 className="certification-name">
                   {t.certifications.titles[certification.name] ?? certification.name}
                 </h3>
                 <p className="certification-meta">
-                  <strong>{t.certifications.issuerLabel}:</strong> {t.certifications.issuers[certification.issuer] ?? certification.issuer}
+                  <strong>{t.certifications.issuerLabel}:</strong>{' '}
+                  {t.certifications.issuers[certification.issuer] ?? certification.issuer}
                 </p>
                 <p className="certification-meta">
                   <strong>{t.certifications.issuedLabel}:</strong> {certification.issued}
@@ -504,7 +640,12 @@ export default function HomePage() {
                   </p>
                 )}
                 {certification.credentialUrl && (
-                  <a className="certification-link" href={certification.credentialUrl} target="_blank" rel="noreferrer">
+                  <a
+                    className="certification-link"
+                    href={certification.credentialUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     {t.certifications.credentialLabel}
                   </a>
                 )}
@@ -514,7 +655,9 @@ export default function HomePage() {
         </section>
 
         <section className="projects-section" id="projects" aria-labelledby="projects-heading">
-          <h2 id="projects-heading" className="section-kicker">{t.projects.title}</h2>
+          <h2 id="projects-heading" className="section-kicker">
+            {t.projects.title}
+          </h2>
           <div className="projects-grid">
             {projects.map((project) => (
               <article key={project.title} className="project-card">
@@ -550,9 +693,11 @@ export default function HomePage() {
               {link.label}
             </a>
           ))}
-          <a href="https://wa.me/573195854272" target="_blank" rel="noreferrer">WhatsApp</a>
+          <a href="https://wa.me/573195854272" target="_blank" rel="noreferrer">
+            WhatsApp
+          </a>
         </div>
       </footer>
     </>
-  );
+  )
 }

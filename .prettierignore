@@ -3,3 +3,6 @@ node_modules
 public
 *.lock
 next-env.d.ts
+.github
+.claude
+openspec
