@@ -43,7 +43,14 @@ export const metadata: Metadata = {
   creator: 'Esneider Bravo',
   publisher: 'Esneider Bravo',
   alternates: { canonical: SITE_URL },
-  icons: { icon: '/favicon.svg', apple: '/favicon.svg' },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '32x32', type: 'image/x-icon' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/icon-192x192.png', sizes: '192x192', type: 'image/png' },
+    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -115,6 +122,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="canonical" href={SITE_URL} />
         <link
           rel="stylesheet"
