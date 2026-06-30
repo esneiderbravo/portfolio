@@ -25,6 +25,14 @@
 # claude code
 .claude/
 
+# local agent / IDE tooling (not part of the site)
+.agents/
+.codex/
+.cursor/
+.codegraph/
+.github/hooks/
+skills-lock.json
+
 # skills (managed externally, contain embedded git repos)
 .github/skills/
 .github/prompts/
