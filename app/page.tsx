@@ -3,8 +3,17 @@
 import Image from 'next/image'
 import { useEffect, useMemo, useState } from 'react'
 
+import { LocaleSwitch } from '@/src/components/LocaleSwitch'
 import { portfolioContent } from '@/src/content/portfolio'
 import { translations, type Locale } from '@/src/i18n/translations'
+
+function readPreferredLocale(): Locale {
+  if (typeof window === 'undefined') return 'en'
+  const stored = localStorage.getItem('portfolio-locale')
+  if (stored === 'en' || stored === 'es') return stored
+  if (navigator.language.toLowerCase().startsWith('es')) return 'es'
+  return 'en'
+}
 
 const GROUP_ORDER = [
   'Frontend',
@@ -41,7 +50,7 @@ export default function HomePage() {
   } = portfolioContent
   const [firstName, ...lastNameParts] = profile.headline.split(' ')
   const lastName = lastNameParts.join(' ')
-  const [locale, setLocale] = useState<Locale>('en')
+  const [locale, setLocale] = useState<Locale>(readPreferredLocale)
   const t = useMemo(() => translations[locale], [locale])
   const [activeSection, setActiveSection] = useState<string>('about')
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -53,6 +62,29 @@ export default function HomePage() {
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  useEffect(() => {
+    localStorage.setItem('portfolio-locale', locale)
+    document.documentElement.lang = locale
+  }, [locale])
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
+  }, [mobileMenuOpen])
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMobileMenuOpen(false)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [mobileMenuOpen])
 
   useEffect(() => {
     const revealElements = document.querySelectorAll('.reveal')
@@ -82,6 +114,7 @@ export default function HomePage() {
       { id: 'education', activeKey: 'education' },
       { id: 'certifications', activeKey: 'certifications' },
       { id: 'projects', activeKey: 'projects' },
+      { id: 'contact', activeKey: 'contact' },
     ]
     const keyById = new Map(sections.map((section) => [section.id, section.activeKey]))
     const visibleRatios = new Map<string, number>()
@@ -332,16 +365,13 @@ export default function HomePage() {
               {t.nav.projects}
             </a>
           </div>
-          <label className="locale-selector" aria-label={t.nav.language}>
-            <span>{t.nav.language}</span>
-            <select value={locale} onChange={(event) => setLocale(event.target.value as Locale)}>
-              <option value="en">EN</option>
-              <option value="es">ES</option>
-            </select>
-          </label>
+          <LocaleSwitch locale={locale} onChange={setLocale} label={t.nav.language} />
           <button
+            type="button"
             className={`hamburger${mobileMenuOpen ? ' open' : ''}`}
             aria-label="Toggle navigation"
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-nav-menu"
             onClick={() => setMobileMenuOpen((v) => !v)}
           >
             <span />
@@ -352,76 +382,60 @@ export default function HomePage() {
       </nav>
 
       {mobileMenuOpen && (
-        <div className="mobile-nav">
-          <a
-            href="#home"
-            onClick={() => {
-              setActiveSection('about')
-              setMobileMenuOpen(false)
-            }}
-            className={activeSection === 'about' ? 'active' : ''}
+        <div
+          className="mobile-nav"
+          id="mobile-nav-menu"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navigation menu"
+          onClick={() => setMobileMenuOpen(false)}
+        >
+          <nav
+            className="mobile-nav__links"
+            aria-label="Mobile navigation"
+            onClick={(event) => event.stopPropagation()}
           >
-            {t.nav.about}
-          </a>
+            {(
+              [
+                ['#home', 'about', t.nav.about],
+                ['#ai', 'ai', t.nav.ai],
+                ['#skills', 'skills', t.nav.skills],
+                ['#experience', 'experience', t.nav.experience],
+                ['#education', 'education', t.nav.education],
+                ['#certifications', 'certifications', t.nav.certifications],
+                ['#projects', 'projects', t.nav.projects],
+                ['#contact', 'contact', t.nav.contact],
+              ] as const
+            ).map(([href, key, label]) => (
+              <a
+                key={key}
+                href={href}
+                onClick={() => {
+                  setActiveSection(key)
+                  setMobileMenuOpen(false)
+                }}
+                className={activeSection === key ? 'active' : ''}
+              >
+                {label}
+              </a>
+            ))}
+          </nav>
+          <LocaleSwitch
+            locale={locale}
+            onChange={setLocale}
+            label={t.nav.language}
+            className="locale-switch--menu"
+            showIcon={false}
+          />
           <a
-            href="#ai"
-            onClick={() => {
-              setActiveSection('ai')
-              setMobileMenuOpen(false)
-            }}
-            className={activeSection === 'ai' ? 'active' : ''}
+            className="mobile-nav__cta"
+            href={`mailto:${profile.email}`}
+            onClick={(event) => event.stopPropagation()}
           >
-            {t.nav.ai}
-          </a>
-          <a
-            href="#skills"
-            onClick={() => {
-              setActiveSection('skills')
-              setMobileMenuOpen(false)
-            }}
-            className={activeSection === 'skills' ? 'active' : ''}
-          >
-            {t.nav.skills}
-          </a>
-          <a
-            href="#experience"
-            onClick={() => {
-              setActiveSection('experience')
-              setMobileMenuOpen(false)
-            }}
-            className={activeSection === 'experience' ? 'active' : ''}
-          >
-            {t.nav.experience}
-          </a>
-          <a
-            href="#education"
-            onClick={() => {
-              setActiveSection('education')
-              setMobileMenuOpen(false)
-            }}
-            className={activeSection === 'education' ? 'active' : ''}
-          >
-            {t.nav.education}
-          </a>
-          <a
-            href="#certifications"
-            onClick={() => {
-              setActiveSection('certifications')
-              setMobileMenuOpen(false)
-            }}
-            className={activeSection === 'certifications' ? 'active' : ''}
-          >
-            {t.nav.certifications}
-          </a>
-          <a
-            href="#projects"
-            onClick={() => {
-              setActiveSection('projects')
-              setMobileMenuOpen(false)
-            }}
-            className={activeSection === 'projects' ? 'active' : ''}
-          >
-            {t.nav.projects}
+            {t.cta.action}
+            <span className="material-symbols-outlined" aria-hidden="true">
+              mail
+            </span>
           </a>
         </div>
       )}
