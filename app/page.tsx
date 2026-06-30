@@ -15,6 +15,19 @@ const GROUP_ORDER = [
   'Integrations',
 ]
 
+const HERO_MARQUEE = [
+  'Python',
+  'FastAPI',
+  'AWS',
+  'Microservices',
+  'LangChain',
+  'MCP',
+  'React',
+  'Next.js',
+  'PostgreSQL',
+  'Docker',
+]
+
 export default function HomePage() {
   const {
     profile,
@@ -32,7 +45,32 @@ export default function HomePage() {
   const t = useMemo(() => translations[locale], [locale])
   const [activeSection, setActiveSection] = useState<string>('about')
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [expIndex, setExpIndex] = useState(0)
+  const [navScrolled, setNavScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setNavScrolled(window.scrollY > 24)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    const revealElements = document.querySelectorAll('.reveal')
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+            revealObserver.unobserve(entry.target)
+          }
+        }
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
+    )
+
+    revealElements.forEach((element) => revealObserver.observe(element))
+    return () => revealObserver.disconnect()
+  }, [])
 
   useEffect(() => {
     const sections: { id: string; activeKey: string }[] = [
@@ -234,7 +272,13 @@ export default function HomePage() {
 
   return (
     <>
-      <nav className="nav" aria-label="Main navigation">
+      <div className="site-backdrop" aria-hidden="true">
+        <div className="site-backdrop__aurora" />
+        <div className="site-backdrop__grid" />
+        <div className="site-backdrop__grain" />
+      </div>
+
+      <nav className={`nav${navScrolled ? ' nav--scrolled' : ''}`} aria-label="Main navigation">
         <div className="nav-inner">
           <div className="brand">ESNEIDERBRAVO.DEV</div>
           <div className="nav-links">
@@ -385,47 +429,92 @@ export default function HomePage() {
       <main className="page-shell">
         <section className="hero" id="home">
           <div className="hero-copy">
-            <div className="status-pill">
-              <span className="status-dot" />
-              <span>{t.hero.availability}</span>
+            <div className="hero-intro reveal is-visible">
+              <div className="status-pill">
+                <span className="status-dot" />
+                <span>{t.hero.availability}</span>
+              </div>
+
+              <p className="hero-eyebrow">Senior Software Engineer</p>
+
+              <h1>
+                {firstName}
+                <br />
+                <span>{lastName}</span>
+              </h1>
+
+              <h2 className="hero-role">{t.hero.role}</h2>
+              <p className="hero-bio">{t.hero.bio}</p>
+
+              <div className="hero-actions">
+                <a className="hero-btn hero-btn--primary" href="#contact">
+                  {t.hero.ctaPrimary}
+                  <span className="material-symbols-outlined" aria-hidden="true">
+                    arrow_forward
+                  </span>
+                </a>
+                <a className="hero-btn hero-btn--ghost" href="#projects">
+                  {t.hero.ctaSecondary}
+                </a>
+              </div>
+
+              <div className="socials">
+                {profile.socialLinks.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="social-link"
+                  >
+                    <span className="material-symbols-outlined" aria-hidden="true">
+                      {socialIcons[link.label.toLowerCase()] ?? 'link'}
+                    </span>
+                    {link.label}
+                  </a>
+                ))}
+                <a href={`mailto:${profile.email}`} className="social-link">
+                  <span className="material-symbols-outlined" aria-hidden="true">
+                    mail
+                  </span>
+                  Email
+                </a>
+              </div>
             </div>
 
-            <h1>
-              {firstName}
-              <br />
-              <span>{lastName}</span>
-            </h1>
-
-            <h2 className="hero-role">{t.hero.role}</h2>
-            <p className="hero-bio">{t.hero.bio}</p>
-
-            <div className="socials">
-              {profile.socialLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="social-link"
-                >
-                  <span className="material-symbols-outlined" aria-hidden="true">
-                    {socialIcons[link.label.toLowerCase()] ?? 'link'}
-                  </span>
-                  {link.label}
-                </a>
-              ))}
+            <div
+              className="hero-metrics reveal reveal-delay-2 is-visible"
+              aria-label="Career highlights"
+            >
+              <div className="hero-metric">
+                <strong>{profile.yearsExperience}</strong>
+                <span>{t.hero.metricYears}</span>
+              </div>
+              <div className="hero-metric">
+                <strong>{certifications.length}</strong>
+                <span>{t.hero.metricCerts}</span>
+              </div>
+              <div className="hero-metric">
+                <strong>{projects.length}</strong>
+                <span>{t.hero.metricProjects}</span>
+              </div>
+              <div className="hero-metric hero-metric--accent">
+                <strong>AI</strong>
+                <span>{t.hero.metricFocus}</span>
+              </div>
             </div>
           </div>
 
-          <div className="hero-visual-wrap">
+          <div className="hero-visual-wrap reveal reveal-delay-1 is-visible">
+            <div className="hero-visual-ring" aria-hidden="true" />
             <div className="hero-visual">
               <Image
                 src="/profile.png"
-                alt="Esneider Bravo — Senior Backend Engineer specializing in Python, FastAPI, and AWS"
+                alt="Esneider Bravo - Senior Software Engineer specializing in Python, FastAPI, and AWS"
                 fill
                 priority
                 className="hero-image"
-                sizes="(max-width: 920px) 90vw, 530px"
+                sizes="(max-width: 920px) 90vw, (max-width: 1280px) 45vw, 600px"
               />
             </div>
             <div className="experience-card">
@@ -433,9 +522,19 @@ export default function HomePage() {
               <p>{t.hero.yearsOfLogic}</p>
             </div>
           </div>
+
+          <div className="hero-marquee" aria-hidden="true">
+            <div className="hero-marquee__track">
+              {[...HERO_MARQUEE, ...HERO_MARQUEE].map((item, index) => (
+                <span key={`${item}-${index}`} className="hero-marquee__item">
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
         </section>
 
-        <section className="about" id="about" aria-labelledby="about-heading">
+        <section className="about reveal" id="about" aria-labelledby="about-heading">
           <h2 id="about-heading" className="about-label">
             {t.about.title}
           </h2>
@@ -445,7 +544,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="ai-section" id="ai" aria-labelledby="ai-heading">
+        <section className="ai-section reveal" id="ai" aria-labelledby="ai-heading">
           <div className="ai-section-head">
             <h2 id="ai-heading" className="section-kicker">
               {t.ai.kicker}
@@ -477,7 +576,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="stack" id="skills" aria-labelledby="skills-heading">
+        <section className="stack reveal" id="skills" aria-labelledby="skills-heading">
           <div className="stack-head">
             <div>
               <h2 id="skills-heading" className="section-kicker">
@@ -526,13 +625,23 @@ export default function HomePage() {
           </article>
         </section>
 
-        <section className="exp-section" id="experience">
-          <p className="section-kicker">{t.experience.kicker}</p>
+        <section
+          className="exp-section reveal"
+          id="experience"
+          aria-labelledby="experience-heading"
+        >
+          <h2 id="experience-heading" className="section-kicker">
+            {t.experience.kicker}
+          </h2>
 
-          <div className="exp-carousel">
-            <div className="exp-track" style={{ transform: `translateX(-${expIndex * 100}%)` }}>
-              {experiences.map((exp) => (
-                <article key={`${exp.company}-${exp.role}`} className="exp-card">
+          <div className="exp-timeline">
+            {experiences.map((exp) => (
+              <article
+                key={`${exp.company}-${exp.role}-${exp.period}`}
+                className={`exp-timeline-item${exp.current ? ' is-current' : ''}`}
+              >
+                <div className="exp-timeline-marker" aria-hidden="true" />
+                <div className="exp-card">
                   <div className="exp-card-header">
                     <div>
                       <p className="exp-company">{exp.company}</p>
@@ -548,44 +657,17 @@ export default function HomePage() {
                       <li key={bullet}>{bullet}</li>
                     ))}
                   </ul>
-                </article>
-              ))}
-            </div>
-
-            <div className="exp-controls">
-              <button
-                className="exp-nav-btn"
-                onClick={() => setExpIndex((i) => Math.max(0, i - 1))}
-                disabled={expIndex === 0}
-                aria-label="Previous"
-              >
-                <span className="material-symbols-outlined">arrow_back</span>
-              </button>
-
-              <div className="exp-dots">
-                {experiences.map((_, i) => (
-                  <button
-                    key={i}
-                    className={`exp-dot${i === expIndex ? ' active' : ''}`}
-                    onClick={() => setExpIndex(i)}
-                    aria-label={`Slide ${i + 1}`}
-                  />
-                ))}
-              </div>
-
-              <button
-                className="exp-nav-btn"
-                onClick={() => setExpIndex((i) => Math.min(experiences.length - 1, i + 1))}
-                disabled={expIndex === experiences.length - 1}
-                aria-label="Next"
-              >
-                <span className="material-symbols-outlined">arrow_forward</span>
-              </button>
-            </div>
+                </div>
+              </article>
+            ))}
           </div>
         </section>
 
-        <section className="education-section" id="education" aria-labelledby="education-heading">
+        <section
+          className="education-section reveal"
+          id="education"
+          aria-labelledby="education-heading"
+        >
           <h2 id="education-heading" className="section-kicker">
             {t.education.kicker}
           </h2>
@@ -611,7 +693,7 @@ export default function HomePage() {
         </section>
 
         <section
-          className="certifications-section"
+          className="certifications-section reveal"
           id="certifications"
           aria-labelledby="certifications-heading"
         >
@@ -654,13 +736,20 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="projects-section" id="projects" aria-labelledby="projects-heading">
+        <section
+          className="projects-section reveal"
+          id="projects"
+          aria-labelledby="projects-heading"
+        >
           <h2 id="projects-heading" className="section-kicker">
             {t.projects.title}
           </h2>
           <div className="projects-grid">
-            {projects.map((project) => (
-              <article key={project.title} className="project-card">
+            {projects.map((project, index) => (
+              <article
+                key={project.title}
+                className={`project-card${index === 0 ? ' project-card--featured' : ''}`}
+              >
                 <p className="project-domain">{project.domain}</p>
                 <h3>{project.title}</h3>
                 <p>{t.projects.summaries[project.title] ?? project.summary}</p>
@@ -672,7 +761,8 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="cta" id="contact">
+        <section className="cta reveal" id="contact">
+          <div className="cta-glow" aria-hidden="true" />
           <h2>{t.cta.title}</h2>
           <p>{t.cta.body}</p>
           <a href="https://wa.me/573195854272" target="_blank" rel="noreferrer">

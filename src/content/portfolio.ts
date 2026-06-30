@@ -4,22 +4,30 @@ export const portfolioContent: PortfolioContent = {
   profile: {
     name: 'Esneider Bravo',
     headline: 'ESNEIDER BRAVO',
-    role: 'Senior Fullstack Developer & Systems Architect',
-    bio: 'Ingeniero de software especializado en plataformas financieras. Diseno y escalo productos con foco en arquitectura, rendimiento, confiabilidad y experiencia de usuario.',
+    role: 'Senior Software Engineer | Python, FastAPI, AWS | Microservices | AI-First Architect',
+    bio: 'Senior Software Engineer specializing in scalable fintech backends, microservices on AWS, and AI-first product delivery with Python, FastAPI, and clean architecture.',
     philosophyTitle: 'The Philosophy',
     philosophyQuote:
-      'Creo en la arquitectura intencional. Cada linea de codigo debe soportar el peso del crecimiento futuro.',
+      'I believe in intentional architecture. Every line of code must support the weight of future scale.',
     philosophyBody:
-      'He construido y evolucionado sistemas en LendingFront con un enfoque fullstack: frontend React, APIs de negocio, integraciones, automatizacion operativa y estandares de calidad. Mi objetivo constante es convertir complejidad tecnica en productos confiables y medibles.',
-    yearsExperience: '8+',
+      'I build robust backend engines for high-performance financial applications and AI-powered platforms. At Muno Labs, LendingFront, and Unozero.ai, I have led microservices migrations, conversational AI systems, and cross-functional engineering initiatives grounded in TDD and clean architecture.',
+    yearsExperience: '7+',
     availability: 'Disponible para nuevos proyectos',
-    email: 'esneiderbravo@gmail.com',
+    email: 'esneiderbravoyb@gmail.com',
     socialLinks: [
       { label: 'GitHub', href: 'https://github.com/esneiderbravo' },
       { label: 'LinkedIn', href: 'https://linkedin.com/in/esneider-bravo' },
     ],
   },
   projects: [
+    {
+      title: 'Chatbook AI Platform',
+      domain: 'AI Hospitality',
+      summary:
+        'Arquitecte y estabilice Chatbook, un asistente conversacional con FastAPI, RAG, n8n y WhatsApp Business API para comunicacion hotelera.',
+      impact:
+        'MVP llevado a produccion con infraestructura GCP, monitoreo operativo y respuestas contextuales basadas en conocimiento.',
+    },
     {
       title: 'Marketplace Expansion Platform',
       domain: 'FinTech Growth',
@@ -47,72 +55,101 @@ export const portfolioContent: PortfolioContent = {
   ],
   experiences: [
     {
-      company: 'LendingFront',
+      company: 'Muno Labs',
       role: 'Senior Software Engineer',
-      period: 'Jun 2024 – Present',
+      period: 'Jun 2026 - Present',
       current: true,
       bullets: [
-        'Developed backend solutions using Python (FastAPI, Django)',
-        'Designed scalable REST APIs for financial systems',
-        'Applied clean architecture and best practices',
+        'Build AI-powered software and data platforms for fintech, insurtech, and healthcare clients',
+        'Architect scalable backend services with Python, TypeScript, and cloud-native patterns',
+        'Embed with product teams on delivery, code quality, and AI-first engineering practices',
+      ],
+    },
+    {
+      company: 'LendingFront',
+      role: 'Technical Lead',
+      period: 'Jun 2025 - Jun 2026',
+      bullets: [
+        'Led cross-functional engineering across backend, frontend, QA, and product for high-impact delivery',
+        'Defined architecture standards, mentored engineers, and drove AI-assisted development workflows',
+        'Facilitated technical decisions, incident resolution, and Spec-Driven Development adoption',
+        'Improved Engineering, QA, and Product collaboration through processes and documentation',
+      ],
+    },
+    {
+      company: 'Unozero.ai',
+      role: 'CTO / AI Platform Architect',
+      period: 'Nov 2025 - Feb 2026',
+      bullets: [
+        'Led architecture and delivery of Chatbook, an AI hospitality assistant for hotel guest communication',
+        'Built a conversational platform with FastAPI, RAG pipelines, n8n, and WhatsApp Business API',
+        'Designed GCP infrastructure: VMs, DNS, firewall policies, networking, and production operations',
+        'Established deployment, monitoring, and operational processes for platform reliability',
+      ],
+    },
+    {
+      company: 'LendingFront',
+      role: 'Senior Software Engineer',
+      period: 'Jun 2024 - Jun 2025',
+      bullets: [
+        'Developed backend solutions using Python (FastAPI, Django) with clean architecture principles',
+        'Designed scalable RESTful APIs for financial applications in production environments',
+        'Automated CI/CD pipelines with GitHub Actions and Docker',
+        'Used PostgreSQL, Redis, AWS, and CloudWatch for monitoring and observability',
       ],
     },
     {
       company: 'LendingFront',
       role: 'Integration Team Lead',
-      period: 'Aug 2023 – Jun 2024',
+      period: 'Aug 2023 - Jun 2024',
       bullets: [
-        'Aligned Development and QA teams',
-        'Ensured high-quality software delivery',
-        'Removed bottlenecks and improved processes',
+        'Aligned Development and QA teams for efficient, high-quality software delivery',
+        'Removed delivery bottlenecks and ensured technical standards across iterations',
+        'Led cross-functional communication across the full software development lifecycle',
       ],
     },
     {
       company: 'LendingFront',
       role: 'Software Engineer II',
-      period: 'Nov 2022 – Oct 2023',
+      period: 'Nov 2022 - Oct 2023',
       bullets: [
-        'Built backend systems using Python and Flask',
-        'Led transition to microservices with Node.js',
-        'Managed a team of 3 developers',
-        'Optimized SQL queries (MySQL / PostgreSQL)',
-        'Implemented CI/CD pipelines with Jenkins and Docker',
+        'Built backend systems with Python and Flask; led transition to Node.js microservices',
+        'Managed a team of 3 developers under Agile methodologies',
+        'Optimized SQL queries in MySQL and PostgreSQL; implemented Pytest and Nose testing',
+        'Adopted CI/CD with Jenkins and Docker for faster, more reliable deployments',
       ],
     },
     {
       company: 'LendingFront',
       role: 'Software Engineer',
-      period: 'Mar 2021 – Oct 2022',
+      period: 'Mar 2021 - Oct 2022',
       bullets: [
-        'Developed REST APIs with Node.js',
-        'Built applications with Python (Flask)',
-        'Improved database performance',
-        'Implemented automated testing',
-        'Contributed to CI/CD processes',
+        'Developed RESTful APIs with Node.js and web applications with Python and Flask',
+        'Optimized MySQL and PostgreSQL queries for high-traffic operations',
+        'Implemented automated testing with Pytest and Nose',
+        'Contributed to frontend performance with React, jQuery, HTML5, and CSS3',
       ],
     },
     {
       company: 'Ladys Confecciones SAS BIC',
       role: 'Web Developer',
-      period: 'Aug 2020 – Mar 2021',
+      period: 'Aug 2020 - Mar 2021',
       bullets: [
-        'Built e-commerce marketplace with PHP & Laravel',
-        'Integrated payment gateways',
-        'Developed REST APIs',
-        'Implemented testing with PHPUnit',
-        'Improved frontend performance',
+        'Led marketplace development with PHP and Laravel: catalog, cart, orders, and payments',
+        'Designed RESTful APIs for mobile app integration',
+        'Optimized MySQL queries and implemented PHPUnit automated testing',
+        'Contributed to CI/CD adoption with Jenkins and Docker',
       ],
     },
     {
       company: 'Universidad del Magdalena',
       role: 'Web Developer',
-      period: 'Feb 2019 – Aug 2020',
+      period: 'Feb 2019 - Aug 2020',
       bullets: [
-        'Developed academic web systems (PHP, jQuery)',
-        'Optimized database performance',
-        'Implemented testing frameworks',
-        'Worked with Agile methodologies',
-        'Documented systems and gathered requirements',
+        'Developed academic and administrative web systems with PHP and jQuery',
+        'Optimized database queries and implemented automated testing frameworks',
+        'Documented systems and gathered requirements from end users',
+        'Delivered features using Agile methodologies',
       ],
     },
   ],
@@ -120,6 +157,7 @@ export const portfolioContent: PortfolioContent = {
     {
       institution: 'Universidad del Magdalena',
       degree: 'B.S. in Systems Engineering',
+      period: '2015 - 2020',
       location: 'Santa Marta, Colombia',
       highlights: [
         'Built a strong base in software architecture, algorithms, and relational databases.',
@@ -128,6 +166,41 @@ export const portfolioContent: PortfolioContent = {
     },
   ],
   certifications: [
+    {
+      name: 'Building with the Claude API',
+      issuer: 'Anthropic',
+      issued: 'Jun 2026',
+      credentialId: 'u75ozqpqrj37',
+      credentialUrl: 'https://verify.skilljar.com/c/u75ozqpqrj37',
+    },
+    {
+      name: 'Claude Code in Action',
+      issuer: 'Anthropic',
+      issued: 'Jun 2026',
+      credentialId: 'jef7cto7jspf',
+      credentialUrl: 'https://verify.skilljar.com/c/jef7cto7jspf',
+    },
+    {
+      name: 'Introduction to Model Context Protocol',
+      issuer: 'Anthropic',
+      issued: 'Jun 2026',
+      credentialId: 'xtjdsxghsg3p',
+      credentialUrl: 'https://verify.skilljar.com/c/xtjdsxghsg3p',
+    },
+    {
+      name: 'Certificate of completion: Introduction to agent skills',
+      issuer: 'Anthropic',
+      issued: 'Jun 2026',
+      credentialId: 'witt7jffq6tu',
+      credentialUrl: 'https://verify.skilljar.com/c/witt7jffq6tu',
+    },
+    {
+      name: 'Gen AI User',
+      issuer: 'Certiprof',
+      issued: 'May 2026',
+      credentialUrl:
+        'https://www.credly.com/badges/45870334-71fc-48e0-b920-2d105dedd44d/linked_in_profile',
+    },
     {
       name: 'Introduccion a la gestion de proyectos',
       issuer: 'Tecnologico de Monterrey',
@@ -150,18 +223,9 @@ export const portfolioContent: PortfolioContent = {
       credentialUrl: 'https://coursera.org/share/aaf7e06444bd0fe1aec455d960b7c891',
     },
     {
-      name: 'Remote Work Professional Certification - RWPC',
-      issuer: 'Certiprof',
-      issued: 'Apr 2023',
-      credentialUrl:
-        'https://www.credly.com/badges/8374a564-1624-42fa-9340-f9e6725be05a/linked_in_profile',
-    },
-    {
-      name: 'Scrum Foundation Professional Certificate - SFPC',
-      issuer: 'Certiprof',
-      issued: 'Feb 2023',
-      credentialUrl:
-        'https://www.credly.com/badges/6ac40dbc-278e-49ec-bab1-beaabed96e6e/linked_in_profile',
+      name: 'Preparation Certification AZ900: Microsoft Azure Fundamentals',
+      issuer: 'Universidad Internacional de La Rioja',
+      issued: 'Oct 2022',
     },
     {
       name: 'Curso de Introduccion a React.js',
@@ -171,21 +235,38 @@ export const portfolioContent: PortfolioContent = {
       credentialUrl: 'https://platzi.com/p/esneiderbravoyb/curso/2444-react/diploma/detalle/',
     },
     {
+      name: 'Scrum Foundation Professional Certificate - SFPC',
+      issuer: 'Certiprof',
+      issued: 'Feb 2023',
+      credentialUrl:
+        'https://www.credly.com/badges/6ac40dbc-278e-49ec-bab1-beaabed96e6e/linked_in_profile',
+    },
+    {
+      name: 'Remote Work Professional Certification - RWPC',
+      issuer: 'Certiprof',
+      issued: 'Apr 2023',
+      credentialUrl:
+        'https://www.credly.com/badges/8374a564-1624-42fa-9340-f9e6725be05a/linked_in_profile',
+    },
+    {
       name: 'EF SET English Certificate 51/100 (B2 Upper Intermediate)',
       issuer: 'EF SET',
       issued: '2023',
       credentialUrl: 'https://www.efset.org/cert/JgA6mE',
     },
-    {
-      name: 'Preparation Certification AZ900: Microsoft Azure Fundamentals',
-      issuer: 'Universidad Internacional de La Rioja',
-      issued: 'Oct 2022',
-    },
   ],
   aiStack: [
     {
       name: 'AI Coding Assistants',
-      items: ['GitHub Copilot', 'Cursor', 'ChatGPT (GPT-4o)', 'Claude (Anthropic)'],
+      items: [
+        'Claude Code',
+        'Claude Code Commands',
+        'Claude Code Hooks',
+        'Claude.md',
+        'GitHub Copilot',
+        'Cursor',
+        'ChatGPT (GPT-4o)',
+      ],
     },
     {
       name: 'LLM APIs & Orchestration',
@@ -251,7 +332,15 @@ export const portfolioContent: PortfolioContent = {
     },
     {
       name: 'Cloud & DevOps',
-      items: ['AWS', 'Docker', 'Jenkins', 'Ansible', 'GitHub Actions', 'Kubernetes'],
+      items: [
+        'AWS',
+        'Google Cloud Platform',
+        'Docker',
+        'Jenkins',
+        'Ansible',
+        'GitHub Actions',
+        'Kubernetes',
+      ],
     },
     {
       name: 'APIs & Architecture',

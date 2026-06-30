@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
-export const alt = 'Esneider Bravo — Senior Backend Engineer · Python · FastAPI · AWS'
+export const alt = 'Esneider Bravo - Senior Software Engineer - Python, FastAPI, AWS'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 

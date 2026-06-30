@@ -13,7 +13,18 @@ type Translation = {
     education: string
     certifications: string
   }
-  hero: { availability: string; role: string; bio: string; yearsOfLogic: string }
+  hero: {
+    availability: string
+    role: string
+    bio: string
+    yearsOfLogic: string
+    ctaPrimary: string
+    ctaSecondary: string
+    metricYears: string
+    metricCerts: string
+    metricProjects: string
+    metricFocus: string
+  }
   about: { title: string; quote: string; body: string }
   stack: { kicker: string; title: string }
   projects: {
@@ -54,21 +65,29 @@ export const translations: Record<Locale, Translation> = {
     },
     hero: {
       availability: 'Available for new projects',
-      role: 'Senior Backend Engineer · Python · FastAPI · AWS',
-      bio: 'Senior Software Engineer with 8+ years building scalable fintech platforms. Specializing in Python, FastAPI, microservices, and AWS — shipping systems that combine performance, reliability, and AI-first thinking.',
+      role: 'Senior Software Engineer · Python · FastAPI · AWS · AI-First',
+      bio: 'Senior Software Engineer with 7+ years building scalable fintech backends and AI-powered platforms. I specialize in Python, FastAPI, microservices, AWS, and clean architecture for high-performance financial applications.',
       yearsOfLogic: 'Years of logic',
+      ctaPrimary: 'Start a project',
+      ctaSecondary: 'View work',
+      metricYears: 'Years shipping',
+      metricCerts: 'Certifications',
+      metricProjects: 'Case studies',
+      metricFocus: 'FinTech & AI',
     },
     about: {
       title: 'The Philosophy',
       quote:
         'I believe in intentional architecture. Every line of code must support the weight of future scale.',
-      body: 'I have built and evolved distributed systems at LendingFront — designing Python microservices with FastAPI and Flask, scalable REST APIs, Kafka-driven pipelines, and React frontends. My constant objective is transforming technical complexity into reliable, measurable products deployable on AWS at scale.',
+      body: 'In an ecosystem where scalability and efficiency are paramount, a poorly designed backend poses the greatest risk to innovation. I build robust solution engines for fintech and AI products with Python, FastAPI, microservices on AWS, and TDD. At Muno Labs, LendingFront, and Unozero.ai, I have led technical initiatives from conversational AI platforms to cross-functional engineering at scale.',
     },
     stack: { kicker: 'Core ecosystem', title: 'Engineered Toolkit' },
     projects: {
       title: 'Featured projects',
       impactPrefix: 'Impact',
       summaries: {
+        'Chatbook AI Platform':
+          'Architected and stabilized Chatbook, a conversational AI hospitality assistant using FastAPI, RAG, n8n, and WhatsApp Business API.',
         'Marketplace Expansion Platform':
           'Designed and evolved a partner onboarding platform with typed workflows, business validations, and eligibility automation.',
         'Origination Core API':
@@ -77,6 +96,8 @@ export const translations: Record<Locale, Translation> = {
           'Strengthened payments and loan-state services with robust rules, observability, and safer critical operations.',
       },
       impacts: {
+        'Chatbook AI Platform':
+          'Production-ready MVP with GCP infrastructure, operational monitoring, and knowledge-driven guest responses.',
         'Marketplace Expansion Platform':
           'Faster onboarding, stronger frontend/API consistency, and reduced operational effort.',
         'Origination Core API':
@@ -104,10 +125,17 @@ export const translations: Record<Locale, Translation> = {
       issuedLabel: 'Issued',
       credentialLabel: 'Show credential',
       titles: {
+        'Building with the Claude API': 'Building with the Claude API',
+        'Claude Code in Action': 'Claude Code in Action',
+        'Introduction to Model Context Protocol': 'Introduction to Model Context Protocol',
+        'Certificate of completion: Introduction to agent skills':
+          'Certificate of Completion: Introduction to Agent Skills',
+        'Gen AI User': 'Gen AI User',
         'Introduccion a la gestion de proyectos': 'Introduction to Project Management',
         'Curso de Introduccion a React.js': 'Introduction to React.js Course',
       },
       issuers: {
+        Anthropic: 'Anthropic',
         'Tecnologico de Monterrey': 'Monterrey Institute of Technology',
         'Universidad Internacional de La Rioja': 'International University of La Rioja',
       },
@@ -132,15 +160,21 @@ export const translations: Record<Locale, Translation> = {
     },
     hero: {
       availability: 'Disponible para nuevos proyectos',
-      role: 'Senior Fullstack Developer & Systems Architect',
-      bio: 'Ingeniero de software especializado en plataformas financieras. Diseno y escalo productos con foco en arquitectura, rendimiento, confiabilidad y experiencia de usuario.',
+      role: 'Senior Software Engineer · Python · FastAPI · AWS · AI-First',
+      bio: 'Ingeniero de software senior con mas de 7 anos construyendo backends fintech escalables y plataformas potenciadas por IA. Especializado en Python, FastAPI, microservicios, AWS y arquitectura limpia.',
       yearsOfLogic: 'Anos de experiencia',
+      ctaPrimary: 'Iniciar proyecto',
+      ctaSecondary: 'Ver proyectos',
+      metricYears: 'Anos entregando',
+      metricCerts: 'Certificaciones',
+      metricProjects: 'Casos de estudio',
+      metricFocus: 'FinTech e IA',
     },
     about: {
       title: 'La Filosofia',
       quote:
         'Creo en la arquitectura intencional. Cada linea de codigo debe soportar el peso del crecimiento futuro.',
-      body: 'He construido y evolucionado sistemas en LendingFront con un enfoque fullstack: frontend React, APIs de negocio, integraciones, automatizacion operativa y estandares de calidad. Mi objetivo constante es convertir complejidad tecnica en productos confiables y medibles.',
+      body: 'En un ecosistema donde la escalabilidad y la eficiencia son clave, un backend mal disenado es el mayor riesgo para la innovacion. Construyo motores de solucion para fintech e IA con Python, FastAPI, microservicios en AWS y TDD. En Muno Labs, LendingFront y Unozero.ai he liderado desde plataformas conversacionales hasta iniciativas de ingenieria cross-funcional.',
     },
     stack: { kicker: 'Ecosistema principal', title: 'Toolkit de Ingenieria' },
     projects: {

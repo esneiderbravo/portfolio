@@ -1,14 +1,19 @@
-import type { Metadata } from 'next'
-import { Inter, Space_Grotesk } from 'next/font/google'
+import type { Metadata, Viewport } from 'next'
+import { DM_Sans, Space_Grotesk } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+const dmSans = DM_Sans({ subsets: ['latin'], variable: '--font-dm-sans' })
 const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-space-grotesk' })
 
 const SITE_URL = 'https://esneiderbravo.dev'
-const TITLE = 'Esneider Bravo | Senior Backend Engineer — Python · FastAPI · AWS'
+const TITLE = 'Esneider Bravo | Senior Software Engineer - Python, FastAPI, AWS'
 const DESCRIPTION =
-  'Senior Software Engineer with 8+ years of expertise in Python, FastAPI, microservices, and AWS. Specialized in scalable fintech platforms, AI-first architectures, and distributed systems.'
+  'Senior Software Engineer specializing in Python, FastAPI, microservices, and AWS. AI-First architect building scalable fintech platforms at Muno Labs. Technical leadership, clean architecture, and TDD.'
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+}
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -63,7 +68,7 @@ export const metadata: Metadata = {
         url: '/opengraph-image',
         width: 1200,
         height: 630,
-        alt: 'Esneider Bravo — Senior Backend Engineer',
+        alt: 'Esneider Bravo - Senior Software Engineer',
       },
     ],
   },
@@ -90,7 +95,7 @@ const personSchema = {
   name: 'Esneider Bravo',
   url: SITE_URL,
   image: `${SITE_URL}/profile.png`,
-  jobTitle: 'Senior Backend Engineer',
+  jobTitle: 'Senior Software Engineer',
   description: DESCRIPTION,
   sameAs: ['https://github.com/esneiderbravo', 'https://linkedin.com/in/esneider-bravo'],
   knowsAbout: [
@@ -104,7 +109,7 @@ const personSchema = {
     'Fintech',
     'LangChain',
   ],
-  worksFor: { '@type': 'Organization', name: 'LendingFront' },
+  worksFor: { '@type': 'Organization', name: 'Muno Labs' },
   address: { '@type': 'PostalAddress', addressLocality: 'Santa Marta', addressCountry: 'CO' },
 }
 
@@ -114,7 +119,7 @@ const websiteSchema = {
   name: 'Esneider Bravo Portfolio',
   url: SITE_URL,
   description:
-    'Portfolio of Esneider Bravo — Senior Backend Engineer specialized in Python, FastAPI, AWS, and AI-first architectures.',
+    'Portfolio of Esneider Bravo - Senior Software Engineer specialized in Python, FastAPI, AWS, and AI-first architectures.',
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -138,7 +143,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
       </head>
-      <body className={`${inter.variable} ${spaceGrotesk.variable}`}>{children}</body>
+      <body className={`${dmSans.variable} ${spaceGrotesk.variable}`}>{children}</body>
     </html>
   )
 }
