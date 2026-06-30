@@ -11,7 +11,6 @@ export type Profile = {
   philosophyTitle: string
   philosophyQuote: string
   philosophyBody: string
-  yearsExperience: string
   availability: string
   email: string
   socialLinks: SocialLink[]
@@ -29,6 +28,23 @@ export type SkillGroup = {
   items: string[]
 }
 
+export type ExperienceRole = {
+  id: string
+  role: string
+  period: string
+  current?: boolean
+  bullets: string[]
+}
+
+export type CompanyExperience = {
+  id: string
+  company: string
+  logo: string
+  logoAlt: string
+  roles: ExperienceRole[]
+}
+
+/** @deprecated Use CompanyExperience roles flattened for date parsing only */
 export type Experience = {
   company: string
   role: string
@@ -56,7 +72,7 @@ export type Certification = {
 export type PortfolioContent = {
   profile: Profile
   projects: Project[]
-  experiences: Experience[]
+  companyExperiences: CompanyExperience[]
   education: Education[]
   certifications: Certification[]
   skillGroups: SkillGroup[]

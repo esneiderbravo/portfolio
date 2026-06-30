@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { LocaleSwitch } from '@/src/components/LocaleSwitch'
 import { portfolioContent } from '@/src/content/portfolio'
 import { translations, type Locale } from '@/src/i18n/translations'
+import { formatYearsOfExperience } from '@/src/lib/yearsExperience'
 
 function readPreferredLocale(): Locale {
   if (typeof window === 'undefined') return 'en'
@@ -41,7 +42,7 @@ export default function HomePage() {
   const {
     profile,
     projects,
-    experiences,
+    companyExperiences,
     education,
     certifications,
     skillGroups,
@@ -303,6 +304,21 @@ export default function HomePage() {
     [skillGroups],
   )
 
+  const allExperienceRoles = useMemo(
+    () => companyExperiences.flatMap((company) => company.roles),
+    [companyExperiences],
+  )
+
+  const yearsExperience = useMemo(
+    () => formatYearsOfExperience(allExperienceRoles),
+    [allExperienceRoles],
+  )
+
+  const heroBio = useMemo(
+    () => t.hero.bio.replace('{years}', yearsExperience),
+    [t.hero.bio, yearsExperience],
+  )
+
   return (
     <>
       <div className="site-backdrop" aria-hidden="true">
@@ -458,7 +474,7 @@ export default function HomePage() {
               </h1>
 
               <h2 className="hero-role">{t.hero.role}</h2>
-              <p className="hero-bio">{t.hero.bio}</p>
+              <p className="hero-bio">{heroBio}</p>
 
               <div className="hero-actions">
                 <a className="hero-btn hero-btn--primary" href="#contact">
@@ -501,7 +517,7 @@ export default function HomePage() {
               aria-label="Career highlights"
             >
               <div className="hero-metric">
-                <strong>{profile.yearsExperience}</strong>
+                <strong>{yearsExperience}</strong>
                 <span>{t.hero.metricYears}</span>
               </div>
               <div className="hero-metric">
@@ -532,7 +548,7 @@ export default function HomePage() {
               />
             </div>
             <div className="experience-card">
-              <strong>{profile.yearsExperience}</strong>
+              <strong>{yearsExperience}</strong>
               <p>{t.hero.yearsOfLogic}</p>
             </div>
           </div>
@@ -649,31 +665,65 @@ export default function HomePage() {
           </h2>
 
           <div className="exp-timeline">
-            {experiences.map((exp) => (
-              <article
-                key={`${exp.company}-${exp.role}-${exp.period}`}
-                className={`exp-timeline-item${exp.current ? ' is-current' : ''}`}
-              >
-                <div className="exp-timeline-marker" aria-hidden="true" />
-                <div className="exp-card">
-                  <div className="exp-card-header">
-                    <div>
-                      <p className="exp-company">{exp.company}</p>
-                      <h3 className="exp-role">{exp.role}</h3>
-                    </div>
-                    <span className={`exp-period${exp.current ? ' current' : ''}`}>
-                      {exp.current ? t.experience.present : exp.period}
-                      {exp.current && <span className="exp-period-sub">{exp.period}</span>}
-                    </span>
+            {companyExperiences.map((company) => {
+              const isCurrent = company.roles.some((role) => role.current)
+              const companyName = t.experience.companies[company.id] ?? company.company
+
+              return (
+                <article
+                  key={company.id}
+                  className={`exp-timeline-item${isCurrent ? ' is-current' : ''}`}
+                >
+                  <div className="exp-timeline-marker" aria-hidden="true" />
+                  <div className="exp-card">
+                    <header className="exp-company-header">
+                      <div className="exp-company-logo-wrap">
+                        <Image
+                          src={company.logo}
+                          alt={company.logoAlt}
+                          width={48}
+                          height={48}
+                          className="exp-company-logo"
+                        />
+                      </div>
+                      <p className="exp-company">{companyName}</p>
+                    </header>
+
+                    {company.roles.map((role, roleIndex) => {
+                      const roleTitle = t.experience.roles[role.id] ?? role.role
+                      const rolePeriod = role.current
+                        ? t.experience.present
+                        : (t.experience.periods[role.id] ?? role.period)
+                      const roleBullets = t.experience.bullets[role.id] ?? role.bullets
+
+                      return (
+                        <div
+                          key={role.id}
+                          className={`exp-role-block${roleIndex > 0 ? ' exp-role-block--divider' : ''}`}
+                        >
+                          <div className="exp-card-header">
+                            <h3 className="exp-role">{roleTitle}</h3>
+                            <span className={`exp-period${role.current ? ' current' : ''}`}>
+                              {rolePeriod}
+                              {role.current && (
+                                <span className="exp-period-sub">
+                                  {t.experience.periods[role.id] ?? role.period}
+                                </span>
+                              )}
+                            </span>
+                          </div>
+                          <ul className="exp-bullets">
+                            {roleBullets.map((bullet) => (
+                              <li key={bullet}>{bullet}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )
+                    })}
                   </div>
-                  <ul className="exp-bullets">
-                    {exp.bullets.map((bullet) => (
-                      <li key={bullet}>{bullet}</li>
-                    ))}
-                  </ul>
-                </div>
-              </article>
-            ))}
+                </article>
+              )
+            })}
           </div>
         </section>
 

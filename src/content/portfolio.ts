@@ -11,7 +11,6 @@ export const portfolioContent: PortfolioContent = {
       'I believe in intentional architecture. Every line of code must support the weight of future scale.',
     philosophyBody:
       'I build robust backend engines for high-performance financial applications and AI-powered platforms. At Muno Labs, LendingFront, and Unozero.ai, I have led microservices migrations, conversational AI systems, and cross-functional engineering initiatives grounded in TDD and clean architecture.',
-    yearsExperience: '7+',
     availability: 'Disponible para nuevos proyectos',
     email: 'esneiderbravoyb@gmail.com',
     socialLinks: [
@@ -53,103 +52,143 @@ export const portfolioContent: PortfolioContent = {
         'Mejor trazabilidad operativa, menor tasa de incidencias y mayor confianza en flujos transaccionales.',
     },
   ],
-  experiences: [
+  companyExperiences: [
     {
+      id: 'muno-labs',
       company: 'Muno Labs',
-      role: 'Senior Software Engineer',
-      period: 'Jun 2026 - Present',
-      current: true,
-      bullets: [
-        'Build AI-powered software and data platforms for fintech, insurtech, and healthcare clients',
-        'Architect scalable backend services with Python, TypeScript, and cloud-native patterns',
-        'Embed with product teams on delivery, code quality, and AI-first engineering practices',
+      logo: '/logos/muno-labs.png',
+      logoAlt: 'Muno Labs logo',
+      roles: [
+        {
+          id: 'muno-senior-se',
+          role: 'Senior Software Engineer',
+          period: 'Jun 2026 - Present',
+          current: true,
+          bullets: [
+            'Build AI-powered software and data platforms for fintech, insurtech, and healthcare clients',
+            'Architect scalable backend services with Python, TypeScript, and cloud-native patterns',
+            'Embed with product teams on delivery, code quality, and AI-first engineering practices',
+          ],
+        },
       ],
     },
     {
+      id: 'lendingfront',
       company: 'LendingFront',
-      role: 'Technical Lead',
-      period: 'Jun 2025 - Jun 2026',
-      bullets: [
-        'Led cross-functional engineering across backend, frontend, QA, and product for high-impact delivery',
-        'Defined architecture standards, mentored engineers, and drove AI-assisted development workflows',
-        'Facilitated technical decisions, incident resolution, and Spec-Driven Development adoption',
-        'Improved Engineering, QA, and Product collaboration through processes and documentation',
+      logo: '/logos/lendingfront.png',
+      logoAlt: 'LendingFront logo',
+      roles: [
+        {
+          id: 'lf-technical-lead',
+          role: 'Technical Lead',
+          period: 'Jun 2025 - Jun 2026',
+          bullets: [
+            'Led cross-functional engineering across backend, frontend, QA, and product for high-impact delivery',
+            'Defined architecture standards, mentored engineers, and drove AI-assisted development workflows',
+            'Facilitated technical decisions, incident resolution, and Spec-Driven Development adoption',
+            'Improved Engineering, QA, and Product collaboration through processes and documentation',
+          ],
+        },
+        {
+          id: 'lf-senior-se',
+          role: 'Senior Software Engineer',
+          period: 'Jun 2024 - Jun 2025',
+          bullets: [
+            'Developed backend solutions using Python (FastAPI, Django) with clean architecture principles',
+            'Designed scalable RESTful APIs for financial applications in production environments',
+            'Automated CI/CD pipelines with GitHub Actions and Docker',
+            'Used PostgreSQL, Redis, AWS, and CloudWatch for monitoring and observability',
+          ],
+        },
+        {
+          id: 'lf-integration-lead',
+          role: 'Integration Team Lead',
+          period: 'Aug 2023 - Jun 2024',
+          bullets: [
+            'Aligned Development and QA teams for efficient, high-quality software delivery',
+            'Removed delivery bottlenecks and ensured technical standards across iterations',
+            'Led cross-functional communication across the full software development lifecycle',
+          ],
+        },
+        {
+          id: 'lf-se-ii',
+          role: 'Software Engineer II',
+          period: 'Nov 2022 - Oct 2023',
+          bullets: [
+            'Built backend systems with Python and Flask; led transition to Node.js microservices',
+            'Managed a team of 3 developers under Agile methodologies',
+            'Optimized SQL queries in MySQL and PostgreSQL; implemented Pytest and Nose testing',
+            'Adopted CI/CD with Jenkins and Docker for faster, more reliable deployments',
+          ],
+        },
+        {
+          id: 'lf-software-engineer',
+          role: 'Software Engineer',
+          period: 'Mar 2021 - Oct 2022',
+          bullets: [
+            'Developed RESTful APIs with Node.js and web applications with Python and Flask',
+            'Optimized MySQL and PostgreSQL queries for high-traffic operations',
+            'Implemented automated testing with Pytest and Nose',
+            'Contributed to frontend performance with React, jQuery, HTML5, and CSS3',
+          ],
+        },
       ],
     },
     {
+      id: 'unozero-ai',
       company: 'Unozero.ai',
-      role: 'CTO / AI Platform Architect',
-      period: 'Nov 2025 - Feb 2026',
-      bullets: [
-        'Led architecture and delivery of Chatbook, an AI hospitality assistant for hotel guest communication',
-        'Built a conversational platform with FastAPI, RAG pipelines, n8n, and WhatsApp Business API',
-        'Designed GCP infrastructure: VMs, DNS, firewall policies, networking, and production operations',
-        'Established deployment, monitoring, and operational processes for platform reliability',
+      logo: '/logos/unozero-ai.png',
+      logoAlt: 'Unozero.ai logo',
+      roles: [
+        {
+          id: 'unozero-cto',
+          role: 'CTO / AI Platform Architect',
+          period: 'Nov 2025 - Feb 2026',
+          bullets: [
+            'Led architecture and delivery of Chatbook, an AI hospitality assistant for hotel guest communication',
+            'Built a conversational platform with FastAPI, RAG pipelines, n8n, and WhatsApp Business API',
+            'Designed GCP infrastructure: VMs, DNS, firewall policies, networking, and production operations',
+            'Established deployment, monitoring, and operational processes for platform reliability',
+          ],
+        },
       ],
     },
     {
-      company: 'LendingFront',
-      role: 'Senior Software Engineer',
-      period: 'Jun 2024 - Jun 2025',
-      bullets: [
-        'Developed backend solutions using Python (FastAPI, Django) with clean architecture principles',
-        'Designed scalable RESTful APIs for financial applications in production environments',
-        'Automated CI/CD pipelines with GitHub Actions and Docker',
-        'Used PostgreSQL, Redis, AWS, and CloudWatch for monitoring and observability',
-      ],
-    },
-    {
-      company: 'LendingFront',
-      role: 'Integration Team Lead',
-      period: 'Aug 2023 - Jun 2024',
-      bullets: [
-        'Aligned Development and QA teams for efficient, high-quality software delivery',
-        'Removed delivery bottlenecks and ensured technical standards across iterations',
-        'Led cross-functional communication across the full software development lifecycle',
-      ],
-    },
-    {
-      company: 'LendingFront',
-      role: 'Software Engineer II',
-      period: 'Nov 2022 - Oct 2023',
-      bullets: [
-        'Built backend systems with Python and Flask; led transition to Node.js microservices',
-        'Managed a team of 3 developers under Agile methodologies',
-        'Optimized SQL queries in MySQL and PostgreSQL; implemented Pytest and Nose testing',
-        'Adopted CI/CD with Jenkins and Docker for faster, more reliable deployments',
-      ],
-    },
-    {
-      company: 'LendingFront',
-      role: 'Software Engineer',
-      period: 'Mar 2021 - Oct 2022',
-      bullets: [
-        'Developed RESTful APIs with Node.js and web applications with Python and Flask',
-        'Optimized MySQL and PostgreSQL queries for high-traffic operations',
-        'Implemented automated testing with Pytest and Nose',
-        'Contributed to frontend performance with React, jQuery, HTML5, and CSS3',
-      ],
-    },
-    {
+      id: 'lady-confecciones',
       company: 'Ladys Confecciones SAS BIC',
-      role: 'Web Developer',
-      period: 'Aug 2020 - Mar 2021',
-      bullets: [
-        'Led marketplace development with PHP and Laravel: catalog, cart, orders, and payments',
-        'Designed RESTful APIs for mobile app integration',
-        'Optimized MySQL queries and implemented PHPUnit automated testing',
-        'Contributed to CI/CD adoption with Jenkins and Docker',
+      logo: '/logos/lady-confecciones.png',
+      logoAlt: 'Lady Confecciones logo',
+      roles: [
+        {
+          id: 'lady-web-developer',
+          role: 'Web Developer',
+          period: 'Aug 2020 - Mar 2021',
+          bullets: [
+            'Led marketplace development with PHP and Laravel: catalog, cart, orders, and payments',
+            'Designed RESTful APIs for mobile app integration',
+            'Optimized MySQL queries and implemented PHPUnit automated testing',
+            'Contributed to CI/CD adoption with Jenkins and Docker',
+          ],
+        },
       ],
     },
     {
+      id: 'universidad-magdalena',
       company: 'Universidad del Magdalena',
-      role: 'Web Developer',
-      period: 'Feb 2019 - Aug 2020',
-      bullets: [
-        'Developed academic and administrative web systems with PHP and jQuery',
-        'Optimized database queries and implemented automated testing frameworks',
-        'Documented systems and gathered requirements from end users',
-        'Delivered features using Agile methodologies',
+      logo: '/logos/universidad-del-magdalena.png',
+      logoAlt: 'Universidad del Magdalena logo',
+      roles: [
+        {
+          id: 'unimag-web-developer',
+          role: 'Web Developer',
+          period: 'Feb 2019 - Aug 2020',
+          bullets: [
+            'Developed academic and administrative web systems with PHP and jQuery',
+            'Optimized database queries and implemented automated testing frameworks',
+            'Documented systems and gathered requirements from end users',
+            'Delivered features using Agile methodologies',
+          ],
+        },
       ],
     },
   ],

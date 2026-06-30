@@ -17,7 +17,7 @@ describe('portfolio content', () => {
   })
 
   it('has work experience entries', () => {
-    expect(portfolioContent.experiences.length).toBeGreaterThanOrEqual(3)
+    expect(portfolioContent.companyExperiences.length).toBeGreaterThanOrEqual(3)
   })
 
   it('has certifications', () => {

@@ -36,7 +36,14 @@ type Translation = {
   cta: { title: string; body: string; action: string }
   skills: { title: string; capabilitiesTitle: string; headlineTitle: string }
   footer: { signature: string }
-  experience: { kicker: string; present: string }
+  experience: {
+    kicker: string
+    present: string
+    companies: Record<string, string>
+    roles: Record<string, string>
+    periods: Record<string, string>
+    bullets: Record<string, string[]>
+  }
   education: { kicker: string }
   certifications: {
     kicker: string
@@ -66,7 +73,7 @@ export const translations: Record<Locale, Translation> = {
     hero: {
       availability: 'Available for new projects',
       role: 'Senior Software Engineer · Python · FastAPI · AWS · AI-First',
-      bio: 'Senior Software Engineer with 7+ years building scalable fintech backends and AI-powered platforms. I specialize in Python, FastAPI, microservices, AWS, and clean architecture for high-performance financial applications.',
+      bio: 'Senior Software Engineer with {years} years building scalable fintech backends and AI-powered platforms. I specialize in Python, FastAPI, microservices, AWS, and clean architecture for high-performance financial applications.',
       yearsOfLogic: 'Years of logic',
       ctaPrimary: 'Start a project',
       ctaSecondary: 'View work',
@@ -117,7 +124,14 @@ export const translations: Record<Locale, Translation> = {
       headlineTitle: 'Short Professional Headline',
     },
     footer: { signature: 'ENGINEERED WITH PRECISION' },
-    experience: { kicker: 'Work History', present: 'Current' },
+    experience: {
+      kicker: 'Work History',
+      present: 'Current',
+      companies: {},
+      roles: {},
+      periods: {},
+      bullets: {},
+    },
     education: { kicker: 'Education' },
     certifications: {
       kicker: 'Certifications',
@@ -155,28 +169,28 @@ export const translations: Record<Locale, Translation> = {
       language: 'Idioma',
       ai: 'IA Stack',
       experience: 'Experiencia',
-      education: 'Educacion',
+      education: 'Educación',
       certifications: 'Certificaciones',
     },
     hero: {
       availability: 'Disponible para nuevos proyectos',
       role: 'Senior Software Engineer · Python · FastAPI · AWS · AI-First',
-      bio: 'Ingeniero de software senior con mas de 7 anos construyendo backends fintech escalables y plataformas potenciadas por IA. Especializado en Python, FastAPI, microservicios, AWS y arquitectura limpia.',
-      yearsOfLogic: 'Anos de experiencia',
+      bio: 'Ingeniero de software senior con {years} años construyendo backends fintech escalables y plataformas potenciadas por IA. Especializado en Python, FastAPI, microservicios, AWS y arquitectura limpia.',
+      yearsOfLogic: 'Años de experiencia',
       ctaPrimary: 'Iniciar proyecto',
       ctaSecondary: 'Ver proyectos',
-      metricYears: 'Anos entregando',
+      metricYears: 'Años entregando',
       metricCerts: 'Certificaciones',
       metricProjects: 'Casos de estudio',
       metricFocus: 'FinTech e IA',
     },
     about: {
-      title: 'La Filosofia',
+      title: 'La Filosofía',
       quote:
-        'Creo en la arquitectura intencional. Cada linea de codigo debe soportar el peso del crecimiento futuro.',
-      body: 'En un ecosistema donde la escalabilidad y la eficiencia son clave, un backend mal disenado es el mayor riesgo para la innovacion. Construyo motores de solucion para fintech e IA con Python, FastAPI, microservicios en AWS y TDD. En Muno Labs, LendingFront y Unozero.ai he liderado desde plataformas conversacionales hasta iniciativas de ingenieria cross-funcional.',
+        'Creo en la arquitectura intencional. Cada línea de código debe soportar el peso del crecimiento futuro.',
+      body: 'En un ecosistema donde la escalabilidad y la eficiencia son clave, un backend mal diseñado es el mayor riesgo para la innovación. Construyo motores de solución para fintech e IA con Python, FastAPI, microservicios en AWS y TDD. En Muno Labs, LendingFront y Unozero.ai he liderado desde plataformas conversacionales hasta iniciativas de ingeniería cross-funcional.',
     },
-    stack: { kicker: 'Ecosistema principal', title: 'Toolkit de Ingenieria' },
+    stack: { kicker: 'Ecosistema principal', title: 'Toolkit de Ingeniería' },
     projects: {
       title: 'Proyectos destacados',
       impactPrefix: 'Impacto',
@@ -187,17 +201,103 @@ export const translations: Record<Locale, Translation> = {
     },
     cta: {
       title: 'LISTO PARA CONSTRUIR ALGO GRANDE?',
-      body: 'Conversemos sobre tu proximo producto, arquitectura o proceso de modernizacion.',
+      body: 'Conversemos sobre tu próximo producto, arquitectura o proceso de modernización.',
       action: 'Iniciar Proyecto',
     },
     skills: {
-      title: 'Habilidades Tecnicas',
+      title: 'Habilidades Técnicas',
       capabilitiesTitle: 'Capacidades Clave',
       headlineTitle: 'Headline Profesional Corta',
     },
     footer: { signature: 'ENGINEERED WITH PRECISION' },
-    experience: { kicker: 'Historial Laboral', present: 'Actual' },
-    education: { kicker: 'Educacion' },
+    experience: {
+      kicker: 'Historial Laboral',
+      present: 'Actual',
+      companies: {
+        'muno-labs': 'Muno Labs',
+        lendingfront: 'LendingFront',
+        'lady-confecciones': 'Ladys Confecciones SAS BIC',
+        'universidad-magdalena': 'Universidad del Magdalena',
+        'unozero-ai': 'Unozero.ai',
+      },
+      roles: {
+        'muno-senior-se': 'Ingeniero de Software Senior',
+        'lf-technical-lead': 'Líder Técnico',
+        'lf-senior-se': 'Ingeniero de Software Senior',
+        'lf-integration-lead': 'Líder de Equipo de Integración',
+        'lf-se-ii': 'Ingeniero de Software II',
+        'lf-software-engineer': 'Ingeniero de Software',
+        'lady-web-developer': 'Desarrollador Web',
+        'unimag-web-developer': 'Desarrollador Web',
+        'unozero-cto': 'CTO / Arquitecto de Plataforma IA',
+      },
+      periods: {
+        'muno-senior-se': 'Jun 2026 - Actual',
+        'lf-technical-lead': 'Jun 2025 - Jun 2026',
+        'lf-senior-se': 'Jun 2024 - Jun 2025',
+        'lf-integration-lead': 'Ago 2023 - Jun 2024',
+        'lf-se-ii': 'Nov 2022 - Oct 2023',
+        'lf-software-engineer': 'Mar 2021 - Oct 2022',
+        'lady-web-developer': 'Ago 2020 - Mar 2021',
+        'unimag-web-developer': 'Feb 2019 - Ago 2020',
+        'unozero-cto': 'Nov 2025 - Feb 2026',
+      },
+      bullets: {
+        'muno-senior-se': [
+          'Construyo software y plataformas de datos con IA para clientes de fintech, insurtech y salud',
+          'Arquitecturo servicios backend escalables con Python, TypeScript y patrones cloud-native',
+          'Me integro con equipos de producto en entrega, calidad de código y prácticas de ingeniería AI-first',
+        ],
+        'lf-technical-lead': [
+          'Lideré ingeniería cross-funcional en backend, frontend, QA y producto para entregas de alto impacto',
+          'Definí estándares de arquitectura, mentoreé ingenieros e impulsé flujos de desarrollo asistido por IA',
+          'Facilité decisiones técnicas, resolución de incidentes y adopción de Spec-Driven Development',
+          'Mejoré la colaboración entre Ingeniería, QA y Producto mediante procesos y documentación',
+        ],
+        'lf-senior-se': [
+          'Desarrollé soluciones backend con Python (FastAPI, Django) bajo principios de arquitectura limpia',
+          'Diseñé APIs REST escalables para aplicaciones financieras en entornos de producción',
+          'Automaticé pipelines CI/CD con GitHub Actions y Docker',
+          'Usé PostgreSQL, Redis, AWS y CloudWatch para monitoreo y observabilidad',
+        ],
+        'lf-integration-lead': [
+          'Alineé equipos de Desarrollo y QA para entregas eficientes y de alta calidad',
+          'Eliminé cuellos de botella en la entrega y aseguré estándares técnicos en cada iteración',
+          'Lideré comunicación cross-funcional a lo largo del ciclo de vida del software',
+        ],
+        'lf-se-ii': [
+          'Construí sistemas backend con Python y Flask; lideré la transición a microservicios en Node.js',
+          'Gestioné un equipo de 3 desarrolladores bajo metodologías Agile',
+          'Optimicé consultas SQL en MySQL y PostgreSQL; implementé pruebas con Pytest y Nose',
+          'Adopté CI/CD con Jenkins y Docker para despliegues más rápidos y confiables',
+        ],
+        'lf-software-engineer': [
+          'Desarrollé APIs REST con Node.js y aplicaciones web con Python y Flask',
+          'Optimicé consultas MySQL y PostgreSQL para operaciones de alto tráfico',
+          'Implementé pruebas automatizadas con Pytest y Nose',
+          'Contribuí al rendimiento frontend con React, jQuery, HTML5 y CSS3',
+        ],
+        'lady-web-developer': [
+          'Lideré el desarrollo del marketplace con PHP y Laravel: catálogo, carrito, pedidos y pagos',
+          'Diseñé APIs REST para integración con aplicación móvil',
+          'Optimicé consultas MySQL e implementé pruebas automatizadas con PHPUnit',
+          'Contribuí a la adopción de CI/CD con Jenkins y Docker',
+        ],
+        'unimag-web-developer': [
+          'Desarrollé sistemas web académicos y administrativos con PHP y jQuery',
+          'Optimicé consultas de base de datos e implementé frameworks de pruebas automatizadas',
+          'Documenté sistemas y recopilé requisitos de usuarios finales',
+          'Entregué funcionalidades usando metodologías Agile',
+        ],
+        'unozero-cto': [
+          'Lideré la arquitectura y entrega de Chatbook, asistente de IA para comunicación hotelera',
+          'Construí una plataforma conversacional con FastAPI, pipelines RAG, n8n y WhatsApp Business API',
+          'Diseñé infraestructura en GCP: VMs, DNS, políticas de firewall, red y operaciones en producción',
+          'Establecí procesos de despliegue, monitoreo y operación para confiabilidad de la plataforma',
+        ],
+      },
+    },
+    education: { kicker: 'Educación' },
     certifications: {
       kicker: 'Certificaciones',
       issuerLabel: 'Emisor',

@@ -1210,6 +1210,53 @@ section {
   flex-wrap: wrap;
 }
 
+.exp-company-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--outline-ghost);
+}
+
+.exp-company-logo-wrap {
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.55rem;
+  overflow: hidden;
+  border: 1px solid var(--outline-ghost);
+  background: var(--surface-highest);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.exp-company-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.exp-company-header .exp-company {
+  margin: 0;
+  font-size: clamp(0.72rem, 1.8vw, 0.82rem);
+  letter-spacing: 0.12em;
+}
+
+.exp-role-block {
+  padding-top: 0.15rem;
+}
+
+.exp-role-block--divider {
+  margin-top: 1.35rem;
+  padding-top: 1.35rem;
+  border-top: 1px solid var(--outline-ghost);
+}
+
+.exp-role-block .exp-card-header {
+  margin-bottom: 1rem;
+}
+
 .exp-company {
   margin: 0 0 0.3rem;
   color: var(--primary);
@@ -1732,6 +1779,22 @@ section {
 
   .exp-card {
     padding: 1.15rem 1.2rem;
+  }
+
+  .exp-company-logo-wrap {
+    width: 2.65rem;
+    height: 2.65rem;
+  }
+
+  .exp-company-header {
+    gap: 0.7rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.85rem;
+  }
+
+  .exp-role-block--divider {
+    margin-top: 1.1rem;
+    padding-top: 1.1rem;
   }
 
   .exp-card-header {
