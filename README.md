@@ -1,4 +1,4 @@
-# esneiderbravo.dev — Personal Portfolio
+# esneiderbravo.dev — Engineering Blog & Portfolio
 
 > **Senior Fullstack Developer & Systems Architect** · 8+ years · Fintech · AI-First
 
@@ -11,12 +11,13 @@
 
 ## Overview
 
-A dark-mode, performance-first personal portfolio built entirely with **Next.js 14 App Router**, **TypeScript**, and pure **CSS** — no UI framework, no bloat. Every section is driven by structured content data, making updates a one-line change.
+A dark-mode, performance-first personal site built entirely with **Next.js App Router**, **TypeScript**, and pure **CSS** — no UI framework, no bloat. The homepage (`/`) is a bilingual engineering blog; the full portfolio/CV experience lives at `/cv`. Every section is driven by structured content data or markdown, making updates a one-line change.
 
 ### Highlights
 
-- ⚡ **Next.js 14 App Router** with full server/client split
-- 🌐 **i18n** — English & Spanish, zero external library
+- ⚡ **Next.js App Router** with full server/client split
+- ✍️ **Blog-first homepage** — bilingual markdown articles (`content/articles/`), statically generated at `/article/<slug>`, with tag filtering and search
+- 🌐 **i18n** — English & Spanish, zero external library, locale persists across routes
 - 📱 **Fully responsive** — phone → tablet → laptop → XL desktop
 - 🎠 **Experience carousel** — 6 roles with animated slide transitions
 - 🍔 **Mobile nav overlay** — hamburger with animated X transform
@@ -45,20 +46,24 @@ A dark-mode, performance-first personal portfolio built entirely with **Next.js 
 ```
 portfolio/
 ├── app/
-│   ├── page.tsx            # All sections + carousel logic
+│   ├── page.tsx            # Article-first homepage
+│   ├── article/[slug]/     # Statically generated article pages
+│   ├── cv/                 # Full portfolio/CV experience
 │   ├── layout.tsx          # Root layout — fonts & metadata
 │   └── globals.css         # Design system — tokens, layout, responsive
+├── content/
+│   └── posts/<slug>/       # One folder per article — en.md + es.md
 ├── src/
+│   ├── components/         # LocaleSwitch + article components
 │   ├── content/
-│   │   └── portfolio.ts    # ← All content lives here
+│   │   └── portfolio.ts    # ← All portfolio content lives here
 │   ├── i18n/
 │   │   └── translations.ts # EN / ES strings
-│   └── types/
-│       └── portfolio.ts    # TypeScript types
+│   ├── lib/                # articles.ts + article.ts (markdown pipeline)
+│   └── types/              # portfolio.ts + article.ts
 ├── public/
 │   └── profile.png
-└── tests/
-    └── content.test.ts
+└── tests/                  # Vitest suites (content, articles, i18n)
 ```
 
 ---

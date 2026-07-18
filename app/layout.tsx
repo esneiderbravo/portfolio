@@ -6,9 +6,9 @@ const dmSans = DM_Sans({ subsets: ['latin'], variable: '--font-dm-sans' })
 const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-space-grotesk' })
 
 const SITE_URL = 'https://esneiderbravo.dev'
-const TITLE = 'Esneider Bravo | Senior Software Engineer - Python, FastAPI, AWS'
+const TITLE = 'Esneider Bravo | Engineering Blog — Python, FastAPI, AWS, AI'
 const DESCRIPTION =
-  'Senior Software Engineer specializing in Python, FastAPI, microservices, and AWS. AI-First architect building scalable fintech platforms at Muno Labs. Technical leadership, clean architecture, and TDD.'
+  'Engineering blog by Esneider Bravo, Senior Software Engineer — deep dives on Python, FastAPI, microservices, AWS, and AI-first architecture, plus the CV behind scalable fintech platforms at Muno Labs.'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -117,10 +117,10 @@ const personSchema = {
 const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  name: 'Esneider Bravo Portfolio',
+  name: 'esneiderbravo.dev',
   url: SITE_URL,
   description:
-    'Portfolio of Esneider Bravo - Senior Software Engineer specialized in Python, FastAPI, AWS, and AI-first architectures.',
+    'Engineering blog and CV of Esneider Bravo - Senior Software Engineer specialized in Python, FastAPI, AWS, and AI-first architectures.',
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -130,7 +130,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="canonical" href={SITE_URL} />
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL,GRAD,opsz@100..700,0..1,-50..200,20..48"
