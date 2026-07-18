@@ -1,0 +1,643 @@
+'use client'
+
+import Image from 'next/image'
+import { useEffect, useMemo } from 'react'
+
+import { SiteHeader } from '@/src/components/article/SiteHeader'
+import { setStoredLocale, useLocale } from '@/src/components/article/useLocale'
+import { BrandWordmark } from '@/src/components/BrandWordmark'
+import { portfolioContent } from '@/src/content/portfolio'
+import { translations } from '@/src/i18n/translations'
+import { formatYearsOfExperience } from '@/src/lib/yearsExperience'
+
+const GROUP_ORDER = [
+  'Frontend',
+  'Backend & Languages',
+  'Data & Messaging',
+  'Cloud & DevOps',
+  'APIs & Architecture',
+  'Integrations',
+]
+
+const HERO_MARQUEE = [
+  'Python',
+  'FastAPI',
+  'AWS',
+  'Microservices',
+  'LangChain',
+  'MCP',
+  'React',
+  'Next.js',
+  'PostgreSQL',
+  'Docker',
+]
+
+/** Full portfolio/CV experience previously served at `/`, now hosted at `/cv`. */
+export default function CvPageClient() {
+  const {
+    profile,
+    projects,
+    companyExperiences,
+    education,
+    certifications,
+    skillGroups,
+    aiStack,
+    coreCapabilities,
+  } = portfolioContent
+  const [firstName, ...lastNameParts] = profile.headline.split(' ')
+  const lastName = lastNameParts.join(' ')
+  const locale = useLocale()
+  const t = useMemo(() => translations[locale], [locale])
+
+  useEffect(() => {
+    const revealElements = document.querySelectorAll('.reveal')
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+            revealObserver.unobserve(entry.target)
+          }
+        }
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
+    )
+
+    revealElements.forEach((element) => revealObserver.observe(element))
+    return () => revealObserver.disconnect()
+  }, [])
+
+  const socialIcons: Record<string, string> = {
+    github: 'terminal',
+    linkedin: 'hub',
+    email: 'mail',
+  }
+
+  const itemIcons: Record<string, string> = {
+    // ── Frontend ──────────────────────────────────────────────────────────────
+    'react 18': 'deployed_code',
+    'react.js': 'deployed_code',
+    react: 'deployed_code',
+    'mui v5': 'palette',
+    'material ui': 'palette',
+    auth0: 'lock',
+    redux: 'account_tree',
+    webpack: 'build',
+    formik: 'edit_note',
+    recharts: 'bar_chart',
+    jquery: 'javascript',
+    html5: 'html',
+    css3: 'css',
+    typescript: 'data_object',
+    tailwind: 'style',
+    'framer motion': 'animation',
+    'next.js': 'rocket_launch',
+    // ── Backend & Languages ────────────────────────────────────────────────────
+    python: 'code',
+    'python (fastapi, django, flask)': 'code',
+    flask: 'local_drink',
+    fastapi: 'flash_on',
+    django: 'dns',
+    'node.js': 'dns',
+    'php (laravel)': 'terminal',
+    sqlalchemy: 'table',
+    alembic: 'history',
+    graphql: 'schema',
+    celery: 'pending_actions',
+    marshmallow: 'transform',
+    // ── Data & Messaging ──────────────────────────────────────────────────────
+    postgresql: 'database',
+    mysql: 'database',
+    redis: 'bolt',
+    kafka: 'stream',
+    'aws s3': 'cloud_upload',
+    'elastic apm': 'monitor_heart',
+    // ── Cloud & DevOps ────────────────────────────────────────────────────────
+    aws: 'cloud',
+    docker: 'package_2',
+    jenkins: 'build',
+    ansible: 'settings_suggest',
+    'github actions': 'deployed_code',
+    kubernetes: 'hub',
+    'ci/cd pipelines': 'sync_alt',
+    'ci/cd': 'sync_alt',
+    // ── APIs & Architecture ───────────────────────────────────────────────────
+    'rest apis': 'api',
+    rest: 'api',
+    microservices: 'widgets',
+    'distributed systems': 'hub',
+    // ── Integrations ──────────────────────────────────────────────────────────
+    salesforce: 'handshake',
+    twilio: 'call',
+    sendgrid: 'mail',
+    rollbar: 'error',
+    plaid: 'account_balance',
+    looker: 'bar_chart',
+    // ── Engineering Skills / Capabilities ─────────────────────────────────────
+    'clean architecture': 'architecture',
+    'solid principles': 'rule',
+    'test-driven development (tdd)': 'check_circle',
+    'system design (scalable systems)': 'schema',
+    'sql query optimization': 'query_stats',
+    'scalable api design': 'lan',
+    'performance tuning': 'speed',
+    'observability & monitoring': 'monitoring',
+    'ai-first architectures': 'psychology',
+    'ai integration in microservices': 'smart_toy',
+    'technical leadership': 'groups',
+    'code reviews': 'rate_review',
+    mentoring: 'school',
+    'agile / scrum': 'sprint',
+    'multidisciplinary team leadership': 'diversity_3',
+    // ── Tools (fallback) ──────────────────────────────────────────────────────
+    git: 'terminal',
+    jira: 'checklist',
+    figma: 'design_services',
+    postman: 'send',
+    'vs code': 'code',
+    // ── AI Assistants ──────────────────────────────────────────────────────────
+    'github copilot': 'auto_awesome',
+    cursor: 'code_blocks',
+    'chatgpt (gpt-4o)': 'psychology',
+    'claude (anthropic)': 'smart_toy',
+    // ── LLM & Orchestration ───────────────────────────────────────────────────
+    'openai api': 'developer_mode',
+    'anthropic api': 'memory',
+    langchain: 'link',
+    langgraph: 'schema',
+    // ── MCPs ─────────────────────────────────────────────────────────────────
+    'github mcp': 'hub',
+    'jira mcp': 'checklist',
+    'postgresql mcp': 'database',
+    'confluence mcp': 'article',
+    'figma mcp': 'design_services',
+    // ── Data Intelligence ─────────────────────────────────────────────────────
+    snowflake: 'ac_unit',
+    fivetran: 'cable',
+    dbt: 'transform',
+    // ── AI Dev Workflow ───────────────────────────────────────────────────────
+    'openspec cli': 'terminal',
+    'artifact-driven changes': 'checklist',
+    'opsx:propose': 'edit_document',
+    'opsx:apply': 'build_circle',
+    'opsx:verify': 'verified',
+    skills: 'school',
+    agents: 'smart_toy',
+    'sub-agents': 'group_work',
+    // ── Design ────────────────────────────────────────────────────────────────
+    'figma dev mode': 'developer_board',
+    figjam: 'gesture',
+  }
+
+  const getIcon = (value: string, fallback = 'code') => itemIcons[value.toLowerCase()] ?? fallback
+
+  const groupIcon: Record<string, string> = {
+    Frontend: 'layers',
+    'Backend & Languages': 'dns',
+    'Data & Messaging': 'database',
+    'Cloud & DevOps': 'cloud',
+    'APIs & Architecture': 'api',
+    Integrations: 'handshake',
+  }
+
+  const aiGroupIcon: Record<string, string> = {
+    'AI Coding Assistants': 'auto_awesome',
+    'LLM APIs & Orchestration': 'psychology',
+    'Model Context Protocol': 'extension',
+    'Data Intelligence': 'analytics',
+    'Design & Prototyping': 'design_services',
+    'AI Dev Workflow': 'workflow',
+  }
+
+  const mergedGroups = useMemo(
+    () =>
+      [...skillGroups].sort((a, b) => GROUP_ORDER.indexOf(a.name) - GROUP_ORDER.indexOf(b.name)),
+    [skillGroups],
+  )
+
+  const allExperienceRoles = useMemo(
+    () => companyExperiences.flatMap((company) => company.roles),
+    [companyExperiences],
+  )
+
+  const yearsExperience = useMemo(
+    () => formatYearsOfExperience(allExperienceRoles),
+    [allExperienceRoles],
+  )
+
+  const heroBio = useMemo(
+    () => t.hero.bio.replace('{years}', yearsExperience),
+    [t.hero.bio, yearsExperience],
+  )
+
+  return (
+    <>
+      <div className="site-backdrop" aria-hidden="true">
+        <div className="site-backdrop__aurora" />
+        <div className="site-backdrop__grid" />
+        <div className="site-backdrop__grain" />
+      </div>
+
+      <SiteHeader locale={locale} onLocaleChange={setStoredLocale} active="cv" />
+
+      <main className="page-shell">
+        <section className="hero" id="home">
+          <div className="hero-copy">
+            <div className="hero-intro reveal is-visible">
+              <div className="status-pill">
+                <span className="status-dot" />
+                <span>{t.hero.availability}</span>
+              </div>
+
+              <p className="hero-eyebrow">Senior Software Engineer</p>
+
+              <h1>
+                {firstName}
+                <br />
+                <span>{lastName}</span>
+              </h1>
+
+              <h2 className="hero-role">{t.hero.role}</h2>
+              <p className="hero-bio">{heroBio}</p>
+
+              <div className="hero-actions">
+                <a className="hero-btn hero-btn--primary" href="#contact">
+                  {t.hero.ctaPrimary}
+                  <span className="material-symbols-outlined" aria-hidden="true">
+                    arrow_forward
+                  </span>
+                </a>
+                <a className="hero-btn hero-btn--ghost" href="#projects">
+                  {t.hero.ctaSecondary}
+                </a>
+              </div>
+
+              <div className="socials">
+                {profile.socialLinks.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="social-link"
+                  >
+                    <span className="material-symbols-outlined" aria-hidden="true">
+                      {socialIcons[link.label.toLowerCase()] ?? 'link'}
+                    </span>
+                    {link.label}
+                  </a>
+                ))}
+                <a href={`mailto:${profile.email}`} className="social-link">
+                  <span className="material-symbols-outlined" aria-hidden="true">
+                    mail
+                  </span>
+                  Email
+                </a>
+              </div>
+            </div>
+
+            <div
+              className="hero-metrics reveal reveal-delay-2 is-visible"
+              aria-label="Career highlights"
+            >
+              <div className="hero-metric">
+                <strong>{yearsExperience}</strong>
+                <span>{t.hero.metricYears}</span>
+              </div>
+              <div className="hero-metric">
+                <strong>{certifications.length}</strong>
+                <span>{t.hero.metricCerts}</span>
+              </div>
+              <div className="hero-metric">
+                <strong>{projects.length}</strong>
+                <span>{t.hero.metricProjects}</span>
+              </div>
+              <div className="hero-metric hero-metric--accent">
+                <strong>AI</strong>
+                <span>{t.hero.metricFocus}</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="hero-visual-wrap reveal reveal-delay-1 is-visible">
+            <div className="hero-visual-ring" aria-hidden="true" />
+            <div className="hero-visual">
+              <Image
+                src="/profile.png"
+                alt="Esneider Bravo - Senior Software Engineer specializing in Python, FastAPI, and AWS"
+                fill
+                priority
+                className="hero-image"
+                sizes="(max-width: 920px) 90vw, (max-width: 1280px) 45vw, 600px"
+              />
+            </div>
+            <div className="experience-card">
+              <strong>{yearsExperience}</strong>
+              <p>{t.hero.yearsOfLogic}</p>
+            </div>
+          </div>
+
+          <div className="hero-marquee" aria-hidden="true">
+            <div className="hero-marquee__track">
+              {[...HERO_MARQUEE, ...HERO_MARQUEE].map((item, index) => (
+                <span key={`${item}-${index}`} className="hero-marquee__item">
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="about reveal" id="about" aria-labelledby="about-heading">
+          <h2 id="about-heading" className="about-label">
+            {t.about.title}
+          </h2>
+          <div>
+            <p className="quote">&quot;{t.about.quote}&quot;</p>
+            <p className="about-body">{t.about.body}</p>
+          </div>
+        </section>
+
+        <section className="ai-section reveal" id="ai" aria-labelledby="ai-heading">
+          <div className="ai-section-head">
+            <h2 id="ai-heading" className="section-kicker">
+              {t.ai.kicker}
+            </h2>
+            <p className="ai-tagline">{t.ai.tagline}</p>
+          </div>
+
+          <div className="ai-grid">
+            {aiStack.map((group) => (
+              <article key={group.name} className="ai-card">
+                <h4>
+                  <span className="material-symbols-outlined ai-group-icon" aria-hidden="true">
+                    {aiGroupIcon[group.name] ?? 'smart_toy'}
+                  </span>
+                  {group.name}
+                </h4>
+                <div className="ai-chips">
+                  {group.items.map((item) => (
+                    <span key={item} className="ai-chip">
+                      <span className="material-symbols-outlined" aria-hidden="true">
+                        {getIcon(item, 'auto_awesome')}
+                      </span>
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="stack reveal" id="skills" aria-labelledby="skills-heading">
+          <div className="stack-head">
+            <div>
+              <h2 id="skills-heading" className="section-kicker">
+                {t.skills.title}
+              </h2>
+            </div>
+          </div>
+
+          <div className="skills-grid">
+            {mergedGroups.map((group) => (
+              <article key={group.name} className="stack-card">
+                <h4>
+                  <span className="material-symbols-outlined stack-icon" aria-hidden="true">
+                    {groupIcon[group.name] ?? 'code'}
+                  </span>
+                  {group.name}
+                </h4>
+                <ul>
+                  {group.items.map((item) => (
+                    <li key={`${group.name}-${item}`}>
+                      <span className="stack-item">
+                        <span className="material-symbols-outlined stack-icon" aria-hidden="true">
+                          {getIcon(item, 'code')}
+                        </span>
+                        {item}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+
+          <article className="stack-card capabilities-card">
+            <h4>{t.skills.capabilitiesTitle}</h4>
+            <div className="chip-list">
+              {coreCapabilities.map((capability) => (
+                <span key={capability} className="chip capability-chip">
+                  <span className="material-symbols-outlined" aria-hidden="true">
+                    {getIcon(capability, 'bolt')}
+                  </span>
+                  {capability}
+                </span>
+              ))}
+            </div>
+          </article>
+        </section>
+
+        <section
+          className="exp-section reveal"
+          id="experience"
+          aria-labelledby="experience-heading"
+        >
+          <h2 id="experience-heading" className="section-kicker">
+            {t.experience.kicker}
+          </h2>
+
+          <div className="exp-timeline">
+            {companyExperiences.map((company) => {
+              const isCurrent = company.roles.some((role) => role.current)
+              const companyName = t.experience.companies[company.id] ?? company.company
+
+              return (
+                <article
+                  key={company.id}
+                  className={`exp-timeline-item${isCurrent ? ' is-current' : ''}`}
+                >
+                  <div className="exp-timeline-marker" aria-hidden="true" />
+                  <div className="exp-card">
+                    <header className="exp-company-header">
+                      <div className="exp-company-logo-wrap">
+                        <Image
+                          src={company.logo}
+                          alt={company.logoAlt}
+                          width={48}
+                          height={48}
+                          className="exp-company-logo"
+                        />
+                      </div>
+                      <p className="exp-company">{companyName}</p>
+                    </header>
+
+                    {company.roles.map((role, roleIndex) => {
+                      const roleTitle = t.experience.roles[role.id] ?? role.role
+                      const rolePeriod = role.current
+                        ? t.experience.present
+                        : (t.experience.periods[role.id] ?? role.period)
+                      const roleBullets = t.experience.bullets[role.id] ?? role.bullets
+
+                      return (
+                        <div
+                          key={role.id}
+                          className={`exp-role-block${roleIndex > 0 ? ' exp-role-block--divider' : ''}`}
+                        >
+                          <div className="exp-card-header">
+                            <h3 className="exp-role">{roleTitle}</h3>
+                            <span className={`exp-period${role.current ? ' current' : ''}`}>
+                              {rolePeriod}
+                              {role.current && (
+                                <span className="exp-period-sub">
+                                  {t.experience.periods[role.id] ?? role.period}
+                                </span>
+                              )}
+                            </span>
+                          </div>
+                          <ul className="exp-bullets">
+                            {roleBullets.map((bullet) => (
+                              <li key={bullet}>{bullet}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </article>
+              )
+            })}
+          </div>
+        </section>
+
+        <section
+          className="education-section reveal"
+          id="education"
+          aria-labelledby="education-heading"
+        >
+          <h2 id="education-heading" className="section-kicker">
+            {t.education.kicker}
+          </h2>
+          <div className="education-grid">
+            {education.map((item) => {
+              const meta = [item.period, item.location].filter(Boolean).join(' • ')
+              return (
+                <article key={`${item.institution}-${item.degree}`} className="education-card">
+                  <h3 className="education-degree">{item.degree}</h3>
+                  <p className="education-institution">{item.institution}</p>
+                  {meta && <p className="education-meta">{meta}</p>}
+                  {item.highlights && item.highlights.length > 0 && (
+                    <ul className="education-highlights">
+                      {item.highlights.map((highlight) => (
+                        <li key={highlight}>{highlight}</li>
+                      ))}
+                    </ul>
+                  )}
+                </article>
+              )
+            })}
+          </div>
+        </section>
+
+        <section
+          className="certifications-section reveal"
+          id="certifications"
+          aria-labelledby="certifications-heading"
+        >
+          <h2 id="certifications-heading" className="section-kicker">
+            {t.certifications.kicker}
+          </h2>
+          <div className="certifications-grid">
+            {certifications.map((certification) => (
+              <article
+                key={`${certification.name}-${certification.issuer}`}
+                className="certification-card"
+              >
+                <h3 className="certification-name">
+                  {t.certifications.titles[certification.name] ?? certification.name}
+                </h3>
+                <p className="certification-meta">
+                  <strong>{t.certifications.issuerLabel}:</strong>{' '}
+                  {t.certifications.issuers[certification.issuer] ?? certification.issuer}
+                </p>
+                <p className="certification-meta">
+                  <strong>{t.certifications.issuedLabel}:</strong> {certification.issued}
+                </p>
+                {certification.credentialId && (
+                  <p className="certification-meta">
+                    <strong>ID:</strong> {certification.credentialId}
+                  </p>
+                )}
+                {certification.credentialUrl && (
+                  <a
+                    className="certification-link"
+                    href={certification.credentialUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {t.certifications.credentialLabel}
+                  </a>
+                )}
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section
+          className="projects-section reveal"
+          id="projects"
+          aria-labelledby="projects-heading"
+        >
+          <h2 id="projects-heading" className="section-kicker">
+            {t.projects.title}
+          </h2>
+          <div className="projects-grid">
+            {projects.map((project, index) => (
+              <article
+                key={project.title}
+                className={`project-card${index === 0 ? ' project-card--featured' : ''}`}
+              >
+                <p className="project-domain">{project.domain}</p>
+                <h3>{project.title}</h3>
+                <p>{t.projects.summaries[project.title] ?? project.summary}</p>
+                <p className="impact">
+                  {t.projects.impactPrefix}: {t.projects.impacts[project.title] ?? project.impact}
+                </p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="cta reveal" id="contact">
+          <div className="cta-glow" aria-hidden="true" />
+          <h2>{t.cta.title}</h2>
+          <p>{t.cta.body}</p>
+          <a href="https://wa.me/573195854272" target="_blank" rel="noreferrer">
+            {t.cta.action}
+            <span className="material-symbols-outlined" aria-hidden="true">
+              arrow_forward
+            </span>
+          </a>
+        </section>
+      </main>
+
+      <footer className="footer">
+        <div className="footer-brand">
+          <BrandWordmark />
+        </div>
+        <div className="footer-copy">© 2026 ESNEIDER BRAVO • {t.footer.signature}</div>
+        <div className="footer-links">
+          {profile.socialLinks.map((link) => (
+            <a key={link.label} href={link.href} target="_blank" rel="noreferrer">
+              {link.label}
+            </a>
+          ))}
+          <a href="https://wa.me/573195854272" target="_blank" rel="noreferrer">
+            WhatsApp
+          </a>
+        </div>
+      </footer>
+    </>
+  )
+}

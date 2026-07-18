@@ -11,11 +11,11 @@ Single Next.js 16 (App Router) app — React 19, TypeScript 5 strict, pure CSS.
 
 | Area | Path | Rule |
 |------|------|------|
-| Pages & routes | `app/` | App Router; portfolio is a single page (`app/page.tsx`) |
+| Pages & routes | `app/` | App Router; article home at `/` (`app/page.tsx`), articles at `/article/[slug]`, portfolio/CV at `/cv` |
 | Portfolio content | `src/content/portfolio.ts` | ALL portfolio copy/data lives here — never hardcode content in components |
 | UI strings | `src/i18n/translations.ts` | Every user-visible string exists in **both** EN and ES |
-| Blog posts | `content/posts/<slug>/{en.md,es.md}` | Folder/slug always English kebab-case, even for bilingual content |
-| Markdown pipeline | `src/lib/posts.ts`, `src/lib/blog.ts` | `gray-matter` frontmatter + `marked` rendering |
+| Articles | `content/articles/<slug>/{en.md,es.md}` | Folder/slug always English kebab-case, even for bilingual content |
+| Markdown pipeline | `src/lib/articles.ts`, `src/lib/article.ts` | `gray-matter` frontmatter + `marked` rendering |
 | Types | `src/types/portfolio.ts` | Must stay in sync with `src/content/portfolio.ts` |
 | Styling | `app/globals.css` | Pure CSS with custom properties — no CSS framework, no UI library. See `docs/design-tokens.md` |
 | Tests | `tests/` | Vitest unit tests |
@@ -61,7 +61,7 @@ Spec-driven changes follow the **OpenSpec** workflow in `openspec/`
 | Area | Example query |
 |------|---------------|
 | Portfolio sections | "hero experience carousel sections in app/page.tsx" |
-| Blog pipeline | "how markdown posts are loaded and rendered posts.ts blog.ts" |
+| Article pipeline | "how markdown articles are loaded and rendered articles.ts article.ts" |
 | i18n | "locale toggle translations useLocale" |
 | SEO routes | "sitemap robots opengraph metadata generation" |
 | Content & types | "portfolio content profile experiences types" |

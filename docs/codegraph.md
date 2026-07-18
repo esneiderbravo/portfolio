@@ -53,8 +53,8 @@ fall back to `Grep`/`Read` and suggest the user run `codegraph init`.
 | Area | Example query |
 |------|----------------|
 | Portfolio sections & carousel | "hero experience carousel sections in app/page.tsx" |
-| Blog pipeline | "how markdown posts are loaded and rendered posts.ts blog.ts" |
-| Blog UI | "BlogHome PostPageClient SiteHeader components" |
+| Article pipeline | "how markdown articles are loaded and rendered articles.ts article.ts" |
+| Article UI | "ArticleHome ArticlePageClient SiteHeader components" |
 | i18n | "locale toggle translations useLocale" |
 | CV page | "cv page CvPageClient" |
 | SEO routes | "sitemap robots opengraph metadata generation" |

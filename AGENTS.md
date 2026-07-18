@@ -15,27 +15,27 @@ Systems Architect), live at https://esneiderbravo.dev. Its purpose is a
 professional showcase targeting senior/lead engineering roles in fintech and
 AI-first companies. Built with Next.js 16 (App Router), React 19, and
 TypeScript 5 in strict mode — no database, no backend API: all portfolio
-content lives in `src/content/portfolio.ts` and blog posts are bilingual
-markdown files under `content/posts/`.
+content lives in `src/content/portfolio.ts` and articles are bilingual
+markdown files under `content/articles/`.
 
 ## Repository map
 
 ```
 portfolio/
 ├── app/                      # Next.js App Router
-│   ├── page.tsx              # Single-page portfolio — all sections + carousel
+│   ├── page.tsx              # Article-first homepage — hero, article listing, filters
 │   ├── layout.tsx            # Root layout — fonts & metadata
 │   ├── globals.css           # Design system — tokens, layout, responsive
-│   ├── blog/[slug]/          # Blog post pages (per-locale markdown rendering)
+│   ├── article/[slug]/       # Article pages (per-locale markdown rendering)
 │   ├── cv/                   # CV page (page.tsx + CvPageClient.tsx)
 │   └── opengraph-image.tsx, robots.ts, sitemap.ts   # SEO routes
-├── content/posts/<slug>/     # Blog posts — en.md + es.md per post (gray-matter frontmatter)
+├── content/articles/<slug>/     # Articles — en.md + es.md per article (gray-matter frontmatter)
 ├── src/
-│   ├── components/           # LocaleSwitch + blog/ (BlogHome, PostPageClient, SiteHeader, useLocale)
+│   ├── components/           # LocaleSwitch + article/ (ArticleHome, ArticlePageClient, SiteHeader, useLocale)
 │   ├── content/portfolio.ts  # ← ALL portfolio content (single source)
 │   ├── i18n/translations.ts  # EN/ES UI strings
-│   ├── lib/                  # posts.ts + blog.ts (markdown pipeline), yearsExperience.ts
-│   └── types/portfolio.ts    # Types — must stay in sync with content
+│   ├── lib/                  # articles.ts + article.ts (markdown pipeline), yearsExperience.ts
+│   └── types/                # portfolio.ts (sync with content) + article.ts (frontmatter contract)
 ├── tests/                    # Vitest unit tests
 ├── scripts/                  # validate.mjs (quality gate), setup-symlinks.sh
 ├── openspec/                 # OpenSpec spec-driven workflow (specs + changes archive)
@@ -46,27 +46,27 @@ portfolio/
 
 ## What exists today
 
-| Area | Status |
-|------|--------|
-| Portfolio page | Live — single page (`app/page.tsx`), fully content-driven from `src/content/portfolio.ts` |
-| Blog | 8 bilingual posts (`content/posts/<slug>/{en,es}.md`), rendered via `src/lib/posts.ts` + `marked` |
-| CV page | `app/cv/` with client component |
-| i18n | EN/ES client-side toggle (no router locale), strings in `src/i18n/translations.ts` |
-| SEO | Sitemap, robots, OG image route, raster favicons, Google verification |
-| Tests | 3 Vitest suites (`tests/`) |
-| CI | GitHub Actions `ci.yml` — runs `npm run validate` on PRs and pushes to `main` |
-| Deployment | Vercel — automatic deploy on push to `main` (see `README.md`) |
+| Area          | Status                                                                                                                                     |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Homepage      | Live — `/` is article-first (`app/page.tsx` + `ArticleHome`), with tag filter and search                                                         |
+| Articles      | Bilingual markdown (`content/articles/<slug>/{en,es}.md`), rendered via `src/lib/articles.ts` + `marked`, statically generated at `/article/[slug]` |
+| CV page       | Live — full portfolio experience at `/cv` (`page.tsx` + `CvPageClient.tsx`), content-driven from `src/content/portfolio.ts`                |
+| i18n          | EN/ES client-side toggle (no router locale), strings in `src/i18n/translations.ts`                                                         |
+| SEO           | Sitemap, robots, OG image route, raster favicons, Google verification                                                                      |
+| Tests         | 3 Vitest suites (`tests/`)                                                                                                                 |
+| CI            | GitHub Actions `ci.yml` — runs `npm run validate` on PRs and pushes to `main`                                                              |
+| Deployment    | Vercel — automatic deploy on push to `main` (see `README.md`)                                                                              |
 
 ## Required reading (before non-trivial changes)
 
-| Doc | When |
-|-----|------|
-| `CLAUDE.md` | Before writing any code |
-| `docs/codegraph.md` | When/how to use Codegraph MCP |
-| `docs/architecture.md` | Before changing module boundaries or adding a feature |
-| `docs/conventions.md` | Naming, git, and language conventions |
-| `docs/design-tokens.md` | Before touching styles or brand assets |
-| `openspec/config.yaml` | Project context for the OpenSpec spec-driven workflow |
+| Doc                     | When                                                  |
+| ----------------------- | ----------------------------------------------------- |
+| `CLAUDE.md`             | Before writing any code                               |
+| `docs/codegraph.md`     | When/how to use Codegraph MCP                         |
+| `docs/architecture.md`  | Before changing module boundaries or adding a feature |
+| `docs/conventions.md`   | Naming, git, and language conventions                 |
+| `docs/design-tokens.md` | Before touching styles or brand assets                |
+| `openspec/config.yaml`  | Project context for the OpenSpec spec-driven workflow |
 
 ## Codegraph (code intelligence) — MANDATORY
 

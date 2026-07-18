@@ -2,7 +2,7 @@ export type Locale = 'en' | 'es'
 
 type Translation = {
   nav: {
-    blog: string
+    home: string
     about: string
     skills: string
     projects: string
@@ -55,25 +55,53 @@ type Translation = {
     issuers: Record<string, string>
   }
   ai: { kicker: string; tagline: string }
-  blog: {
+  article: {
     writing: string
     heroKicker: string
     heroTitle: string
     heroTitleAccent: string
+    heroTitleEnd: string
     heroLead: string
-    topicPrefix: string
-    topics: string[]
+    statArticles: string
+    statReads: string
+    statRating: string
+    topRatedTitle: string
+    topRatedTag: string
+    searchPlaceholder: string
+    sortRecent: string
+    sortMostRead: string
+    sortTopRated: string
+    sortTrending: string
+    filterAll: string
+    filterUnread: string
+    filterRead: string
+    allTopics: string
+    clearFilters: string
+    resultMeta: string
+    resultMetaOne: string
+    emptyTitle: string
+    emptyState: string
     latestBadge: string
     featuredBadge: string
-    allPosts: string
+    readBadge: string
+    readsLabel: string
+    yourVote: string
+    starLabel: string
+    markRead: string
+    markedRead: string
+    readArticle: string
+    loadMore: string
     viewCv: string
-    searchPlaceholder: string
-    authorTitle: string
     authorBody: string
-    communityTitle: string
-    communityBody: string
-    emptyState: string
-    backToBlog: string
+    footerNote: string
+    backToHome: string
+    backToArticles: string
+    tocTitle: string
+    ratingPrompt: string
+    ratingHintPrompt: string
+    ratingHintVoted: string
+    keepReading: string
+    allArticlesLink: string
     minRead: string
     publishedOn: string
   }
@@ -82,7 +110,7 @@ type Translation = {
 export const translations: Record<Locale, Translation> = {
   en: {
     nav: {
-      blog: 'Blog',
+      home: 'Home',
       about: 'About',
       skills: 'Skills',
       projects: 'Projects',
@@ -182,35 +210,62 @@ export const translations: Record<Locale, Translation> = {
       kicker: 'AI-First Architecture',
       tagline: 'Tools, platforms and protocols I use to build and ship AI-powered products.',
     },
-    blog: {
+    article: {
       writing: 'Writing & sharing',
-      heroKicker: 'Field notes from production',
-      heroTitle: 'Everything I learn shipping software,',
-      heroTitleAccent: 'written down.',
+      heroKicker: '// Engineering blog · community',
+      heroTitle: 'Explore, learn and',
+      heroTitleAccent: 'rate',
+      heroTitleEnd: 'the best.',
       heroLead:
-        'Deep dives and honest notes on Python, FastAPI, AWS and AI-first engineering — published so the next engineer ships faster.',
-      topicPrefix: 'writing about',
-      topics: ['Python', 'FastAPI', 'AWS', 'AI agents', 'clean architecture', 'TDD'],
-      latestBadge: 'Latest',
+        'Honest notes on Python, FastAPI, AWS and AI-first engineering. Search by topic, mark what you have read and discover what the community rates highest.',
+      statArticles: 'Articles',
+      statReads: 'Total reads',
+      statRating: 'Average rating',
+      topRatedTitle: 'Top rated by the community',
+      topRatedTag: 'Top 3',
+      searchPlaceholder: 'Search by title, description or topic…',
+      sortRecent: 'Recent',
+      sortMostRead: 'Most read',
+      sortTopRated: 'Top rated',
+      sortTrending: 'Trending',
+      filterAll: 'All',
+      filterUnread: 'Unread',
+      filterRead: 'Read',
+      allTopics: 'All topics',
+      clearFilters: 'Clear filters',
+      resultMeta: 'Showing {shown} of {matched} articles',
+      resultMetaOne: 'Showing 1 of 1 article',
+      emptyTitle: 'No results',
+      emptyState: 'Try another term or remove a filter.',
+      latestBadge: 'New',
       featuredBadge: 'Featured',
-      allPosts: 'All posts',
+      readBadge: 'Read',
+      readsLabel: 'reads',
+      yourVote: 'Your rating',
+      starLabel: '{n} of 5',
+      markRead: 'Mark as read',
+      markedRead: 'Marked as read',
+      readArticle: 'Read article',
+      loadMore: 'Load more articles',
       viewCv: 'View CV',
-      searchPlaceholder: 'Search posts…',
-      authorTitle: 'Who writes this',
       authorBody:
-        'Esneider Bravo — senior software engineer with {years} years building fintech backends and AI platforms. This blog is my small way of giving back to the tech community that taught me.',
-      communityTitle: 'Join the conversation',
-      communityBody:
-        'I share notes on code, architecture and AI. Follow me on LinkedIn and GitHub.',
-      emptyState: 'No posts match your search.',
-      backToBlog: 'Back to blog',
+        'Backend engineer focused on Python, FastAPI and AI-first systems. I write about what I learn building software in production.',
+      footerNote: 'Built with markdown, no database.',
+      backToHome: 'Back to home',
+      backToArticles: 'Back to articles',
+      tocTitle: 'In this article',
+      ratingPrompt: 'Was this article helpful?',
+      ratingHintPrompt: 'Tap a star to rate',
+      ratingHintVoted: 'Thanks, you rated {n} of 5',
+      keepReading: 'Keep reading',
+      allArticlesLink: 'All articles',
       minRead: 'min read',
       publishedOn: 'Published on',
     },
   },
   es: {
     nav: {
-      blog: 'Blog',
+      home: 'Inicio',
       about: 'Sobre mí',
       skills: 'Habilidades',
       projects: 'Proyectos',
@@ -361,28 +416,55 @@ export const translations: Record<Locale, Translation> = {
       tagline:
         'Herramientas, plataformas y protocolos que uso para construir productos potenciados por IA.',
     },
-    blog: {
+    article: {
       writing: 'Escribir y compartir',
-      heroKicker: 'Notas de campo desde producción',
-      heroTitle: 'Todo lo que aprendo construyendo software,',
-      heroTitleAccent: 'por escrito.',
+      heroKicker: '// Blog de ingeniería · comunidad',
+      heroTitle: 'Explora, aprende y',
+      heroTitleAccent: 'vota',
+      heroTitleEnd: 'lo mejor.',
       heroLead:
-        'Análisis a fondo y notas honestas sobre Python, FastAPI, AWS e ingeniería AI-first — publicadas para que el próximo ingeniero avance más rápido.',
-      topicPrefix: 'escribiendo sobre',
-      topics: ['Python', 'FastAPI', 'AWS', 'agentes de IA', 'arquitectura limpia', 'TDD'],
-      latestBadge: 'Reciente',
+        'Notas honestas sobre Python, FastAPI, AWS e ingeniería AI-first. Busca por tema, marca lo que ya leíste y descubre lo que la comunidad puntúa más alto.',
+      statArticles: 'Artículos',
+      statReads: 'Lecturas totales',
+      statRating: 'Valoración media',
+      topRatedTitle: 'Lo mejor valorado por la comunidad',
+      topRatedTag: 'Top 3',
+      searchPlaceholder: 'Buscar por título, descripción o tema…',
+      sortRecent: 'Recientes',
+      sortMostRead: 'Más leídos',
+      sortTopRated: 'Mejor puntuados',
+      sortTrending: 'Tendencia',
+      filterAll: 'Todos',
+      filterUnread: 'No leídos',
+      filterRead: 'Leídos',
+      allTopics: 'Todos los temas',
+      clearFilters: 'Limpiar filtros',
+      resultMeta: 'Mostrando {shown} de {matched} artículos',
+      resultMetaOne: 'Mostrando 1 de 1 artículo',
+      emptyTitle: 'Sin resultados',
+      emptyState: 'Prueba con otro término o quita algún filtro.',
+      latestBadge: 'Nuevo',
       featuredBadge: 'Destacado',
-      allPosts: 'Todos los artículos',
+      readBadge: 'Leído',
+      readsLabel: 'lecturas',
+      yourVote: 'Tu voto',
+      starLabel: '{n} de 5',
+      markRead: 'Marcar como leído',
+      markedRead: 'Marcado como leído',
+      readArticle: 'Leer artículo',
+      loadMore: 'Cargar más artículos',
       viewCv: 'Ver CV',
-      searchPlaceholder: 'Buscar artículos…',
-      authorTitle: 'Quién escribe esto',
       authorBody:
-        'Esneider Bravo — ingeniero de software senior con {years} años construyendo backends fintech y plataformas de IA. Este blog es mi pequeña forma de devolverle a la comunidad tech que me enseñó.',
-      communityTitle: 'Únete a la conversación',
-      communityBody:
-        'Comparto notas sobre código, arquitectura e IA. Sígueme en LinkedIn y GitHub.',
-      emptyState: 'Ningún artículo coincide con tu búsqueda.',
-      backToBlog: 'Volver al blog',
+        'Ingeniero backend enfocado en Python, FastAPI y sistemas AI-first. Escribo sobre lo que aprendo construyendo software en producción.',
+      footerNote: 'Construido con markdown, sin base de datos.',
+      backToHome: 'Volver al inicio',
+      backToArticles: 'Volver a artículos',
+      tocTitle: 'En este artículo',
+      ratingPrompt: '¿Te sirvió este artículo?',
+      ratingHintPrompt: 'Toca una estrella para votar',
+      ratingHintVoted: 'Gracias, votaste {n} de 5',
+      keepReading: 'Sigue leyendo',
+      allArticlesLink: 'Todos los artículos',
       minRead: 'min de lectura',
       publishedOn: 'Publicado el',
     },

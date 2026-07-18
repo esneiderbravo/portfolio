@@ -73,6 +73,8 @@ export default function Image() {
       {/* Name */}
       <div
         style={{
+          display: 'flex',
+          flexDirection: 'column',
           color: '#ffffff',
           fontSize: '82px',
           fontWeight: 700,
@@ -81,8 +83,7 @@ export default function Image() {
           marginBottom: '28px',
         }}
       >
-        ESNEIDER
-        <br />
+        <span>ESNEIDER</span>
         <span style={{ color: 'rgba(173,170,170,0.32)' }}>BRAVO</span>
       </div>
 
@@ -108,18 +109,23 @@ export default function Image() {
         <div style={tagStyle}>Remote</div>
       </div>
 
-      {/* Domain bottom-right */}
+      {/* Brand wordmark bottom-right */}
       <div
         style={{
           position: 'absolute',
           bottom: '42px',
           right: '90px',
-          color: '#3a3a3a',
-          fontSize: '17px',
-          letterSpacing: '2px',
+          display: 'flex',
+          alignItems: 'baseline',
+          gap: '7px',
+          fontSize: '22px',
+          fontWeight: 700,
+          letterSpacing: '-0.5px',
         }}
       >
-        esneiderbravo.dev
+        <span style={{ color: '#00e5ff', fontWeight: 400 }}>{'{'}</span>
+        <span style={{ color: '#f4f4f3' }}>esneiderbravo</span>
+        <span style={{ color: '#00e5ff', fontWeight: 400 }}>{'}'}</span>
       </div>
     </div>,
     { ...size },
