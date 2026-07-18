@@ -1,19 +1,43 @@
 'use client'
 
 import Image from 'next/image'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, useSyncExternalStore } from 'react'
 
 import { LocaleSwitch } from '@/src/components/LocaleSwitch'
 import { portfolioContent } from '@/src/content/portfolio'
 import { translations, type Locale } from '@/src/i18n/translations'
 import { formatYearsOfExperience } from '@/src/lib/yearsExperience'
 
+const LOCALE_STORAGE_KEY = 'portfolio-locale'
+const LOCALE_CHANGE_EVENT = 'portfolio-locale-change'
+
+/** Preferred locale on the client: stored choice, else browser language. */
 function readPreferredLocale(): Locale {
-  if (typeof window === 'undefined') return 'en'
-  const stored = localStorage.getItem('portfolio-locale')
+  const stored = localStorage.getItem(LOCALE_STORAGE_KEY)
   if (stored === 'en' || stored === 'es') return stored
   if (navigator.language.toLowerCase().startsWith('es')) return 'es'
   return 'en'
+}
+
+/** Server (and hydration) snapshot — must be stable so SSR HTML matches. */
+function getServerLocale(): Locale {
+  return 'en'
+}
+
+/** Subscribes to locale changes from this tab and from other tabs. */
+function subscribeToLocale(onStoreChange: () => void): () => void {
+  window.addEventListener('storage', onStoreChange)
+  window.addEventListener(LOCALE_CHANGE_EVENT, onStoreChange)
+  return () => {
+    window.removeEventListener('storage', onStoreChange)
+    window.removeEventListener(LOCALE_CHANGE_EVENT, onStoreChange)
+  }
+}
+
+/** Persists the chosen locale and notifies subscribers in this tab. */
+function setStoredLocale(locale: Locale): void {
+  localStorage.setItem(LOCALE_STORAGE_KEY, locale)
+  window.dispatchEvent(new Event(LOCALE_CHANGE_EVENT))
 }
 
 const GROUP_ORDER = [
@@ -51,7 +75,7 @@ export default function HomePage() {
   } = portfolioContent
   const [firstName, ...lastNameParts] = profile.headline.split(' ')
   const lastName = lastNameParts.join(' ')
-  const [locale, setLocale] = useState<Locale>(readPreferredLocale)
+  const locale = useSyncExternalStore(subscribeToLocale, readPreferredLocale, getServerLocale)
   const t = useMemo(() => translations[locale], [locale])
   const [activeSection, setActiveSection] = useState<string>('about')
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -65,7 +89,6 @@ export default function HomePage() {
   }, [])
 
   useEffect(() => {
-    localStorage.setItem('portfolio-locale', locale)
     document.documentElement.lang = locale
   }, [locale])
 
@@ -381,7 +404,7 @@ export default function HomePage() {
               {t.nav.projects}
             </a>
           </div>
-          <LocaleSwitch locale={locale} onChange={setLocale} label={t.nav.language} />
+          <LocaleSwitch locale={locale} onChange={setStoredLocale} label={t.nav.language} />
           <button
             type="button"
             className={`hamburger${mobileMenuOpen ? ' open' : ''}`}
@@ -438,7 +461,7 @@ export default function HomePage() {
           </nav>
           <LocaleSwitch
             locale={locale}
-            onChange={setLocale}
+            onChange={setStoredLocale}
             label={t.nav.language}
             className="locale-switch--menu"
             showIcon={false}
