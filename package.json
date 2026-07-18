@@ -2,7 +2,7 @@
   "name": "portfolio",
   "version": "0.1.0",
   "private": true,
-  "description": "KINETIC portfolio for Esneider Bravo built with Next.js and TypeScript.",
+  "description": "Architecture of Systems portfolio for Esneider Bravo built with Next.js and TypeScript.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

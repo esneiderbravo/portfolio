@@ -1,9 +1,11 @@
 import type { MetadataRoute } from 'next'
 
+const SITE_URL = 'https://esneiderbravo.dev'
+
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: 'https://esneiderbravo.dev',
+      url: SITE_URL,
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 1,

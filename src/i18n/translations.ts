@@ -2,6 +2,7 @@ export type Locale = 'en' | 'es'
 
 type Translation = {
   nav: {
+    blog: string
     about: string
     skills: string
     projects: string
@@ -54,11 +55,34 @@ type Translation = {
     issuers: Record<string, string>
   }
   ai: { kicker: string; tagline: string }
+  blog: {
+    writing: string
+    heroKicker: string
+    heroTitle: string
+    heroTitleAccent: string
+    heroLead: string
+    topicPrefix: string
+    topics: string[]
+    latestBadge: string
+    featuredBadge: string
+    allPosts: string
+    viewCv: string
+    searchPlaceholder: string
+    authorTitle: string
+    authorBody: string
+    communityTitle: string
+    communityBody: string
+    emptyState: string
+    backToBlog: string
+    minRead: string
+    publishedOn: string
+  }
 }
 
 export const translations: Record<Locale, Translation> = {
   en: {
     nav: {
+      blog: 'Blog',
       about: 'About',
       skills: 'Skills',
       projects: 'Projects',
@@ -158,9 +182,35 @@ export const translations: Record<Locale, Translation> = {
       kicker: 'AI-First Architecture',
       tagline: 'Tools, platforms and protocols I use to build and ship AI-powered products.',
     },
+    blog: {
+      writing: 'Writing & sharing',
+      heroKicker: 'Field notes from production',
+      heroTitle: 'Everything I learn shipping software,',
+      heroTitleAccent: 'written down.',
+      heroLead:
+        'Deep dives and honest notes on Python, FastAPI, AWS and AI-first engineering — published so the next engineer ships faster.',
+      topicPrefix: 'writing about',
+      topics: ['Python', 'FastAPI', 'AWS', 'AI agents', 'clean architecture', 'TDD'],
+      latestBadge: 'Latest',
+      featuredBadge: 'Featured',
+      allPosts: 'All posts',
+      viewCv: 'View CV',
+      searchPlaceholder: 'Search posts…',
+      authorTitle: 'Who writes this',
+      authorBody:
+        'Esneider Bravo — senior software engineer with {years} years building fintech backends and AI platforms. This blog is my small way of giving back to the tech community that taught me.',
+      communityTitle: 'Join the conversation',
+      communityBody:
+        'I share notes on code, architecture and AI. Follow me on LinkedIn and GitHub.',
+      emptyState: 'No posts match your search.',
+      backToBlog: 'Back to blog',
+      minRead: 'min read',
+      publishedOn: 'Published on',
+    },
   },
   es: {
     nav: {
+      blog: 'Blog',
       about: 'Sobre mí',
       skills: 'Habilidades',
       projects: 'Proyectos',
@@ -200,7 +250,7 @@ export const translations: Record<Locale, Translation> = {
       impacts: {},
     },
     cta: {
-      title: 'LISTO PARA CONSTRUIR ALGO GRANDE?',
+      title: '¿LISTO PARA CONSTRUIR ALGO GRANDE?',
       body: 'Conversemos sobre tu próximo producto, arquitectura o proceso de modernización.',
       action: 'Iniciar Proyecto',
     },
@@ -310,6 +360,31 @@ export const translations: Record<Locale, Translation> = {
       kicker: 'Arquitectura AI-First',
       tagline:
         'Herramientas, plataformas y protocolos que uso para construir productos potenciados por IA.',
+    },
+    blog: {
+      writing: 'Escribir y compartir',
+      heroKicker: 'Notas de campo desde producción',
+      heroTitle: 'Todo lo que aprendo construyendo software,',
+      heroTitleAccent: 'por escrito.',
+      heroLead:
+        'Análisis a fondo y notas honestas sobre Python, FastAPI, AWS e ingeniería AI-first — publicadas para que el próximo ingeniero avance más rápido.',
+      topicPrefix: 'escribiendo sobre',
+      topics: ['Python', 'FastAPI', 'AWS', 'agentes de IA', 'arquitectura limpia', 'TDD'],
+      latestBadge: 'Reciente',
+      featuredBadge: 'Destacado',
+      allPosts: 'Todos los artículos',
+      viewCv: 'Ver CV',
+      searchPlaceholder: 'Buscar artículos…',
+      authorTitle: 'Quién escribe esto',
+      authorBody:
+        'Esneider Bravo — ingeniero de software senior con {years} años construyendo backends fintech y plataformas de IA. Este blog es mi pequeña forma de devolverle a la comunidad tech que me enseñó.',
+      communityTitle: 'Únete a la conversación',
+      communityBody:
+        'Comparto notas sobre código, arquitectura e IA. Sígueme en LinkedIn y GitHub.',
+      emptyState: 'Ningún artículo coincide con tu búsqueda.',
+      backToBlog: 'Volver al blog',
+      minRead: 'min de lectura',
+      publishedOn: 'Publicado el',
     },
   },
 }
