@@ -1,0 +1,24 @@
+## ADDED Requirements
+
+### Requirement: QR generation script
+
+The repository SHALL provide `scripts/generate-qr.mjs`, runnable via `npm run generate:qr`, that generates QR assets encoding `https://esneiderbravo.dev/card` using the `qrcode` devDependency with error-correction level H. The script MUST NOT add any runtime dependency.
+
+#### Scenario: Regenerating assets
+
+- **WHEN** the owner runs `npm run generate:qr`
+- **THEN** `public/qr/card-qr.svg` and `public/qr/card-qr-print.png` (1200×1200) are written
+
+### Requirement: Committed QR assets
+
+The generated QR assets SHALL be committed under `public/qr/` so they are deployable and printable without running the script, and the SVG MUST encode the exact card URL.
+
+#### Scenario: Asset integrity
+
+- **WHEN** the test suite runs
+- **THEN** a test asserts `public/qr/card-qr.svg` exists and was generated for `https://esneiderbravo.dev/card`
+
+#### Scenario: Scanning the printed card
+
+- **WHEN** a phone camera scans the printed QR
+- **THEN** it resolves to `https://esneiderbravo.dev/card`

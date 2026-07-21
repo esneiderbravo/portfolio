@@ -69,6 +69,24 @@ export type Certification = {
   credentialUrl?: string
 }
 
+export type LocalizedText = {
+  en: string
+  es: string
+}
+
+export type BusinessCard = {
+  /** Phone number in E.164 format, e.g. +573001234567. */
+  phone: string
+  /** WhatsApp deep link, e.g. https://wa.me/573001234567 */
+  whatsappUrl: string
+  /** External scheduling link (Calendly / Cal.com). */
+  schedulingUrl: string
+  /** Short elevator pitch shown on the card, per locale. */
+  pitch: LocalizedText
+  organization: string
+  jobTitle: string
+}
+
 export type PortfolioContent = {
   profile: Profile
   projects: Project[]
@@ -78,4 +96,5 @@ export type PortfolioContent = {
   skillGroups: SkillGroup[]
   aiStack: SkillGroup[]
   coreCapabilities: string[]
+  businessCard: BusinessCard
 }

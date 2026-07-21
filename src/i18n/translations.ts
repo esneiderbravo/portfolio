@@ -55,6 +55,17 @@ type Translation = {
     issuers: Record<string, string>
   }
   ai: { kicker: string; tagline: string }
+  card: {
+    heading: string
+    saveContact: string
+    bookCall: string
+    whatsapp: string
+    email: string
+    share: string
+    copied: string
+    viewPortfolio: string
+    whatsappGreeting: string
+  }
   article: {
     writing: string
     heroKicker: string
@@ -209,6 +220,17 @@ export const translations: Record<Locale, Translation> = {
     ai: {
       kicker: 'AI-First Architecture',
       tagline: 'Tools, platforms and protocols I use to build and ship AI-powered products.',
+    },
+    card: {
+      heading: 'Let’s connect',
+      saveContact: 'Save contact',
+      bookCall: 'Book a call',
+      whatsapp: 'WhatsApp',
+      email: 'Email',
+      share: 'Share card',
+      copied: 'Link copied',
+      viewPortfolio: 'View portfolio',
+      whatsappGreeting: 'Hi Esneider! We just met — I would love to keep in touch.',
     },
     article: {
       writing: 'Writing & sharing',
@@ -415,6 +437,17 @@ export const translations: Record<Locale, Translation> = {
       kicker: 'Arquitectura AI-First',
       tagline:
         'Herramientas, plataformas y protocolos que uso para construir productos potenciados por IA.',
+    },
+    card: {
+      heading: 'Conectemos',
+      saveContact: 'Guardar contacto',
+      bookCall: 'Agendar llamada',
+      whatsapp: 'WhatsApp',
+      email: 'Correo',
+      share: 'Compartir tarjeta',
+      copied: 'Enlace copiado',
+      viewPortfolio: 'Ver portafolio',
+      whatsappGreeting: '¡Hola Esneider! Acabamos de conocernos, me encantaría seguir en contacto.',
     },
     article: {
       writing: 'Escribir y compartir',

@@ -407,4 +407,15 @@ export const portfolioContent: PortfolioContent = {
     'Agile / Scrum',
     'Multidisciplinary Team Leadership',
   ],
+  businessCard: {
+    phone: '+573195854272',
+    whatsappUrl: 'https://wa.me/573195854272',
+    schedulingUrl: 'https://cal.com/esneiderbravo',
+    pitch: {
+      en: 'Senior Software Engineer building scalable fintech backends and AI-first platforms. Ready to talk about your next product or partnership.',
+      es: 'Ingeniero de software senior construyendo backends fintech escalables y plataformas AI-first. Hablemos de tu proximo producto o alianza.',
+    },
+    organization: 'Muno Labs',
+    jobTitle: 'Senior Software Engineer',
+  },
 }
