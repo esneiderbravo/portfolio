@@ -24,6 +24,16 @@ describe('portfolio content', () => {
   it('has certifications', () => {
     expect(portfolioContent.certifications.length).toBeGreaterThanOrEqual(1)
   })
+
+  it('has a well-formed business card block', () => {
+    const { businessCard } = portfolioContent
+    expect(businessCard.phone.startsWith('+')).toBe(true)
+    expect(businessCard.whatsappUrl.startsWith('https://wa.me/')).toBe(true)
+    expect(() => new URL(businessCard.schedulingUrl)).not.toThrow()
+    expect(businessCard.schedulingUrl.startsWith('https://')).toBe(true)
+    expect(businessCard.pitch.en.trim().length).toBeGreaterThan(0)
+    expect(businessCard.pitch.es.trim().length).toBeGreaterThan(0)
+  })
 })
 
 describe('article i18n completeness', () => {
