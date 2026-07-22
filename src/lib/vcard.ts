@@ -26,7 +26,8 @@ function property(name: string, value: string): string | null {
  *
  * Uses version 3.0 (not 4.0) for the widest native support in the iOS and
  * Android add-contact flows. Lines are CRLF-terminated per spec; empty
- * content fields are omitted.
+ * content fields are omitted. No ORG field: the employer changes over time
+ * and saved contacts would go stale.
  */
 export function buildVCard(profile: Profile, businessCard: BusinessCard): string {
   const [givenName, ...familyParts] = profile.name.split(' ')
@@ -37,8 +38,7 @@ export function buildVCard(profile: Profile, businessCard: BusinessCard): string
     'VERSION:3.0',
     property('FN', profile.name),
     `N:${escapeVCardValue(familyName)};${escapeVCardValue(givenName)};;;`,
-    property('TITLE', businessCard.jobTitle),
-    property('ORG', businessCard.organization),
+    property('TITLE', businessCard.jobTitle.en),
     property('TEL;TYPE=CELL', businessCard.phone),
     property('EMAIL;TYPE=INTERNET', profile.email),
     property('URL', SITE_URL),

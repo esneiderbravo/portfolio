@@ -8,7 +8,7 @@ Generate a vCard 3.0 contact file from portfolio content via a pure builder func
 
 ### Requirement: vCard derived from portfolio content
 
-The system SHALL generate the vCard from `portfolioContent` via a pure function `buildVCard` in `src/lib/vcard.ts` — the vCard MUST NOT be hand-maintained as a static file. The output SHALL be vCard version 3.0 with CRLF line endings and MUST include `FN`, `N`, `TITLE`, `ORG`, `TEL;TYPE=CELL`, `EMAIL`, and `URL` fields populated from content; empty content fields SHALL be omitted from the output.
+The system SHALL generate the vCard from `portfolioContent` via a pure function `buildVCard` in `src/lib/vcard.ts` — the vCard MUST NOT be hand-maintained as a static file. The output SHALL be vCard version 3.0 with CRLF line endings and MUST include `FN`, `N`, `TITLE`, `TEL;TYPE=CELL`, `EMAIL`, and `URL` fields populated from content (no `ORG` — the employer changes over time and saved contacts would go stale); empty content fields SHALL be omitted from the output.
 
 #### Scenario: vCard reflects content
 

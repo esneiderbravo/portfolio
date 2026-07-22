@@ -415,7 +415,9 @@ export const portfolioContent: PortfolioContent = {
       en: 'Behind every business that scales is the right technology — and most ideas die without it. I turn ideas into products that sell: fintech, AI, and platforms built to grow. If you are building something big, let us talk today.',
       es: 'Detrás de cada negocio que escala hay tecnología bien construida — y la mayoría de ideas mueren sin ella. Convierto ideas en productos que venden: fintech, IA y plataformas listas para crecer. Si estás construyendo algo grande, hablemos hoy.',
     },
-    organization: 'Muno Labs',
-    jobTitle: 'Senior Software Engineer',
+    jobTitle: {
+      en: 'Technology professional',
+      es: 'Profesional en tecnología',
+    },
   },
 }

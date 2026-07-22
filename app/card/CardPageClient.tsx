@@ -65,7 +65,7 @@ export default function CardPageClient() {
           <div className="card-photo">
             <Image
               src="/profile.png"
-              alt={`${profile.name} — ${businessCard.jobTitle}`}
+              alt={`${profile.name} — ${businessCard.jobTitle[locale]}`}
               fill
               priority
               sizes="140px"
@@ -77,9 +77,7 @@ export default function CardPageClient() {
           <h1 id="card-name" className="card-name">
             {profile.name}
           </h1>
-          <p className="card-role">
-            {businessCard.jobTitle} · {businessCard.organization}
-          </p>
+          <p className="card-role">{businessCard.jobTitle[locale]}</p>
           <p className="card-pitch">{businessCard.pitch[locale]}</p>
 
           <div className="card-primary-actions">

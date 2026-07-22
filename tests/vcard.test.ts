@@ -14,10 +14,9 @@ const baseProfile: Profile = {
 const baseCard: BusinessCard = {
   phone: '+573001234567',
   whatsappUrl: 'https://wa.me/573001234567',
-  schedulingUrl: 'https://calendly.com/example',
+  schedulingUrl: 'https://cal.com/example',
   pitch: { en: 'Backend engineer.', es: 'Ingeniero backend.' },
-  organization: 'Muno Labs',
-  jobTitle: 'Senior Software Engineer',
+  jobTitle: { en: 'Technology professional', es: 'Profesional en tecnología' },
 }
 
 describe('buildVCard', () => {
@@ -27,8 +26,8 @@ describe('buildVCard', () => {
     expect(vcard).toContain('VERSION:3.0')
     expect(vcard).toContain('FN:Esneider Bravo')
     expect(vcard).toContain('N:Bravo;Esneider;;;')
-    expect(vcard).toContain('TITLE:Senior Software Engineer')
-    expect(vcard).toContain('ORG:Muno Labs')
+    expect(vcard).toContain('TITLE:Technology professional')
+    expect(vcard).not.toContain('ORG:')
     expect(vcard).toContain('TEL;TYPE=CELL:+573001234567')
     expect(vcard).toContain('EMAIL;TYPE=INTERNET:test@example.com')
     expect(vcard).toContain('URL:https://esneiderbravo.dev')
@@ -45,16 +44,18 @@ describe('buildVCard', () => {
   it('escapes commas, semicolons, and newlines in values', () => {
     const vcard = buildVCard(baseProfile, {
       ...baseCard,
-      organization: 'Muno Labs, Inc; LATAM',
+      jobTitle: { ...baseCard.jobTitle, en: 'Builder, partner; advisor' },
       pitch: { ...baseCard.pitch, en: 'Line one\nLine two' },
     })
-    expect(vcard).toContain('ORG:Muno Labs\\, Inc\\; LATAM')
+    expect(vcard).toContain('TITLE:Builder\\, partner\\; advisor')
     expect(vcard).toContain('NOTE:Line one\\nLine two')
   })
 
   it('omits properties whose content field is empty', () => {
-    const vcard = buildVCard(baseProfile, { ...baseCard, organization: '', jobTitle: ' ' })
-    expect(vcard).not.toContain('ORG:')
+    const vcard = buildVCard(baseProfile, {
+      ...baseCard,
+      jobTitle: { ...baseCard.jobTitle, en: ' ' },
+    })
     expect(vcard).not.toContain('TITLE:')
   })
 

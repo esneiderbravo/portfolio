@@ -57,7 +57,7 @@ All portfolio content MUST conform to the TypeScript types defined in `src/types
 
 ### Requirement: Business card content block
 
-Portfolio content SHALL include a `businessCard` block typed by `BusinessCard` in `src/types/portfolio.ts`, containing `phone` (E.164 format), `whatsappUrl` (`https://wa.me/...`), `schedulingUrl`, a localized `pitch` (`en` and `es`, both non-empty), `organization`, and `jobTitle`. The block MUST be the single source for card contact data — no card component may hardcode contact values.
+Portfolio content SHALL include a `businessCard` block typed by `BusinessCard` in `src/types/portfolio.ts`, containing `phone` (E.164 format), `whatsappUrl` (`https://wa.me/...`), `schedulingUrl`, a localized `pitch` and a localized `jobTitle` (`en` and `es`, both non-empty). No employer/organization field is stored — the company changes over time and would go stale on printed cards and saved contacts. The block MUST be the single source for card contact data — no card component may hardcode contact values.
 
 #### Scenario: Business card content is well-formed
 

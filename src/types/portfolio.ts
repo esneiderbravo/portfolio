@@ -83,8 +83,8 @@ export type BusinessCard = {
   schedulingUrl: string
   /** Short elevator pitch shown on the card, per locale. */
   pitch: LocalizedText
-  organization: string
-  jobTitle: string
+  /** Business-friendly role label shown under the name, per locale. */
+  jobTitle: LocalizedText
 }
 
 export type PortfolioContent = {
