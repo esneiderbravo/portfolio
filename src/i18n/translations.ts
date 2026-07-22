@@ -222,7 +222,7 @@ export const translations: Record<Locale, Translation> = {
       tagline: 'Tools, platforms and protocols I use to build and ship AI-powered products.',
     },
     card: {
-      heading: 'Let’s connect',
+      heading: 'The partner your idea needs',
       saveContact: 'Save contact',
       bookCall: 'Book a call',
       whatsapp: 'WhatsApp',
@@ -439,7 +439,7 @@ export const translations: Record<Locale, Translation> = {
         'Herramientas, plataformas y protocolos que uso para construir productos potenciados por IA.',
     },
     card: {
-      heading: 'Conectemos',
+      heading: 'El aliado que tu idea necesita',
       saveContact: 'Guardar contacto',
       bookCall: 'Agendar llamada',
       whatsapp: 'WhatsApp',

@@ -412,8 +412,8 @@ export const portfolioContent: PortfolioContent = {
     whatsappUrl: 'https://wa.me/573195854272',
     schedulingUrl: 'https://cal.com/esneiderbravo',
     pitch: {
-      en: 'Senior Software Engineer building scalable fintech backends and AI-first platforms. Ready to talk about your next product or partnership.',
-      es: 'Ingeniero de software senior construyendo backends fintech escalables y plataformas AI-first. Hablemos de tu proximo producto o alianza.',
+      en: 'Behind every business that scales is the right technology — and most ideas die without it. I turn ideas into products that sell: fintech, AI, and platforms built to grow. If you are building something big, let us talk today.',
+      es: 'Detrás de cada negocio que escala hay tecnología bien construida — y la mayoría de ideas mueren sin ella. Convierto ideas en productos que venden: fintech, IA y plataformas listas para crecer. Si estás construyendo algo grande, hablemos hoy.',
     },
     organization: 'Muno Labs',
     jobTitle: 'Senior Software Engineer',

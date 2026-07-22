@@ -6,7 +6,7 @@ const SITE_URL = 'https://esneiderbravo.dev'
 const CARD_URL = `${SITE_URL}/card`
 const CARD_TITLE = 'Esneider Bravo — Digital Business Card'
 const CARD_DESCRIPTION =
-  'Save my contact, book a call, or reach me on WhatsApp, LinkedIn, and email. Senior Software Engineer — Python, FastAPI, AWS, AI-first architectures.'
+  'Building something big? I turn business ideas into products that scale — fintech, AI, and revenue-ready platforms. Save my contact or book a call today.'
 
 export const metadata: Metadata = {
   title: CARD_TITLE,
